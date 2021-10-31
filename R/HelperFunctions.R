@@ -217,6 +217,16 @@ VisualiseSimulation <- function(simulation_data, variables, scale_identifier){
   #' @export
 
   # Function ---------------------------------
+  for(i in variables){
+    if(i %in% names(simulation_data)){
+    }else{
+      aux_error_message <- 
+        paste("The variable", 
+              i, 
+              "is not endogenous to the simulation entered into the function VisualiseSimulation and thus, cannot be visualised.")
+      stop(aux_error_message)
+    }
+  }
   variables <- c("period", variables)
   simulation_data %>% select(all_of(variables)) %>%
     pivot_longer(-period, names_to = "Variable") %>%
