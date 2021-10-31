@@ -3,7 +3,7 @@ Type: Package
 Title: Provide framework to simulate macroeconomic Solow growth models
 Version: 0.1.0
 Author: Sebastian Behrens
-Maintainer: Sebastian Behrens (sebastian.behrens@student.unisg.ch)
+Maintainer: Sebastian Behrens (<sebastian.behrens@student.unisg.ch>)
 Description: This function makes availbale useable functions to a) simulate, b) visualise and c) compare Solow growth model variants.
 License: MIT License
 Encoding: UTF-8
