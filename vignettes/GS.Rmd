@@ -59,3 +59,16 @@ Starting value of endogenous variables defining the BS
 - Starting value of physical capital ($K_0$)
 - Starting value of the labor force ($L_0$)
 Remark: Those parameters can be found via the command: \code{getRequiredStartingValues("GS")}.
+
+## Structural Equations to the General Solow Growth Model
+$$
+\begin{aligned}
+Y_t &= K_t^\alpha (A_tL_t)^{1-\alpha} \\
+r_t &= \alpha \left(\frac{K_t}{A_tL_t}\right)^{\alpha -1}\\
+w_t &= (1-\alpha) \left(\frac{K_t}{A_tL_t}\right)^\alpha A_t\\
+S_t &= sY_t \\
+K_{t+1}&= sY_t + (1-\delta)K_t \\
+L_{t+1}&=(1+n)L_t \\
+A_{t+1} &= (1 + g)*A_t
+\end{aligned}
+$$

@@ -63,3 +63,14 @@ Starting value of endogenous variables defining the BS
 - Starting value of human capital ($H_0$)
 - Starting value of physical capital ($K_0$)
 Remark: Those parameters can be found via the command: \code{getRequiredStartingValues("ESHC")}.
+
+## Structural Equations to the Extended Solow Growth Model with Human Capital
+$$
+\begin{aligned}
+Y_t &= K_t^\alpha * H_t^\phi * (A_t * L_t)^{(1- \alpha - \phi)} \\
+K_{t+1} &= s_KY_t + (1-\delta)K_{t} \\
+H_{t+1} &= s_HY_t + (1-\delta)H_{t} \\
+L_{t+1}&=(1+n)L_t \\
+A_{t+1}&=(1+g)A_t \\
+\end{aligned}
+$$
