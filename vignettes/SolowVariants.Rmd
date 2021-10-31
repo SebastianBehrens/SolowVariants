@@ -1,6 +1,8 @@
 ---
 title: "SolowVariants"
 output: rmarkdown::html_vignette
+  toc: true
+    toc_depth: 2
 vignette: >
   %\VignetteIndexEntry{SolowVariants}
   %\VignetteEngine{knitr::rmarkdown}
