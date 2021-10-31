@@ -494,19 +494,20 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
 }
 
 # 0.8 compute steady state values and check correctness of simulations =================================
-simulation_correctness_checker <- function(last_row_simulation, last_row_parameter, solow_variant){
+simulation_correctness_checker <- function(sim_data, parameter_grid, solow_variant){
 
   # Roxygen Header ---------------------------------
   #' @title Check correctness by comparing simulated (endo.) variables to their steady state values
   #' @description Compare variables in the final period of the simulation to their respective steady state value (given the exo. paramters).
   #' @details This function presumes that the number of periods simulated were such that the final values are near steady state. If the steady state path is disrupted by a parameter change in the second to last period, this function will yield misleading results.
-  #' @param last_row_simulation Vector of the values of both primary and secondary variables in the last period of the simulation.
-  #' @param last_row_parameter Vector of the values of the exo. paramter (from the paramter grid).
+  #' @param sim_data The tibble that is being filled in the simulation function.
+  #' @param parameter_grid The output from \code{create_parameter_grid(...)}.
   #' @param solow_variant String indicating the model, such as "BS" or "ESHC".
   #' @export
 
   # Function ---------------------------------
-
+  last_row_simulation <- sim_data[nrow(sim_data), ]
+  last_row_parameter <- parameter_grid[nrow(parameter_grid), ]
   # last_row for the last row of the simulation table (sim_table %>% tail(1))
   # solow_variant for the different solow variants
     aux <- tibble(variable = toString(NA), last_value = as.double(NA), steadystate = as.double(NA))
