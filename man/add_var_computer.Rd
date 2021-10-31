@@ -27,5 +27,5 @@ add_var_computer(
 This function computes additional secondary variables that are not computed in a models respective simulation functions. The simulation functions only compute the primary variables of a model such as L, K and Y in the Basic Solow Growth Model (BS).
 }
 \note{
-\text{See} SimulateBasicSolowModel() \text{for an example.}
+See SimulateBasicSolowModel() for an example.
 }
