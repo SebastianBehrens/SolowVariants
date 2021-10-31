@@ -57,7 +57,7 @@ Parameters defining the ESSRL
 * Rate of capital depreciation ($\delta$)
 * Stock of land ($X$)
 
-Remark: Those parameters can be found via the command: \texttt{getRequiredParams("ESSRL")}.
+Remark: Those parameters can be found via the command: `getRequiredParams("ESSRL")`.
 
 Starting value of endogenous variables defining the ESSRL
 
@@ -65,7 +65,7 @@ Starting value of endogenous variables defining the ESSRL
 * Starting value of physical capital ($K_0$)
 * Starting value of the labor force ($L_0$)
 
-Remark: Those parameters can be found via the command: \texttt{getRequiredStartingValues("ESSRL")}.
+Remark: Those parameters can be found via the command: `getRequiredStartingValues("ESSRL")`.
 
 ## Structural Equations to the Extended Solow Growth Model with the Scarce Resource Land
 $$

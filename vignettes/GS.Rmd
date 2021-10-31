@@ -54,7 +54,7 @@ Parameters defining the GS
 * Population growth rate ($n$)
 * Savings rate ($s$)
 
-Remark: Those parameters can be found via the command: \texttt{getRequiredParams("GS")}.
+Remark: Those parameters can be found via the command: `getRequiredParams("GS")`.
 
 Starting value of endogenous variables defining the GS
 
@@ -62,7 +62,7 @@ Starting value of endogenous variables defining the GS
 * Starting value of physical capital ($K_0$)
 * Starting value of the labor force ($L_0$)
 
-Remark: Those parameters can be found via the command: \texttt{getRequiredStartingValues("GS")}.
+Remark: Those parameters can be found via the command: `getRequiredStartingValues("GS")`.
 
 ## Structural Equations to the General Solow Growth Model
 $$

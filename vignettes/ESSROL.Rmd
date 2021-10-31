@@ -59,7 +59,7 @@ Parameters defining the ESSROL
 * Rate of capital depreciation ($\delta$)
 * Stock of land ($X$)
 
-Remark: Those parameters can be found via the command: \texttt{getRequiredParams("ESSROL")}.
+Remark: Those parameters can be found via the command: `getRequiredParams("ESSROL")`.
 
 Starting value of endogenous variables defining the ESSROL
 
@@ -68,7 +68,7 @@ Starting value of endogenous variables defining the ESSROL
 * Starting value of the labor force ($L_0$)
 * Starting value of the resource stock of oil ($R_0$)
 
-Remark: Those parameters can be found via the command: \texttt{getRequiredStartingValues("ESSROL")}.
+Remark: Those parameters can be found via the command: `getRequiredStartingValues("ESSROL")`.
 
 ## Structural Equations to the Extended Solow Growth Model with the Scarce Resources Oil and Land
 $$
