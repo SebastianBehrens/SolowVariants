@@ -50,17 +50,17 @@ VisualiseSimulation(aux_simulation,
 
 ## Elaboration
 Parameters defining the BS
-* Total factor productivity ($B$)
-* Alpha ($\alpha$)
-* Population growth rate ($n$)
-* Savings rate to physical capital ($s$)
-* Real rate of return on capital ($r$)
+  * Total factor productivity ($B$)
+  * Alpha ($\alpha$)
+  * Population growth rate ($n$)
+  * Savings rate to physical capital ($s$)
+  * Real rate of return on capital ($r$)
 Remark: Those parameters can be found via the command: \code{getRequiredParams("ESSOE")}.
 
 
 Starting value of endogenous variables defining the BS
-* Starting value of the labor force ($L_0$)
-* Starting value of national wealth ($V_0$)
+  * Starting value of the labor force ($L_0$)
+  * Starting value of national wealth ($V_0$)
 Remark: Those parameters can be found via the command: \code{getRequiredStartingValues("ESSOE")}.
 
 ## Structural Equations to the Extended Solow Growth Model for the Small Open Economy
