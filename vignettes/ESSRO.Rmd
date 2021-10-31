@@ -1,0 +1,65 @@
+---
+title: "Simulate the Extended Solow Growth Model with the Scarce Resource Oil"
+output:
+  html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{ESSRO}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Working Code Example
+```{r, eval = F}
+library(SolowVariants)
+library(tidyverse)
+theme_set(theme_bw())
+
+# Setting up the parameter grid ---------------------------------
+aux_np <- 200
+aux_parameter_grid <-
+  create_parameter_grid(
+    c("alpha", "beta", "n", "g", "sE", "s", "delta"),
+    c(1 / 3, 1 / 3, 0.005, 0.02, 0.15, 0.15, 0.2),
+    c(NA, NA, NA, NA, NA, NA, NA),
+    c(NA, NA, NA, NA, NA, NA, NA),
+    aux_np
+  )
+
+# Setting starting values for K and L ---------------------------------
+aux_startvalues <- list(A = 1, K = 1, L = 1, R = 1)
+
+# Simulate the basic Solow growth model ---------------------------------
+aux_simulation <- SimulateExtendedSolowModelScarceResourceOil(aux_parameter_grid, aux_np,aux_startvalues)
+
+# Visualise some variables ---------------------------------
+VisualiseSimulation(aux_simulation,
+                    c("YpW", "KpEW", "R"), 
+                    "free")
+
+```
+
+## Elaboration
+Parameters defining the BS
+- Alpha ($\alpha$)
+- Beta ($\beta$)
+- Population growth rate ($n$)
+- Growth rate of total factor productivity ($g$)
+- Extraction rate of oil ($sR$)
+- Savings rate to physical capital ($s$)
+- Rate of capital depreciation ($\delta$)
+Remark: Those parameters can be found via the command: \code{getRequiredParams("ESSRO")}.
+
+Starting value of endogenous variables defining the BS
+- Starting value of total factor productivity ($A_0$)
+- Starting value of physical capital ($K_0$)
+- Starting value of the labor force ($L_0$)
+- Starting value of the resource stock of oil ($R_0$)
+Remark: Those parameters can be found via the command: \code{getRequiredStartingValues("ESSRO")}.
