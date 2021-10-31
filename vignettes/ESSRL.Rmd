@@ -47,20 +47,24 @@ VisualiseSimulation(aux_simulation,
 ```
 
 ## Elaboration
-Parameters defining the BS
-  * Alpha ($\alpha$)
-  * Beta ($\beta$)
-  * Population growth rate ($n$)
-  * Growth rate of total factor productivity ($g$)
-  * Savings rate to physical capital ($s$)
-  * Rate of capital depreciation ($\delta$)
-  * Stock of land ($X$)
+Parameters defining the ESSRL
+
+* Alpha ($\alpha$)
+* Beta ($\beta$)
+* Population growth rate ($n$)
+* Growth rate of total factor productivity ($g$)
+* Savings rate to physical capital ($s$)
+* Rate of capital depreciation ($\delta$)
+* Stock of land ($X$)
+
 Remark: Those parameters can be found via the command: \code{getRequiredParams("ESSRL")}.
 
-Starting value of endogenous variables defining the BS
-  * Starting value of total factor productivity ($A_0$)
-  * Starting value of physical capital ($K_0$)
-  * Starting value of the labor force ($L_0$)
+Starting value of endogenous variables defining the ESSRL
+
+* Starting value of total factor productivity ($A_0$)
+* Starting value of physical capital ($K_0$)
+* Starting value of the labor force ($L_0$)
+
 Remark: Those parameters can be found via the command: \code{getRequiredStartingValues("ESSRL")}.
 
 ## Structural Equations to the Extended Solow Growth Model with the Scarce Resource Land

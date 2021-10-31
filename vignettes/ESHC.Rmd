@@ -47,21 +47,25 @@ VisualiseSimulation(aux_simulation,
 ```
 
 ## Elaboration
-Parameters defining the BS
-  * Alpha ($\alpha$)
-  * Phi ($\phi$)
-  * Population growth rate ($n$)
-  * Growth rate of total factor productivity ($g$)
-  * Savings rate to human capital ($sK$)
-  * Savings rate to physical capital ($sH$)
-  * Rate of capital depreciation ($\delta$)
+Parameters defining the ESHC
+
+* Alpha ($\alpha$)
+* Phi ($\phi$)
+* Population growth rate ($n$)
+* Growth rate of total factor productivity ($g$)
+* Savings rate to human capital ($sK$)
+* Savings rate to physical capital ($sH$)
+* Rate of capital depreciation ($\delta$)
+
 Remark: Those parameters can be found via the command: \code{getRequiredParams("ESHC")}.
 
-Starting value of endogenous variables defining the BS
-  * Starting value of total factor productivity ($A_0$)
-  * Starting value of the labor force ($L_0$)
-  * Starting value of human capital ($H_0$)
-  * Starting value of physical capital ($K_0$)
+Starting value of endogenous variables defining the ESHC
+
+* Starting value of total factor productivity ($A_0$)
+* Starting value of the labor force ($L_0$)
+* Starting value of human capital ($H_0$)
+* Starting value of physical capital ($K_0$)
+
 Remark: Those parameters can be found via the command: \code{getRequiredStartingValues("ESHC")}.
 
 ## Structural Equations to the Extended Solow Growth Model with Human Capital
