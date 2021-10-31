@@ -147,11 +147,19 @@ VisualiseSimulation(aux_simulation,
 
 ## See Also the Vignettes specific to each Solow Growth Model Variant
 [BS](BS.html)
+
 [GS](GS.html)
+
 [ESSOE](ESSOE.html)
+
 [ESHC](ESHC.html)
+
 [ESSRO](ESSRO.html)
+
 [ESSRL](ESSRL.html)
+
 [ESSROL](ESSROL.html)
+
 [ESEG](ESEG.html)
+
 [ESEGRomer](ESEGRomer.html)
