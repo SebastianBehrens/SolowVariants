@@ -84,6 +84,8 @@ VisualiseSimulation(aux_simulation,
 | Extended Solow Growth Model with Endogenous Technological Growth by Cozzi | `SimulateExtendedSolowModelEndogenousGrowth()`         |
 
 ## Model Abbreviations
+The table below shows the used abbreviations, so-called model codes, that will be used throughout the package to refer to the respective Solow Growth Model Variants.
+
 | Solow Variant                                                             | Simulation Function |
 |:------------------------------------------------------------------------- |:------------------- |
 | Basic Solow Growth Model                                                  | BS                  |
@@ -145,7 +147,9 @@ VisualiseSimulation(aux_simulation,
 | "Consumption per Effective Worker"                        |        "CpEW"         |
 | "Capital to Output Ratio"                                 |         "CtO"         |
 
-## See Also the Vignettes specific to each Solow Growth Model Variant
+## Vignettes to each Solow Growth Model Variant
+The following hyperlinks link directly to the vignettes that contain explanations on the respective Solow variant.
+
 [BS](BS.html)
 
 [GS](GS.html)
@@ -163,3 +167,5 @@ VisualiseSimulation(aux_simulation,
 [ESEG](ESEG.html)
 
 [ESEGRomer](ESEGRomer.html)
+
+Remark: You can call any of these directly with, for example, `vignette("BS")`.
