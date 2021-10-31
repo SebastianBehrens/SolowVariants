@@ -57,7 +57,7 @@ Parameters defining the ESSOE
 * Savings rate to physical capital ($s$)
 * Real rate of return on capital ($r$)
 
-Remark: Those parameters can be found via the command: \code{getRequiredParams("ESSOE")}.
+Remark: Those parameters can be found via the command: \texttt{getRequiredParams("ESSOE")}.
 
 
 Starting value of endogenous variables defining the ESSOE
@@ -65,7 +65,7 @@ Starting value of endogenous variables defining the ESSOE
 * Starting value of the labor force ($L_0$)
 * Starting value of national wealth ($V_0$)
 
-Remark: Those parameters can be found via the command: \code{getRequiredStartingValues("ESSOE")}.
+Remark: Those parameters can be found via the command: \texttt{getRequiredStartingValues("ESSOE")}.
 
 ## Structural Equations to the Extended Solow Growth Model for the Small Open Economy
 $$
