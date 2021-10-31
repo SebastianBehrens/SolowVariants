@@ -1,12 +1,15 @@
 Package: SolowVariants
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Provide framework to simulate macroeconomic Solow growth models
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Sebastian Behrens
+Maintainer: Sebastian Behrens (sebastian.behrens@student.unisg.ch)
+Description: This function makes availbale useable functions to a) simulate, b) visualise and c) compare Solow growth model variants.
+License: MIT License
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
