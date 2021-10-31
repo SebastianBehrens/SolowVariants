@@ -211,8 +211,6 @@ VisualiseSimulation <- function(simulation_data, variables, scale_identifier){
 
   # Roxygen Header ---------------------------------
   #' @title Visualise selected variables of a simulation
-  #' @description
-  #' @details
   #' @param simulation_data The output tibble of any simulation function.
   #' @param variables The variables to visualise in *abbreviated* form.
   #' @param scale_identifier string to indicate freely floating scales ("free") or fixed sales ("fixed")
@@ -242,7 +240,7 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
   #' @param parameter_data The output from \code{create_parameter_grid(...)}.
   #' @param technology_variant A string indicating the exogenous (\code{technology_variant = "exo"}) or endogenous (\code{technology_variant = "endo"}) nature of technology in the respective model. A special case (\code{technology_variant = "special"}) is the technology form of endogenous technology growth (model code "ESEG").
   #' @param solowversion The model code for the model, such as "BS" or "ESSOE". (The same variables such as WR or RR are computed differently depending on the model.)
-  #' @note \text{See} SimulateBasicSolowModel() \text{for an example.}
+  #' @note See SimulateBasicSolowModel() for an example.
   #' @export
 
   # Function ---------------------------------
@@ -316,7 +314,7 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
     # Variables uniquely calculated to different Solow Model Versions (e.g. WR, RR)
     # WR, RR for BS ---------------------------------
     if(solowversion == "BS") {
-      source("ModelFunctions/BSModelFunctions.R")
+      # source("ModelFunctions/BSModelFunctions.R")
       if (i == "WR") {
         sim_data[["WR"]] <- BS_MF_WR(technology,
                                      sim_data[["K"]],
@@ -334,7 +332,7 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
     }
     # WR, RR for GS ---------------------------------
     if(solowversion == "GS") {
-      source("ModelFunctions/GSModelFunctions.R")
+      # source("ModelFunctions/GSModelFunctions.R")
       if (i == "WR") {
         sim_data[["WR"]] <- GS_MF_WR(technology,
                                      sim_data[["K"]],
@@ -352,7 +350,7 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
     }
     # WR, RR for ESSOE ---------------------------------
     if(solowversion == "ESSOE") {
-        source("ModelFunctions/ESSOEModelFunctions.R")
+        # source("ModelFunctions/ESSOEModelFunctions.R")
       if (i == "WR") {
         sim_data[["WR"]] <- ESSOE_MF_WR(technology,
                                      sim_data[["K"]],
@@ -370,7 +368,7 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
     }
       # WR, RR for ESHC ---------------------------------
       if(solowversion == "ESHC") {
-          source("ModelFunctions/ESHCModelFunctions.R")
+          # source("ModelFunctions/ESHCModelFunctions.R")
         if (i == "WR") {
           sim_data[["WR"]] <- ESHC_MF_WR(technology,
                                          sim_data[["H"]],
@@ -398,7 +396,7 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
       }
     # WR, RR for ESSRL ---------------------------------
     if(solowversion == "ESSRL") {
-        source("ModelFunctions/ESSRLModelFunctions.R")
+        # source("ModelFunctions/ESSRLModelFunctions.R")
       if (i == "WR") {
         sim_data[["WR"]] <- ESSRL_MF_WR(technology,
                                         sim_data[["K"]],
@@ -432,7 +430,7 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
     }
     # WR, RR for ESSRO ---------------------------------
     if(solowversion == "ESSRO") {
-        source("ModelFunctions/ESSROModelFunctions.R")
+        # source("ModelFunctions/ESSROModelFunctions.R")
       if (i == "WR") {
         # The _WR and _RR functions don't exist yet, I will need to compute them by hand first. They are not given in the book.
         # sim_data[["WR"]] <- ESSRO_MF_WR()
@@ -449,7 +447,7 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
 
     # WR, RR and TFP for ESEG ---------------------------------
     if(solowversion == "ESEG") {
-        source("ModelFunctions/ESEGModelFunctions.R")
+        # source("ModelFunctions/ESEGModelFunctions.R")
       if(i == "TFP"){
         sim_data[["TFP"]] <- sim_data[["K"]]^parameter_data[["phi"]]
       }
@@ -576,7 +574,6 @@ compare_simulations <- function(simulation_list, sim_identifier_vector, vars_sel
   # Roxygen Header ---------------------------------
   #' @title (Superseeded!) Visualise Common Variables of Different Solow Models
   #' @description Visualise the evolution of common variables of multiple (2 or more) Solow variants in the same graph.
-  #' @details
   #' @param simulation_list List with tibbles. The tibbles need to be the results of the simulationfunctions, e.g. \code{SimulateBasicSolowModel()}.
   #' @param sim_identifier_vector Vector with the model codes. (The first element of \code{sim_identifier_vector} should correspond to the first element of \code{simulation_list}.)
   #' @param vars_selection Vector with the abbreviated variable names to visualise. (This vector can of course only contain variable abbreviations that are shared by all the simulation in \code{simulation_list}.)
