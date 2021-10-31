@@ -51,18 +51,18 @@ create_path <- function(iv, pfc, nv, np){
 # create_path(2, 3, 4, 7)
 
 # 0.2 grid of individual parameter paths =================================
-create_parameter_grid <- function(namel, ivs, pfcs, nvs, np){
+create_parameter_grid <- function(names, ivs, pfcs, nvs, np){
 
   # Roxygen Header ---------------------------------
-  #' @title Create a set of parameter pathes (grid).
+  #' @title Create a set of parameter paths (grid).
   #' @description Creates dataframe with \code{np+1} rows and
-  #' \code{length(namel)} columns.
-  #' @details The word "grid" refers to multiple parameter pathes.
+  #' \code{length(names)} columns.
+  #' @details The word "grid" refers to multiple parameter paths.
   #' The term will be referenced throughout the simulation functions
   #' as every model is defined via exogenously given parameters that will
   #' be supplied and referenced as a 'parameter-grid' in the simulation functions.
   #' **Warning**: Make sure you use the correct names in \code{names} for the respective parameters. Use \code{getRequiredParams(ModelCode)} to get them. The model abbreviations for \code{ModelCode} (used consistently throughout the package) can be found in the vignette.
-  #' **Warning**: The inputs will be used to create the paramter pathes. For each paramter, the same index will be used across all input vectors. That means that the first entry to \code{ivs} will be the initial value to the parameter that is the first entry in the \code{namel} vector. Same applies the rest of the inputs to this function.
+  #' **Warning**: The inputs will be used to create the paramter paths. For each paramter, the same index will be used across all input vectors. That means that the first entry to \code{ivs} will be the initial value to the parameter that is the first entry in the \code{names} vector. Same applies the rest of the inputs to this function.
   #' @param names A vector with the names of the model-specific set of exogenously defined parameters. Refer to the vignette for the used names to the parameters.
   #' @param ivs Vector with intial values of the parameters.
   #' @param pfcs Vector with periods of paramter changes.
@@ -77,21 +77,20 @@ create_parameter_grid <- function(namel, ivs, pfcs, nvs, np){
   #'
   #' @export
 
+  # Verifying appropriate inputs
+  lengths_of_inputs <- c(length(names), length(ivs), length(pfcs), length(nvs))
+  if(min(lengths_of_inputs) != max(lengths_of_inputs)){
+    stop("The inputs to create_parameter_grid are of different lengths. They need to contain the same number of entries.")
+  }
   # Function ---------------------------------
   aux <- tibble(period = c(0:np))
-  for(i in seq_along(namel)){
+  for(i in seq_along(names)){
     aux_path <- create_path(ivs[[i]], pfcs[[i]], nvs[[i]], np)
-    aux[[namel[[i]] ]] <- aux_path
+    aux[[names[[i]] ]] <- aux_path
   }
   return(aux)
 }
 
-# testing of create_paramter_grid
-# testnamel <- c("B", "alpha", "delta", "n", "s")
-# testivl <- c(1,1/3,0.1, 0.04, 0.23)
-# testpfcl <- c(NA,NA, NA, NA, NA)
-# testnvl <- c(NA, NA, NA, NA, NA)
-# testgrid <- create_parameter_grid(testnamel, testivl, testpfcl, testnvl, 50)
 
 
 # 0.3 grid of paths of model variables =================================
@@ -183,6 +182,7 @@ variable_encoder <- function(variables){
       aux2 == "National Output" ~ "Yn",
       aux2 == "National Wealth" ~ "V",
       aux2 == "National Wealth per Worker"~ "VpW",
+      aux2 == "National Wealth per Effective Worker"~ "VpEW",
       aux2 == "Net Foreign Assets" ~ "F",
       aux2 == "Net Foreign Assets per Worker" ~ "FpW",
       aux2 == "National Savings" ~ "Sn",
@@ -301,6 +301,7 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
     if(i == "Sn"){sim_data[["Sn"]] <- parameter_data[["s"]] * sim_data[["Yn"]]}
     # Variants of Wealth and Foreign Assets in SOE Version
     if(i == "VpW"){sim_data[["VpW"]] <- sim_data[["V"]] / sim_data[["L"]]}
+    if(i == "VpEW"){sim_data[["VpEW"]] <- sim_data[["V"]] / (sim_data[["L"]]*technology)}
     if(i == "FpW"){sim_data[["FpW"]] <- sim_data[["F"]] / sim_data[["L"]]}
     # Variants of Consumption
 
