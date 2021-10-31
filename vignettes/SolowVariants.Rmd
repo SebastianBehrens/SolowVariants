@@ -16,23 +16,23 @@ knitr::opts_chunk$set(
 
 ## What does this package provide?
 1. functions to simulate the following Solow growth models
-  - Basic Solow Growth Model
-  - General Solow Growth Model
-  - Extended Solow Growth Model with Human Capital
-  - Extended Solow Growth Model for the Small and Open Economy
-  - Extended Solow Growth Model with Scarce Resources
-    - with Oil
-    - with Land
-    - with Oil and Land
-  - Extended Solow Growth Model with Endogenous Technological Growth
-    - version put forward by Romer
-    - version put forward by Cozzi
+    - Basic Solow Growth Model
+    - General Solow Growth Model
+    - Extended Solow Growth Model with Human Capital
+    - Extended Solow Growth Model for the Small and Open Economy
+    - Extended Solow Growth Model with Scarce Resources
+      - with Oil
+      - with Land
+      - with Oil and Land
+    - Extended Solow Growth Model with Endogenous Technological Growth
+      - version put forward by Romer
+      - version put forward by Cozzi
 2. function to nicely visualise certain variables of a simulation
 3. function to visualise several simulations to compare them
-  - Example 1: An increase parameter s in period 50 vs. a decrease in capital depreciation rate, $\delta$, in period 50.
-  - Example 2: Compare output in the basic Solow growth model to Output in the general Solow growth model. (both with the same common parameters.)
-  - Example 3: Compare the extended Solow growth models with land, a fixed scarce resource, and the the extended Solow growth models with oil, a not-fixed but depletable scarce resource.
-  - and many more.
+    - Example 1: An increase parameter s in period 50 vs. a decrease in capital depreciation rate, $\delta$, in period 50.
+    - Example 2: Compare output in the basic Solow growth model to Output in the general Solow growth model. (both with the same common parameters.)
+    - Example 3: Compare the extended Solow growth models with land, a fixed scarce resource, and the the extended Solow growth models with oil, a not-fixed but depletable scarce resource.
+    - and many more.
 
 ## Illustrative Example
 ```{r, eval = F}
