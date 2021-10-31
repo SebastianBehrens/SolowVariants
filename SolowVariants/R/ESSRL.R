@@ -1,40 +1,4 @@
 ### 6.0 Extended Solow Growth Model with Scarce Resources — Land #############################
-# source("HelperFunctions.R")
-# Meta-Information All Variables =================================
-meta_ESSRL_variables <-
-    c(
-        "Total Factor Productivity",
-        "Capital Stock",
-        "Labor Stock",
-        "Output",
-        
-        "Capital Stock per Worker",
-        "Output per Worker",
-        
-        "Capital Stock per Effective Worker",
-        "Output per Effective Worker",
-        
-        "Wage Rate",
-        "Capital Rental Rate",
-        "Land Rental Rate",
-        
-        "Log of Output",
-        "Log of Output per Worker",
-        "Log of Output per Effective Worker",
-        
-        "Log of Capital Stock",
-        "Log of Capital Stock per Worker",
-        "Log of Capital Stock per Effective Worker",
-        
-        "Growth Rate of Output",
-        "Growth Rate of Output per Worker",
-        "Growth Rate of Output per Effective Worker",
-        
-        "Growth Rate of Capital Stock",
-        "Growth Rate of Capital Stock per Worker",
-        "Growth Rate of Capital Stock per Effective Worker",
-        "Capital to Output Ratio"
-    )
 
 SimulateExtendedSolowModelScarceResourceLand <- function(paragrid, np, startvals){
 
@@ -49,8 +13,8 @@ SimulateExtendedSolowModelScarceResourceLand <- function(paragrid, np, startvals
   # Function ---------------------------------
 
     # Load Basic Model Functions ---------------------------------
-    source("ModelFunctions/ESSRLModelFunctions.R")
-    source("HelperFunctions.R")
+    # source("ModelFunctions/ESSRLModelFunctions.R")
+    # source("HelperFunctions.R")
     
     # Initialize Simulation Table ---------------------------------
     sim_table <- create_simulation_table(variable_encoder(meta_ESSRL_variables), np)

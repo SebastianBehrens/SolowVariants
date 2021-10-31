@@ -1,40 +1,5 @@
 ### 1.0 Extended Solow Growth Model for Endogeneous Growth #############################
 
-# Meta-Information All Variables =================================
-meta_ESEG_variables <-
-    c(
-        "Output",
-        "Consumption",
-        "Capital Stock",
-        "Labor Stock",
-        "Total Factor Productivity",
-        "Output per Worker",
-        "Consumption per Worker",
-        "Capital Stock per Worker",
-        "Output per Effective Worker",
-        "Consumption per Effective Worker",
-        "Capital Stock per Effective Worker",
-        
-        "Wage Rate",
-        "Rental Rate",
-        
-        "Log of Capital Stock",
-        "Log of Capital Stock per Worker",
-        "Log of Capital Stock per Effective Worker",
-        
-        "Log of Output",
-        "Log of Output per Worker",
-        "Log of Output per Effective Worker",
-        
-        "Growth Rate of Output",
-        "Growth Rate of Output per Worker",
-        "Growth Rate of Output per Effective Worker",
-        
-        "Growth Rate of Capital Stock",
-        "Growth Rate of Capital Stock per Worker",
-        "Growth Rate of Capital Stock per Effective Worker"
-    )
-
 SimulateExtendedSolowModelEndogenousGrowth <- function(paragrid, np, startvals){
 
   # Roxygen Header ---------------------------------

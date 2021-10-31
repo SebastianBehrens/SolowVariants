@@ -1,50 +1,5 @@
 ### 4.0 Extended Solow Growth Model #############################
 
-# Meta-Information All Variables =================================
-meta_ESHC_variables <-
-    c(
-        "Total Factor Productivity",
-        "Human Capital Stock",
-        "Capital Stock",
-        "Labor Stock",
-        "Output",
-        
-        "Human Capital Stock per Worker",
-        "Capital Stock per Worker",
-        "Output per Worker",
-        
-        "Human Capital Stock per Effective Worker",
-        "Capital Stock per Effective Worker",
-        "Output per Effective Worker",
-        
-        "Wage Rate",
-        "Rental Rate",
-        
-        "Log of Output",
-        "Log of Output per Worker",
-        "Log of Output per Effective Worker",
-        
-        "Log of Capital Stock",
-        "Log of Capital Stock per Worker",
-        "Log of Capital Stock per Effective Worker",
-        
-        "Log of Human Capital Stock",
-        "Log of Human Capital Stock per Worker",
-        "Log of Human Capital Stock per Effective Worker",
-        
-        "Growth Rate of Output",
-        "Growth Rate of Output per Worker",
-        "Growth Rate of Output per Effective Worker",
-        
-        "Growth Rate of Capital Stock",
-        "Growth Rate of Capital Stock per Worker",
-        "Growth Rate of Capital Stock per Effective Worker",
-        
-        "Growth Rate of Human Capital Stock",
-        "Growth Rate of Human Capital Stock per Worker",
-        "Growth Rate of Human Capital Stock per Effective Worker"
-    )
-
 SimulateExtendedSolowModelHumanCapital <- function(paragrid, np, startvals){
 
   # Roxygen Header ---------------------------------
@@ -62,7 +17,7 @@ SimulateExtendedSolowModelHumanCapital <- function(paragrid, np, startvals){
     # np for number of periods;
     
     # Load Basic Model Functions ---------------------------------
-    source("ModelFunctions/ESHCModelFunctions.R")
+    # source("ModelFunctions/ESHCModelFunctions.R")
     
     # Initialize Simulation Table ---------------------------------
     sim_table <- create_simulation_table(variable_encoder(meta_ESHC_variables), np)

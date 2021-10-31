@@ -1,42 +1,5 @@
 ### 7.0 Extended Solow Growth Model with Scarce Resources — Land and Oil #############################
 
-# Meta-Information All Variables =================================
-meta_ESSROL_variables <-
-    c(
-        "Capital Stock",
-        "Labor Stock",
-        "Energy Use",
-        "Resource Stock",
-        "Output",
-        
-        "Capital Stock per Worker",
-        "Output per Worker",
-        
-        "Capital Stock per Effective Worker",
-        "Output per Effective Worker",
-        
-        "Wage Rate",
-        "Rental Rate",
-        
-        "Log of Output",
-        "Log of Output per Worker",
-        "Log of Output per Effective Worker",
-        
-        "Log of Capital Stock",
-        "Log of Capital Stock per Worker",
-        "Log of Capital Stock per Effective Worker",
-        
-        "Growth Rate of Output",
-        "Growth Rate of Output per Worker",
-        "Growth Rate of Output per Effective Worker",
-        
-        "Growth Rate of Capital Stock",
-        "Growth Rate of Capital Stock per Worker",
-        "Growth Rate of Capital Stock per Effective Worker",
-        
-        "Total Factor Productivity"
-    )
-
 SimulateExtendedSolowModelScarceResourceOilAndLand <- function(paragrid, np, startvals){
 
 
@@ -51,7 +14,7 @@ SimulateExtendedSolowModelScarceResourceOilAndLand <- function(paragrid, np, sta
   # Function ---------------------------------
 
     # Load Basic Model Functions ---------------------------------
-    source("ModelFunctions/ESSROLModelFunctions.R")
+    # source("ModelFunctions/ESSROLModelFunctions.R")
     
     # Initialize Simulation Table ---------------------------------
     sim_table <- create_simulation_table(variable_encoder(meta_ESSROL_variables), np)

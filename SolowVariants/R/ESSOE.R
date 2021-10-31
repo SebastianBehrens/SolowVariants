@@ -1,46 +1,5 @@
 ### 3.0 Basic Solow Growth Model #############################
 
-# Meta-Information All Variables =================================
-meta_ESSOE_variables <-
-    c(
-        "Capital Stock",
-        "Labor Stock",
-        "Output",
-        
-        "Capital Stock per Worker",
-        "Output per Worker",
-        
-        "Capital Stock per Effective Worker",
-        "Output per Effective Worker",
-        
-        "Wage Rate",
-        "Rental Rate",
-        
-        "National Output",
-        "National Wealth",
-        "National Wealth per Worker",
-        "Net Foreign Assets",
-        "Net Foreign Assets per Worker",
-        "National Savings",
-        
-        "Log of Output",
-        "Log of Output per Worker",
-        "Log of Output per Effective Worker",
-        
-        "Log of Capital Stock",
-        "Log of Capital Stock per Worker",
-        "Log of Capital Stock per Effective Worker",
-        
-        "Growth Rate of Output",
-        "Growth Rate of Output per Worker",
-        "Growth Rate of Output per Effective Worker",
-        
-        "Growth Rate of Capital Stock",
-        "Growth Rate of Capital Stock per Worker",
-        "Growth Rate of Capital Stock per Effective Worker"
-        
-    )
-
 SimulateExtendedSolowModelSmallOpenEconomy <- function(paragrid, np, startvals){
 
   # Roxygen Header ---------------------------------
@@ -54,7 +13,7 @@ SimulateExtendedSolowModelSmallOpenEconomy <- function(paragrid, np, startvals){
   # Function ---------------------------------
     
     # Load Basic Model Functions ---------------------------------
-    source("ModelFunctions/ESSOEModelFunctions.R")
+    # source("ModelFunctions/ESSOEModelFunctions.R")
     
     # Initialize Simulation Table ---------------------------------
     sim_table <- create_simulation_table(variable_encoder(meta_ESSOE_variables), np)

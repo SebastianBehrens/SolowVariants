@@ -1,40 +1,5 @@
 ### 1.0 Basic Solow Growth Model #############################
 
-# Meta-Information All Variables =================================
-meta_ESEGRomer_variables <-
-    c(
-        "Output",
-        "Consumption",
-        "Capital Stock",
-        "Labor Stock",
-        "Total Factor Productivity",
-        "Output per Worker",
-        "Consumption per Worker",
-        "Capital Stock per Worker",
-        "Output per Effective Worker",
-        "Consumption per Effective Worker",
-        "Capital Stock per Effective Worker",
-        
-        "Wage Rate",
-        "Rental Rate",
-        
-        "Log of Capital Stock",
-        "Log of Capital Stock per Worker",
-        "Log of Capital Stock per Effective Worker",
-        
-        "Log of Output",
-        "Log of Output per Worker",
-        "Log of Output per Effective Worker",
-        
-        "Growth Rate of Output",
-        "Growth Rate of Output per Worker",
-        "Growth Rate of Output per Effective Worker",
-        
-        "Growth Rate of Capital Stock",
-        "Growth Rate of Capital Stock per Worker",
-        "Growth Rate of Capital Stock per Effective Worker"
-    )
-
 SimulateExtendedSolowModelEndogenousGrowthRomer <- function(paragrid, np, startvals){
 
   # Roxygen Header ---------------------------------
@@ -48,7 +13,7 @@ SimulateExtendedSolowModelEndogenousGrowthRomer <- function(paragrid, np, startv
   # Function ---------------------------------
     
     # Load Basic Model Functions ---------------------------------
-    source("ModelFunctions/ESEGRomerModelFunctions.R")
+    # source("ModelFunctions/ESEGRomerModelFunctions.R")
     
     # Initialize Simulation Table ---------------------------------
     sim_table <- create_simulation_table(variable_encoder(meta_ESEGRomer_variables), np)
