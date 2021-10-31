@@ -47,16 +47,16 @@ VisualiseSimulation(aux_simulation,
 
 ## Elaboration
 Parameters defining the BS
-    - TFP ($B$)
-    - Alpha ($\alpha$)
-    - Rate of capital depreciation ($\delta$)
-    - Population growth rate ($n$)
-    - Savings rate ($s$)
+* TFP ($B$)
+* Alpha ($\alpha$)
+* Rate of capital depreciation ($\delta$)
+* Population growth rate ($n$)
+* Savings rate ($s$)
 Remark: Those parameters can be found via the command: \code{getRequiredParams("BS")}.
 
 Starting value of endogenous variables defining the BS
-    - Starting value of physical capital ($K_0$)
-    - Starting value of the labor force ($L_0$)
+* Starting value of physical capital ($K_0$)
+* Starting value of the labor force ($L_0$)
 Remark: Those parameters can be found via the command: \code{getRequiredStartingValues("BS")}.
 
 ## Structural Equations to the Basic Solow Growth Model
