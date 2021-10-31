@@ -86,6 +86,7 @@ meta_ESSOE_variables <-
         "National Output",
         "National Wealth",
         "National Wealth per Worker",
+        "National Wealth per Effective Worker",
         "Net Foreign Assets",
         "Net Foreign Assets per Worker",
         "National Savings",
