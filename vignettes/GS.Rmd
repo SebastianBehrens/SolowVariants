@@ -43,6 +43,11 @@ aux_simulation <- SimulateGeneralSolowModel(aux_parameter_grid, aux_np,aux_start
 VisualiseSimulation(aux_simulation,
                     c("YpW", "Y", "KpEW"), 
                     "free")
+
+# Verify whether the economy is 'in' steady state in the final period ---------------------------------
+
+steadystate_checker(aux_simulation, aux_parameter_grid, "GS")
+
 ```
 
 ## Elaboration

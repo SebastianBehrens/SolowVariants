@@ -44,6 +44,9 @@ VisualiseSimulation(aux_simulation,
                     c("YpW", "KpEW", "R"), 
                     "free")
 
+# Verify whether the economy is 'in' steady state in the final period ---------------------------------
+
+steadystate_checker(aux_simulation, aux_parameter_grid, "ESSROL")
 ```
 
 ## Elaboration

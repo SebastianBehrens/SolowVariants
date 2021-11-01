@@ -63,6 +63,11 @@ aux_simulation <- SimulateBasicSolowModel(aux_parameter_grid, aux_np,aux_startva
 VisualiseSimulation(aux_simulation,
                     c("YpW", "Y", "KpW"), 
                     "free")
+
+# Verify whether the economy is 'in' steady state in the final period ---------------------------------
+
+steadystate_checker(aux_simulation, aux_parameter_grid, "BS")
+
 ```
 
 
