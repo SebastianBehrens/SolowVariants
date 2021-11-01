@@ -2,11 +2,13 @@
 % Please edit documentation in R/HelperFunctions.R
 \name{create_parameter_grid}
 \alias{create_parameter_grid}
-\title{Create a set of parameter pathes (grid).}
+\title{Create a set of parameter paths (grid).}
 \usage{
-create_parameter_grid(namel, ivs, pfcs, nvs, np)
+create_parameter_grid(names, ivs, pfcs, nvs, np)
 }
 \arguments{
+\item{names}{A vector with the names of the model-specific set of exogenously defined parameters. Refer to the vignette for the used names to the parameters.}
+
 \item{ivs}{Vector with intial values of the parameters.}
 
 \item{pfcs}{Vector with periods of paramter changes.}
@@ -14,20 +16,18 @@ create_parameter_grid(namel, ivs, pfcs, nvs, np)
 \item{nvs}{Vector with new paramter values from the respective period of paramter change onwards.}
 
 \item{np}{Integer indicating the number of periods for which the paramter-grid will be set up.}
-
-\item{names}{A vector with the names of the model-specific set of exogenously defined parameters. Refer to the vignette for the used names to the parameters.}
 }
 \description{
 Creates dataframe with \code{np+1} rows and
-\code{length(namel)} columns.
+\code{length(names)} columns.
 }
 \details{
-The word "grid" refers to multiple parameter pathes.
+The word "grid" refers to multiple parameter paths.
 The term will be referenced throughout the simulation functions
 as every model is defined via exogenously given parameters that will
 be supplied and referenced as a 'parameter-grid' in the simulation functions.
 **Warning**: Make sure you use the correct names in \code{names} for the respective parameters. Use \code{getRequiredParams(ModelCode)} to get them. The model abbreviations for \code{ModelCode} (used consistently throughout the package) can be found in the vignette.
-**Warning**: The inputs will be used to create the paramter pathes. For each paramter, the same index will be used across all input vectors. That means that the first entry to \code{ivs} will be the initial value to the parameter that is the first entry in the \code{namel} vector. Same applies the rest of the inputs to this function.
+**Warning**: The inputs will be used to create the paramter paths. For each paramter, the same index will be used across all input vectors. That means that the first entry to \code{ivs} will be the initial value to the parameter that is the first entry in the \code{names} vector. Same applies the rest of the inputs to this function.
 }
 \examples{
 create_parameter_grid(getRequiredParams("BS"),

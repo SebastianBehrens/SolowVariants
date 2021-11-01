@@ -4,16 +4,12 @@
 \alias{simulation_correctness_checker}
 \title{Check correctness by comparing simulated (endo.) variables to their steady state values}
 \usage{
-simulation_correctness_checker(
-  last_row_simulation,
-  last_row_parameter,
-  solow_variant
-)
+simulation_correctness_checker(sim_data, parameter_grid, solow_variant)
 }
 \arguments{
-\item{last_row_simulation}{Vector of the values of both primary and secondary variables in the last period of the simulation.}
+\item{sim_data}{The tibble that is being filled in the simulation function.}
 
-\item{last_row_parameter}{Vector of the values of the exo. paramter (from the paramter grid).}
+\item{parameter_grid}{The output from \code{create_parameter_grid(...)}.}
 
 \item{solow_variant}{String indicating the model, such as "BS" or "ESHC".}
 }
