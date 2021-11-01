@@ -2,6 +2,7 @@
 
 export(ESSRL_SS_CtO)
 export(ESSRL_SS_YpW)
+export(GS_SS_KpW)
 export(SimulateBasicSolowModel)
 export(SimulateExtendedSolowModelEndogenousGrowth)
 export(SimulateExtendedSolowModelEndogenousGrowthRomer)
@@ -22,3 +23,5 @@ export(getRequiredStartingValues)
 export(getVariablesAvailableToBeVisualised)
 export(simulation_correctness_checker)
 export(variable_encoder)
+import(R.utils)
+import(tidyverse)
