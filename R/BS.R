@@ -56,6 +56,9 @@ SimulateBasicSolowModel <- function(paragrid, np, startvals){
     return(sim_table)
 }
 
+
+
+
 # # Testing
 # testnamel <- c("B", "alpha", "delta", "n", "s")
 # testivl <- c(10, 1/3,0.1, 0.005, 0.22)
