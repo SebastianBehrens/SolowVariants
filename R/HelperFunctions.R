@@ -10,17 +10,6 @@
 # }
 ############################################################################
 
-docallissuetester <- function(){
-  #' @title testerfunction
-  #' @description tester function to see whether the function is accessible in this function. because if so, i don't see why it would not be accessible to the doCall statement.
-  #' @export
-  
-  if(exists("ESSRL_SS_CtO")){
-  print("SS function accessible")}
-  if(exists("ESSRL_MF_LR")){
-  print("MF function accessible")}
-}
-
 # 0.1 individual parameter path =================================
 create_path <- function(iv, pfc, nv, np){
 
@@ -583,7 +572,12 @@ simulation_correctness_checker <- function(sim_data, parameter_grid, solow_varia
 
     for(i in aux_steadystate_variables){
       aux_function_name <- paste(solow_variant, "_SS_", i, sep = "")
-      SS_val_computed <- doCall(aux_function_name, args = all_possible_steady_state_function_inputs, envir = baseenv())
+      if(exists(aux_function_name)){
+        print(paste("SS function exists:", aux_function_name))
+      }else{
+        print(paste("SS function DOES NOT exist:", aux_function_name))
+      }
+      SS_val_computed <- doCall(aux_function_name, args = all_possible_steady_state_function_inputs )
       aux <- aux %>% complete(variable = i, last_value = last_row_simulation[[i]], steadystate = SS_val_computed)
     }
     aux <- aux %>% drop_na()
