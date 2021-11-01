@@ -588,7 +588,8 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
     ))
     aux <- aux %>% rename("Theoretical Value" = steadystate,
                           "Simulated Value" = last_value,
-                          "Variable" = variable)
+                          "Variable" = variable
+                          "Economy in SS?" = is_same)
     return(aux)
 
 }
