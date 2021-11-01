@@ -508,8 +508,8 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
   return(sim_data)
 }
 
-# 0.8 compute steady state values and check correctness of simulations =================================
-simulation_correctness_checker <- function(sim_data, parameter_grid, solow_variant){
+# 0.8 compute steady state values and validate the simulation against the theoretically to be attained values with the current model setup (paramters, starting values) =================================
+steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
 
   # Roxygen Header ---------------------------------
   #' @title Check correctness by comparing simulated (endo.) variables to their steady state values
@@ -795,7 +795,7 @@ getVariablesAvailableToBeVisualised <- function(ModelCode1,
 # last_row_parameter <- paragrid[nrow(paragrid), ]
 # solow_variant <- "BS"
 #
-# result <- simulation_correctness_checker(testsimulation[nrow(testsimulation), ],
+# result <- steadystate_checker(testsimulation[nrow(testsimulation), ],
 #                                paragrid[nrow(paragrid), ],
 #                                "BS")
 
