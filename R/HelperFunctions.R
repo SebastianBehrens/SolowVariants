@@ -515,7 +515,7 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
   #' @title Check correctness by comparing simulated (endo.) variables to their steady state values
   #' @description Compare variables in the final period of the simulation to their respective steady state value (given the exo. paramters).
   #' @details This function presumes that the number of periods simulated were such that the final values are near steady state. If the steady state path is disrupted by a parameter change in the second to last period, this function will yield misleading results.
-  #' @param sim_data The tibble that is being filled in the simulation function.
+  #' @param sim_data The tibble that is being filled in the simulation function, e.g. \code{SimulateBasicSolowModel()}.
   #' @param parameter_grid The output from \code{create_parameter_grid(...)}.
   #' @param solow_variant String indicating the model, such as "BS" or "ESHC".
   #' @export
@@ -589,7 +589,7 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
     aux <- aux %>% rename("Theoretical Value" = steadystate,
                           "Simulated Value" = last_value,
                           "Variable" = variable,
-                          "Economy in SS?" = is_same)
+                          "Economy in SS" = is_same)
     return(aux)
 
 }
