@@ -7,15 +7,16 @@ workaround_load_packages <- function(){
  #' @imports tidyverse
 }
 
-docallissuetester <- function(
+docallissuetester <- function(){
   #' @title testerfunction
   #' @description tester function to see whether the function is accessible in this function. because if so, i don't see why it would not be accessible to the doCall statement.
   #' @export
+  
   print("SS function accessible")
   exists("ESSRL_SS_CtO")
   print("MF function accessible")
   exists("ESSRL_MF_LR")
-  )
+}
 
 # 0.1 individual parameter path =================================
 create_path <- function(iv, pfc, nv, np){
