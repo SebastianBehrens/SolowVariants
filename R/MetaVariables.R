@@ -325,3 +325,5 @@ meta_ESEGRomer_variables <-
         "Growth Rate of Capital Stock per Worker",
         "Growth Rate of Capital Stock per Effective Worker"
     )
+
+# save(meta_BS_variables, meta_GS_variables, meta_ESSOE_variables, meta_ESHC_variables, meta_ESSRO_variables, meta_ESSRL_variables, meta_ESSROL_variables,meta_ESEG_variables , meta_ESEGRomer_variables, file = "meta_variables.Rdata")
