@@ -1,5 +1,12 @@
 # This file sets up several helper functions that will be used throughout the Solow model simulation functions.
 
+workaround_load_packages <- function(){
+  #' @title This function serves as a workaround to put required pacakges into the imports in the namespace file.
+
+ #' @imports R.utils
+ #' @imports tidyverse
+}
+
 # 0.1 individual parameter path =================================
 create_path <- function(iv, pfc, nv, np){
 
@@ -508,7 +515,7 @@ simulation_correctness_checker <- function(sim_data, parameter_grid, solow_varia
   # Function ---------------------------------
     last_row_simulation <- sim_data[nrow(sim_data), ]
     last_row_parameter <- parameter_grid[nrow(parameter_grid), ]
-    
+
     aux <- tibble(variable = toString(NA), last_value = as.double(NA), steadystate = as.double(NA))
     aux[[1,1]] <- NA
 
