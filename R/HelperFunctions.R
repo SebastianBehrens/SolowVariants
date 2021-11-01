@@ -577,15 +577,6 @@ simulation_correctness_checker <- function(sim_data, parameter_grid, solow_varia
 
     for(i in aux_steadystate_variables){
       aux_function_name <- paste(solow_variant, "_SS_", i, sep = "")
-      print("----------")
-      if(exists(aux_function_name)){
-        print(paste("SS function exists:", aux_function_name))
-      }else{
-        print(paste("SS function DOES NOT exist:", aux_function_name))
-      }
-      print("----------")
-      ls()
-      print("----------")
       SS_val_computed <- doCall(aux_function_name, args = all_possible_steady_state_function_inputs )
       aux <- aux %>% complete(variable = i, last_value = last_row_simulation[[i]], steadystate = SS_val_computed)
     }
