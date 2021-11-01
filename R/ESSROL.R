@@ -68,20 +68,3 @@ SimulateExtendedSolowModelScarceResourceOilAndLand <- function(paragrid, np, sta
     
     return(sim_table)
 }
-
-# # Testing
-# testnamel <- c("alpha", "beta", "kappa", "delta", "n", "s", "sE", "g", "X")
-# testivl <- c(0.33, 0.2, 0.2, 0.1, 0.02, 0.2, 0.05, 0.05, 5)
-# testpfcl <- c(NA,NA,NA, NA, NA, NA, NA, NA, NA)
-# testnvl <- c(NA, NA, NA, NA, NA, NA, NA, NA, NA)
-# np <- 50
-# testgridalt <- create_parameter_grid(testnamel, testivl, testpfcl, testnvl, np)
-# paragrid <- testgridalt
-# startvals <- list(A = 1, K = 1, L = 1, R = 1)
-# testsimulation <- SimulateExtendedSolowModelScarceResourceLand(testgridalt, np,startvals)
-# simulation_correctness_checker(testsimulation[nrow(testsimulation), ],
-#                                paragrid[nrow(paragrid), ],
-#                                "ESSROL")
-
-# # View(testsimulation)
-# VisualiseSimulation(testsimulation, variable_encoder(meta_ESSRL_variables)[1:4], "free")

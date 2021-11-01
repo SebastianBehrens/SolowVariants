@@ -78,27 +78,3 @@ SimulateExtendedSolowModelSmallOpenEconomy <- function(paragrid, np, startvals){
     # View(sim_table)
     return(sim_table)
 }
-
-# Testing
-# testnamel <- c("B", "alpha", "n", "s", "r")
-# testivl <- c(5, 1/3,0.1, 0.1, 0.05)
-# testpfcl <- c(NA,NA,NA, NA, NA)
-# testnvl <- c(NA, NA, NA, NA, NA)
-# np <- 100
-# testgridalt <- create_parameter_grid(testnamel, testivl, testpfcl, testnvl, np)
-# paragrid <- testgridalt
-# startvals <- list(L = 1, V = 30)
-# testsimulation <- SimulateExtendedSolowModelSmallOpenEconomy(testgridalt, np,startvals)
-# simulation_correctness_checker(testsimulation[nrow(testsimulation), ],
-#                                paragrid[nrow(paragrid), ],
-#                                "ESSOE")
-# 
-# ESSOE_SS_VpW <- function(s, n, r, w){(s/(n- s * r)) * w}
-# ESSOE_SS_VpW(paragrid[[nrow(paragrid), "s"]],
-#              paragrid[[nrow(paragrid), "n"]],
-#              paragrid[[nrow(paragrid), "r"]],
-#              testsimulation[[nrow(testsimulation), "WR"]])
-# 
-# testsimulation[nrow(testsimulation), "VpW"]
-# View(testsimulation)
-# VisualiseSimulation(testsimulation, variable_encoder(meta_ESSOE_variables), "free")
