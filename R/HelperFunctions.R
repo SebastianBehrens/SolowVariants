@@ -583,8 +583,8 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
     aux <- aux %>% drop_na()
     aux <- aux %>% mutate_at(vars(steadystate, last_value), round, digits = 2)
     aux <- aux %>% mutate(is_same = case_when(
-      last_value == steadystate ~ "Equal",
-      TRUE ~ "Different"
+      last_value == steadystate ~ "TRUE",
+      TRUE ~ "FALSE"
     ))
     aux <- aux %>% rename("Theoretical Value" = steadystate,
                           "Simulated Value" = last_value,
