@@ -13,4 +13,4 @@ library(SolowVariants)
 
 ## How to use the package?
 
-Check `vignette("SolowVariants")` after installing and loading the package.
+Check the vignette of this package by calling `vignette("SolowVariants")` (after installing and loading) to get an explanation of this package.
