@@ -9,3 +9,7 @@
 
 
 # create such an interactive function to easily simulate teh solow models
+
+# then: ESSOE steadystate_checker yields False for VpW and FpW. investigate.
+# ESSRO only has one ss variable in steadystate_checker => where are others?
+# ESSROL only has gY for steadystate_checker
