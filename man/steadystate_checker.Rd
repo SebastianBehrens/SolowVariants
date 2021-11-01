@@ -7,7 +7,7 @@
 steadystate_checker(sim_data, parameter_grid, solow_variant)
 }
 \arguments{
-\item{sim_data}{The tibble that is being filled in the simulation function.}
+\item{sim_data}{The tibble that is being filled in the simulation function, e.g. \code{SimulateBasicSolowModel()}.}
 
 \item{parameter_grid}{The output from \code{create_parameter_grid(...)}.}
 
