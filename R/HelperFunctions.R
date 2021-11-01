@@ -506,8 +506,8 @@ simulation_correctness_checker <- function(sim_data, parameter_grid, solow_varia
   #' @export
 
   # Function ---------------------------------
-  last_row_simulation <- sim_data[nrow(sim_data), ]
-  last_row_parameter <- parameter_grid[nrow(parameter_grid), ]
+    last_row_simulation <- sim_data[nrow(sim_data), ]
+    last_row_parameter <- parameter_grid[nrow(parameter_grid), ]
   # last_row for the last row of the simulation table (sim_table %>% tail(1))
   # solow_variant for the different solow variants
     aux <- tibble(variable = toString(NA), last_value = as.double(NA), steadystate = as.double(NA))
