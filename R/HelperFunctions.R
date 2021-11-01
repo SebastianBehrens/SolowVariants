@@ -1,21 +1,24 @@
 # This file sets up several helper functions that will be used throughout the Solow model simulation functions.
 
-workaround_load_packages <- function(){
-  #' @title This function serves as a workaround to put required pacakges into the imports in the namespace file.
+############################################################################
+## not working below => fix it  => ultimate goal: automatically load required packages as tidyverse and R.utils
+# workaround_load_packages <- function(){
+#   #' @title This function serves as a workaround to put required pacakges into the imports in the namespace file.
 
- #' @imports R.utils
- #' @imports tidyverse
-}
+#  #' @imports R.utils
+#  #' @imports tidyverse
+# }
+############################################################################
 
 docallissuetester <- function(){
   #' @title testerfunction
   #' @description tester function to see whether the function is accessible in this function. because if so, i don't see why it would not be accessible to the doCall statement.
   #' @export
   
-  print("SS function accessible")
-  exists("ESSRL_SS_CtO")
-  print("MF function accessible")
-  exists("ESSRL_MF_LR")
+  if(exists("ESSRL_SS_CtO")){
+  print("SS function accessible")}
+  if(exists("ESSRL_MF_LR")){
+  print("MF function accessible")}
 }
 
 # 0.1 individual parameter path =================================
