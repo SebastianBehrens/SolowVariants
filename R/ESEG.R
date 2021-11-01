@@ -74,7 +74,7 @@ SimulateExtendedSolowModelEndogenousGrowth <- function(paragrid, np, startvals){
 # (testsimulation[["TFP"]][[201]] - testsimulation[["TFP"]][[200]])/testsimulation[["TFP"]][[200]]
 # ESEG_SS_gYpW(n, phi, s, testsimulation[["TFP"]][[201]], delta)
 # 
-# simulation_correctness_checker(testsimulation[nrow(testsimulation), ],
+# steadystate_checker(testsimulation[nrow(testsimulation), ],
 #                                paragrid[nrow(paragrid), ],
 #                                "ESEG")
 
