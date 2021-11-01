@@ -1,5 +1,5 @@
 # Install and load packages
-devtools::install_github("SebastianBehrens/SolowVariants", build_vignettes = T, force = T)
+# devtools::install_github("SebastianBehrens/SolowVariants", build_vignettes = T, force = T)
 library(SolowVariants)
 library(tidyverse)
 library(R.utils)
@@ -31,7 +31,7 @@ VisualiseSimulation(aux_simulation,
 # Issues =================================
 # for seeing the code of the function at question
 simulation_correctness_checker
-
+?ESSRL_SS_CtO
 # invoke error message
 simulation_correctness_checker(aux_simulation, aux_parameter_grid, "ESSRL")
 
