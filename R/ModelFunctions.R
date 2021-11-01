@@ -5,11 +5,26 @@ BS_MF_RR <- function(B, K, L, alpha){alpha * B * (K/L)^(alpha - 1)}
 BS_MF_WR <- function(B, K, L, alpha){(1-alpha) * B * (K/L)^alpha}
 BS_MF_Y <- function(B, K, L, alpha){B * K^alpha * L^(1-alpha)}
 
-BS_SS_KpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(s/(n+ delta))^(1/(1-alpha))}
-BS_SS_YpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(s/(n+ delta))^(alpha/(1-alpha))}
-BS_SS_CpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(1-s)*(s/(n+delta))^(alpha/(1-alpha))}
-BS_SS_RR <- function(alpha, s, n, delta){alpha * (s/(n + delta))^(-1)}
-BS_SS_WR <- function(B, alpha, s, n, delta){(1-alpha)*B^(1/(1-alpha))*(s/(n+delta))^(alpha/(1-alpha))}
+BS_SS_KpW <- function(B, alpha, s, n, delta){
+    #' @export
+    B^(1/(1-alpha))*(s/(n+ delta))^(1/(1-alpha))
+    }
+BS_SS_YpW <- function(B, alpha, s, n, delta){
+    #' @export
+    B^(1/(1-alpha))*(s/(n+ delta))^(alpha/(1-alpha))
+    }
+BS_SS_CpW <- function(B, alpha, s, n, delta){
+    #' @export
+    B^(1/(1-alpha))*(1-s)*(s/(n+delta))^(alpha/(1-alpha))
+    }
+BS_SS_RR <- function(alpha, s, n, delta){
+    #' @export
+    alpha * (s/(n + delta))^(-1)
+    }
+BS_SS_WR <- function(B, alpha, s, n, delta){
+    #' @export
+    (1-alpha)*B^(1/(1-alpha))*(s/(n+delta))^(alpha/(1-alpha))
+    }
 
 # Model Functions of General Solow Growth Model ---------------------------------
 GS_MF_KN <- function(s, Y, delta, K){s * Y + (1-delta)*K}
@@ -20,15 +35,36 @@ GS_MF_WR <- function(A, K, L, alpha){A* (1-alpha) * (K/(A*L))^alpha }
 GS_MF_Y <- function(A, K, L, alpha){K^alpha * (A*L)^(1-alpha)}
 
 # from book
-GS_SS_KpW <- function(s, n, g, delta, alpha, A){A * (s/(n + g + delta + n*g))^(1/(1-alpha))}
-GS_SS_YpW <- function(s, n, g, delta, alpha, A){A * (s/(n + g + delta + n*g))^(alpha/(1-alpha))}
-GS_SS_CpW <- function(s, n, g, delta, alpha, A){A * (1-s) * (s/(n + g + delta + n * g))^(alpha/(1-alpha))}
-GS_SS_RR <- function(alpha, s, n, g, delta){alpha * (s/(n + g + delta + n * g))^(-1)}
-GS_SS_WR <- function(alpha, s, n, g, delta, A){A * (1- alpha) * (s/(n + g + delta + n * g))^(alpha/(1-alpha))}
+GS_SS_KpW <- function(s, n, g, delta, alpha, A){
+    #' @export
+    A * (s/(n + g + delta + n*g))^(1/(1-alpha))
+    }
+GS_SS_YpW <- function(s, n, g, delta, alpha, A){
+    #' @export
+    A * (s/(n + g + delta + n*g))^(alpha/(1-alpha))
+    }
+GS_SS_CpW <- function(s, n, g, delta, alpha, A){
+    #' @export
+    A * (1-s) * (s/(n + g + delta + n * g))^(alpha/(1-alpha))
+    }
+GS_SS_RR <- function(alpha, s, n, g, delta){
+    #' @export
+    alpha * (s/(n + g + delta + n * g))^(-1)
+    }
+GS_SS_WR <- function(alpha, s, n, g, delta, A){
+    #' @export
+    A * (1- alpha) * (s/(n + g + delta + n * g))^(alpha/(1-alpha))
+    }
 
 # from slides
-GS_SS_KpEW <- function(s, n, g, delta, alpha){(s/(n + g + delta + n*g))^(1/(1-alpha))}
-GS_SS_YpEW <- function(s, n, g, delta, alpha, A){(s/(n + g + delta + n*g))^(alpha/(1-alpha))}
+GS_SS_KpEW <- function(s, n, g, delta, alpha){
+    #' @export
+    (s/(n + g + delta + n*g))^(1/(1-alpha))
+    }
+GS_SS_YpEW <- function(s, n, g, delta, alpha, A){
+    #' @export
+    (s/(n + g + delta + n*g))^(alpha/(1-alpha))
+    }
 
 # Model Functions of Extended Solow Growth Model for the Small and Open Economy ---------------------------------
 ESSOE_MF_LN <- function(n, L){(1+n) * L}
@@ -41,12 +77,30 @@ ESSOE_MF_VN <- function(Y_nat, s, V_previous){s*Y_nat + V_previous}
 ESSOE_MF_F <- function(V, K){V - K}
 
 
-ESSOE_SS_KpW <- function(B, alpha, r){B^(1/(1-alpha))*(alpha/r)^(1/(1-alpha))}
-ESSOE_SS_YpW <- function(B, alpha, r){B^(1/(1-alpha))*(alpha/r)^(alpha/(1-alpha))}
-ESSOE_SS_WR <- function(B, alpha, r){(1-alpha) * B^(1/(1-alpha))*(alpha/r)^(alpha/(1-alpha))}
-ESSOE_SS_VpW <- function(s, n, r, w){((s/n)/(1 - (s/n)*r))*w} # old
-ESSOE_SS_VpW <- function(s, n, r, w){(s/(n- s * r)) * w}
-ESSOE_SS_FpW <- function(alpha, s, n, r, w){(1/(1- alpha))* (s/n) * (1/r)*((r - ((alpha* n)/s))/(1 - (s/n)*r))*w}
+ESSOE_SS_KpW <- function(B, alpha, r){
+    #' @export
+    B^(1/(1-alpha))*(alpha/r)^(1/(1-alpha))
+    }
+ESSOE_SS_YpW <- function(B, alpha, r){
+    #' @export
+    B^(1/(1-alpha))*(alpha/r)^(alpha/(1-alpha))
+    }
+ESSOE_SS_WR <- function(B, alpha, r){
+    #' @export
+    (1-alpha) * B^(1/(1-alpha))*(alpha/r)^(alpha/(1-alpha))
+    }
+ESSOE_SS_VpW_alt <- function(s, n, r, w){
+    #' @export
+    ((s/n)/(1 - (s/n)*r))*w
+    } # old
+ESSOE_SS_VpW <- function(s, n, r, w){
+    #' @export
+    (s/(n- s * r)) * w
+    }
+ESSOE_SS_FpW <- function(alpha, s, n, r, w){
+    #' @export
+    (1/(1- alpha))* (s/n) * (1/r)*((r - ((alpha* n)/s))/(1 - (s/n)*r))*w
+    }
 
 # Model Functions of Extended Solow Growth Model with Human Capital ---------------------------------
 ESHC_MF_KN <- function(sK, Y, delta, K){sK * Y + (1-delta)*K}
@@ -59,19 +113,34 @@ ESHC_MF_Y <- function(A, H, K, L, alpha, phi){K^alpha * H^phi * (A*L)^(1-alpha -
 ESHC_MF_KpEWN <- function(n, g, sK, YpEW, delta, KpEW){(1/((1+n)*(1+g))) * (sK * YpEW + (1-delta)*KpEW)}
 ESHC_MF_HpEWN <- function(n, g, sH, YpEW, delta, KpEW){(1/((1+n)*(1+g))) * (sH * YpEW + (1-delta)*KpEW)}
 # from book
-ESHC_SS_KpEW <- function(sK, sH, alpha, phi, n, g, delta){((sK^(1-phi)*sH^phi)/(n + g + delta + n * g))^(1/(1-alpha - phi))}
-ESHC_SS_HpEW <- function(sK, sH, alpha, phi, n, g, delta){((sK^alpha * sH^(1-alpha))/(n + g + delta + n * g))^(1/(1-alpha- phi))} 
+ESHC_SS_KpEW <- function(sK, sH, alpha, phi, n, g, delta){
+    #' @export
+    ((sK^(1-phi)*sH^phi)/(n + g + delta + n * g))^(1/(1-alpha - phi))
+    }
+ESHC_SS_HpEW <- function(sK, sH, alpha, phi, n, g, delta){
+    #' @export
+    ((sK^alpha * sH^(1-alpha))/(n + g + delta + n * g))^(1/(1-alpha- phi))
+    } 
 
 # YpEW complicated variant (sH and sK occuring twice per factor)
 # ESHC_SS_YpEW <- function(sK, sH, n, g, delta, alpha, phi){(((sK^(1-phi)*sH^phi)/(n + g + delta + n * g))^(1/(1-alpha - phi)))^alpha *(((sK^(1- alpha) * sH^alpha)/(n + g + delta + n * g))^(1/(1-alpha- phi)))^phi}
 
 # YpEW simplified sK and sH occuring just once in separate factors
-ESHC_SS_YpEW <- function(sK, sH, n, g, delta, alpha, phi){(((sK)/(n + g + delta + n * g))^(1/(1-alpha - phi)))^alpha *(((sH)/(n + g + delta + n * g))^(1/(1-alpha- phi)))^phi}
+ESHC_SS_YpEW <- function(sK, sH, n, g, delta, alpha, phi){
+    #' @export
+    (((sK)/(n + g + delta + n * g))^(1/(1-alpha - phi)))^alpha *(((sH)/(n + g + delta + n * g))^(1/(1-alpha- phi)))^phi
+    }
 
-ESHC_SS_YpW <- function(A, sK, sH, n, g, delta, alpha, phi){A * (((sK)/(n + g + delta + n * g))^(1/(1-alpha - phi)))^alpha *(((sH)/(n + g + delta + n * g))^(1/(1-alpha- phi)))^phi}
+ESHC_SS_YpW <- function(A, sK, sH, n, g, delta, alpha, phi){
+    #' @export
+    A * (((sK)/(n + g + delta + n * g))^(1/(1-alpha - phi)))^alpha *(((sH)/(n + g + delta + n * g))^(1/(1-alpha- phi)))^phi
+    }
 # ESHC_SS_YpW <- function(HpEW, KpEW, A, alpha, phi){A * KpEW^alpha * HpEW^phi}
 
-ESHC_SS_CpW <- function(A, sK, sH, n, g, delta, alpha, phi){A * (1- sK - sH) * (((sK)/(n + g + delta + n * g))^(1/(1-alpha - phi)))^alpha *(((sH)/(n + g + delta + n * g))^(1/(1-alpha- phi)))^phi}
+ESHC_SS_CpW <- function(A, sK, sH, n, g, delta, alpha, phi){
+    #' @export
+    A * (1- sK - sH) * (((sK)/(n + g + delta + n * g))^(1/(1-alpha - phi)))^alpha *(((sH)/(n + g + delta + n * g))^(1/(1-alpha- phi)))^phi
+    }
 
 # SS_WR and SS_RR missing. formula nowhere to be found — must be computed myself
 # ESHC_SS_RR <- function(alpha, s, n, g, delta){alpha * (s/(n + g + delta + n * g))^(-1)}
@@ -90,8 +159,10 @@ ESSRO_MF_AN <- function(g, A){(1+g) * A}
 # ESSRO_MF_WR <- function(){}
 
 ESSRO_SS_YpW <- function(KpW, YpW, A, R, L, alpha, beta){
+    #' @export
     epsilon <- 1- alpha - beta
-    (KpW/YpW)^(alpha/(beta + epsilon)) * A^(beta/(beta + epsilon)) * (R/L)^(epsilon/(beta + epsilon))}
+    (KpW/YpW)^(alpha/(beta + epsilon)) * A^(beta/(beta + epsilon)) * (R/L)^(epsilon/(beta + epsilon))
+    }
 
 
 # Remark regarding dynamics of E and R
@@ -110,13 +181,11 @@ ESSRL_MF_LR <- function(A, K, L, X, alpha, beta){(1-alpha - beta) * (K/(A*L))^(a
 
 # from book (but also on slides)
 ESSRL_SS_YpW <- function(KpW, YpW, A, X, L, alpha, beta){
-    #' @title Get steady state value of YpW in the the ESSRL variant
     #' @export
     (KpW/YpW)^(alpha/(beta + (1-alpha - beta))) * A^(beta/(beta + (1-alpha - beta))) * (X/L)^((1-alpha - beta)/(beta + (1-alpha - beta)))
 }
 # Capital to Output Ratio
 ESSRL_SS_CtO <- function(s, n, g, delta, alpha, beta){
-    #' @title Get steady state value of CtO in the the ESSRL variant
     #' @export
     s/(((1 + n) * (1 + g))^(beta/(beta + (1-alpha - beta))) - (1- delta))
 }
@@ -135,6 +204,7 @@ ESSROL_MF_AN <- function(g, A){(1+g) * A}
 # ESSRO_MF_WR <- function(){}
 
 ESSROL_SS_gY <- function(alpha, beta, kappa, n, g, sE){
+    #' @export
     (beta/(beta + kappa + (1- alpha - beta - kappa)))* g - 
         ((kappa + (1- alpha - beta- kappa))/(beta + kappa + (1- alpha - beta - kappa))) * n - 
         ((1- alpha - beta- kappa)/(beta + kappa  + (1- alpha - beta - kappa))) * sE
@@ -156,6 +226,7 @@ ESEG_MF_Y <- function(K, L, alpha, phi){K^alpha * (K^phi*L)^(1-alpha)}
 # }
 
 ESEG_SS_gYpW <- function(n, phi, s, A, delta){
+    #' @export
     if(phi < 1){
     (1 + n)^((phi)/(1- phi)) - 1
     }else if(i %>% between(0.95, 1)){
@@ -164,7 +235,10 @@ ESEG_SS_gYpW <- function(n, phi, s, A, delta){
             NaN
     }
 }
-ESEG_SS_KpEW <- function(alpha, phi, n, s, delta){(s/((1 + n)^(1/(1 - phi)) - (1- delta)))^(1/(1-alpha))}
+ESEG_SS_KpEW <- function(alpha, phi, n, s, delta){
+    #' @export
+    (s/((1 + n)^(1/(1 - phi)) - (1- delta)))^(1/(1-alpha))
+    }
 # BS_SS_KpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(s/(n+ delta))^(1/(1-alpha))}
 # BS_SS_YpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(s/(n+ delta))^(alpha/(1-alpha))}
 # BS_SS_CpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(1-s)*(s/(n+delta))^(alpha/(1-alpha))}
@@ -187,6 +261,7 @@ ESEGRomer_MF_Y <- function(K, L, alpha, phi){K^alpha * (K^phi*L)^(1-alpha)}
 # }
 
 ESEGRomer_SS_gYpW <- function(n, phi, s, A, delta){
+    #' @export
     if(phi < 1){
     (1 + n)^((phi)/(1- phi)) - 1
     }else if(i %>% between(0.95, 1)){
@@ -195,7 +270,10 @@ ESEGRomer_SS_gYpW <- function(n, phi, s, A, delta){
             NaN
     }
 }
-ESEGRomer_SS_KpEW <- function(alpha, phi, n, s, delta){(s/((1 + n)^(1/(1 - phi)) - (1- delta)))^(1/(1-alpha))}
+ESEGRomer_SS_KpEW <- function(alpha, phi, n, s, delta){
+    #' @export
+    (s/((1 + n)^(1/(1 - phi)) - (1- delta)))^(1/(1-alpha))
+    }
 # BS_SS_KpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(s/(n+ delta))^(1/(1-alpha))}
 # BS_SS_YpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(s/(n+ delta))^(alpha/(1-alpha))}
 # BS_SS_CpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(1-s)*(s/(n+delta))^(alpha/(1-alpha))}
