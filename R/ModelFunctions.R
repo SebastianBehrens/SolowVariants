@@ -109,9 +109,9 @@ ESSRL_MF_RR <- function(A, K, L, X, alpha, beta){alpha * (K/(A*L))^(alpha - 1) *
 ESSRL_MF_LR <- function(A, K, L, X, alpha, beta){(1-alpha - beta) * (K/(A*L))^(alpha) * (X/(A*L))^((1-alpha - beta) - 1)}
 
 # from book (but also on slides)
-# Capital to Output Ratio
 ESSRL_SS_YpW <- function(KpW, YpW, A, X, L, alpha, beta){
     (KpW/YpW)^(alpha/(beta + (1-alpha - beta))) * A^(beta/(beta + (1-alpha - beta))) * (X/L)^((1-alpha - beta)/(beta + (1-alpha - beta)))}
+# Capital to Output Ratio
 ESSRL_SS_CtO <- function(s, n, g, delta, alpha, beta){
     s/(((1 + n) * (1 + g))^(beta/(beta + (1-alpha - beta))) - (1- delta))}
 
