@@ -11,9 +11,10 @@ LazyData: true
 RoxygenNote: 7.1.2
 Depends:
     R (>= 3.3),
-    ggplot2,
     tibble,
     dplyr,
+    tidyr,
+    ggplot2,
     R.utils
 Suggests: 
     knitr,
