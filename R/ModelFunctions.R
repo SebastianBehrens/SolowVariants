@@ -26,6 +26,14 @@ BS_SS_WR <- function(B, alpha, s, n, delta){
     (1-alpha)*B^(1/(1-alpha))*(s/(n+delta))^(alpha/(1-alpha))
     }
 
+BS_TE <- function(s, n, B, x, alpha, delta){
+    (1/(1+n)) * (s * B * x^alpha + (1- delta) * x)
+}
+BS_SE_pt1 <- function(s, B, x, alpha){s * B * x^alpha}
+BS_SE_pt2 <- function(n, delta, x){(n + delta) * x}
+BS_SE <- function(s, B, x, alpha, n, delta){
+    (1/(1+n)) * (BS_SE_pt1(s, B, x, alpha) - BS_SE_pt2(n, delta, x))
+}
 # Model Functions of General Solow Growth Model ---------------------------------
 GS_MF_KN <- function(s, Y, delta, K){s * Y + (1-delta)*K}
 GS_MF_LN <- function(n, L){(1+n) * L}
@@ -72,10 +80,10 @@ ESSOE_MF_RR <- function(B, K, L, alpha){alpha * B * (K/(L))^(alpha - 1)}
 ESSOE_MF_WR <- function(B, K, L, alpha){B* (1-alpha) * (K/(L))^alpha}
 ESSOE_MF_K <- function(r, alpha, B, L){L/((r/(alpha * B))^(1/(1-alpha)))}
 ESSOE_MF_Y <- function(B, K, L, alpha){B* K^alpha * (L)^(1-alpha)}
-ESSOE_MF_Yn <- function(Y, r, F_var){Y + r * F_var} # F_var for variable F since F in R stands for FALSE
+ESSOE_MF_Yn <- function(Y, r, F_var){Y + r * F_var} # F_var for variable F since F in the R programming language stands for FALSE
 ESSOE_MF_VN <- function(Y_nat, s, V_previous){s*Y_nat + V_previous}
 ESSOE_MF_F <- function(V, K){V - K}
-
+ESSOE_MF_VpWN <- function(s, r, n, vL, w){((1 + (s * r))/(1 + n))*vL + (s * w)/(1 + n)}
 
 ESSOE_SS_KpW <- function(B, alpha, r){
     #' @export
@@ -95,12 +103,15 @@ ESSOE_SS_VpW_alt <- function(s, n, r, w){
     } # old
 ESSOE_SS_VpW <- function(s, n, r, w){
     #' @export
-    (s/(n- s * r)) * w
+    (s/(n - (s * r))) * w
     }
 ESSOE_SS_FpW <- function(alpha, s, n, r, w){
     #' @export
     (1/(1- alpha))* (s/n) * (1/r)*((r - ((alpha* n)/s))/(1 - (s/n)*r))*w
     }
+ESSOE_TE <- function(s, n, r, x, w){
+    ((1 + s * r)/(1 + n)) * x + ((s * w)/(1 + n))
+}
 
 # Model Functions of Extended Solow Growth Model with Human Capital ---------------------------------
 ESHC_MF_KN <- function(sK, Y, delta, K){sK * Y + (1-delta)*K}
@@ -239,6 +250,10 @@ ESEG_SS_KpEW <- function(alpha, phi, n, s, delta){
     #' @export
     (s/((1 + n)^(1/(1 - phi)) - (1- delta)))^(1/(1-alpha))
     }
+ESEG_SS_YpEW <- function(alpha, phi, n, s, delta){
+    #' @export
+    (s/((1 + n)^(1/(1 - phi)) - (1- delta)))^(alpha/(1-alpha))
+    }
 # BS_SS_KpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(s/(n+ delta))^(1/(1-alpha))}
 # BS_SS_YpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(s/(n+ delta))^(alpha/(1-alpha))}
 # BS_SS_CpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(1-s)*(s/(n+delta))^(alpha/(1-alpha))}
@@ -262,7 +277,7 @@ ESEGRomer_MF_Y <- function(K, L, alpha, phi){K^alpha * (K^phi*L)^(1-alpha)}
 
 ESEGRomer_SS_gYpW <- function(n, phi, s, A, delta){
     #' @export
-    if(phi < 1){
+    if(phi < 0.95){
     (1 + n)^((phi)/(1- phi)) - 1
     }else if(i %>% between(0.95, 1)){
             s * A - delta
