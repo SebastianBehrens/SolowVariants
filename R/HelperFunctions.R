@@ -257,13 +257,14 @@ VisualiseSimulation <- function(simulation_data, variables, scale_identifier){
 # 0.7 computing additional variables =================================
 add_var_computer <- function(sim_data, add_vars, parameter_data, technology_variant, solowversion){
 
+
   # Roxygen Header ---------------------------------
   #' @title Compute the non-primary variables
   #' @description This function computes additional secondary variables that are not computed in a models respective simulation functions. The simulation functions only compute the primary variables of a model such as L, K and Y in the Basic Solow Growth Model (BS).
   #' @param sim_data The tibble that is being filled in the simulation function.
   #' @param add_vars Vector with the encoded variables that are secondary and need to be computed to make the simulation table complete.
   #' @param parameter_data The output from \code{create_parameter_grid(...)}.
-  #' @param technology_variant A string indicating the exogenous (\code{technology_variant = "exo"}) or endogenous (\code{technology_variant = "endo"}) nature of technology in the respective model. A special case (\code{technology_variant = "special"}) is the technology form of endogenous technology growth (model code "ESEG").
+  #' @param technology_variant A string indicating the exogenous (\code{technology_variant = "exo"}) or endogenous (\code{technology_variant = "endo"}) nature of technology in the respective model. A special case (\code{technology_variant = "special"}) stands for the technology form(s) of endogenous technology growth models (model code "ESEG").
   #' @param solowversion The model code for the model, such as "BS" or "ESSOE". (The same variables such as WR or RR are computed differently depending on the model.)
   #' @note See SimulateBasicSolowModel() for an example.
   #' @export
@@ -285,13 +286,19 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
   }else if(technology_variant == "exo"){
     technology <- parameter_data[["B"]]
   }else if(technology_variant == "special"){
-    if(phi < 0.95){
-      technology <- sim_data[["K"]]^(parameter_data[["phi"]])
-    }else if(i %>% between(0.95, 1)){
-      technology <- sim_data[["L"]]^(1 - parameter_data[["alpha"]])
+    technology <- rep(NA, dim(sim_data)[1])
+    # A is defined differnetly in semi-endo growth variant and fully-endo variant of the ESEG variant
+    # semi: it^s K^phi
+    # fully: it's L^(1-alpha) where L is actualy constant (somewhat paramter)
+    for (i in seq_along(technology)){
+      if(parameter_data[["phi"]][[i]] < 0.95){
+        technology[[i]] <- sim_data[["K"]][[i]]^(parameter_data[["phi"]][[i]])
+      }else if(parameter_data[["phi"]][[i]] %>% between(0.95, 1)){
+        technology[[i]] <- sim_data[["L"]][[i]]^(1 - parameter_data[["alpha"]][[i]])
     }
+  }
   }else{
-    stop("Technology location unclear")
+    stop("Technology location unclear. Fill in an appropriate value for technology_variant. ")
   }
   # second: computing and filling in the secondary endogenous variables
   for(i in names(sim_data)[!add_vars]){
@@ -479,7 +486,13 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
     if(solowversion == "ESEG") {
         # source("ModelFunctions/ESEGModelFunctions.R")
       if(i == "TFP"){
-        sim_data[["TFP"]] <- sim_data[["K"]]^parameter_data[["phi"]]
+        for (i in seq_along(sim_data[["TFP"]])){
+          if(parameter_data[["phi"]][[i]] < 0.95){
+            sim_data[["TFP"]][[i]] <- sim_data[["K"]][[i]]^(parameter_data[["phi"]][[i]])
+          }else if(parameter_data[["phi"]][[i]] %>% between(0.95, 1)){
+            sim_data[["TFP"]][[i]] <- sim_data[["L"]][[i]]^(1 - parameter_data[["alpha"]][[i]])
+          }
+        } 
       }
       if (i == "WR") {
         # sim_data[["WR"]] <- ESEG_MF_WR(technology,

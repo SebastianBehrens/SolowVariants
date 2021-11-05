@@ -229,7 +229,14 @@ ESEG_MF_KN <- function(s, Y, delta, K){s * Y + (1-delta)*K}
 ESEG_MF_LN <- function(n, L){(1+n) * L}
 # ESEG_MF_RR <- function(K, L, alpha){alpha * B * (K/L)^(alpha - 1)}
 # ESEG_MF_WR <- function(K, L, alpha){(1-alpha) * B * (K/L)^alpha}
-ESEG_MF_Y <- function(K, L, alpha, phi){K^alpha * (K^phi*L)^(1-alpha)}
+ESEG_MF_Y <- function(K, L, alpha, phi, A){
+    if(phi < 0.95){
+        K^alpha * (K^phi*L)^(1-alpha)
+    }else if(phi >= 0.95 && phi < 1){
+        A * K
+    }
+
+}
 
 # ESEG_SS_gY <- function(endogenous_type, input_list){
 #     if(endogenous_type == "AK")
@@ -240,7 +247,7 @@ ESEG_SS_gYpW <- function(n, phi, s, A, delta){
     #' @export
     if(phi < 1){
     (1 + n)^((phi)/(1- phi)) - 1
-    }else if(i %>% between(0.95, 1)){
+    }else if(phi >= 0.95 && phi < 1){
             s * A - delta
     }else if(phi > 1){
             NaN
