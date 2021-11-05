@@ -285,7 +285,11 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
   }else if(technology_variant == "exo"){
     technology <- parameter_data[["B"]]
   }else if(technology_variant == "special"){
-    technology <- sim_data[["K"]]^(parameter_data[["phi"]])
+    if(phi < 0.95){
+      technology <- sim_data[["K"]]^(parameter_data[["phi"]])
+    }else if(i %>% between(0.95, 1)){
+      technology <- sim_data[["L"]]^(1 - parameter_data[["alpha"]])
+    }
   }else{
     stop("Technology location unclear")
   }
