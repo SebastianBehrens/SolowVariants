@@ -514,7 +514,8 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
   # Roxygen Header ---------------------------------
   #' @title Check correctness by comparing simulated (endo.) variables to their steady state values
   #' @description Compare variables in the final period of the simulation to their respective steady state value (given the exo. paramters).
-  #' @details This function presumes that the number of periods simulated were such that the final values are near steady state. If the steady state path is disrupted by a parameter change in the second to last period, this function will yield misleading results.
+  #' @details This function presumes that the number of periods simulated were such that the final values are near steady state. If the steady state path is disrupted by a parameter change in the second to last period, this function will yield misleading results. 
+  #' @note The column "Economy in SS" is evaluated as TRUE when the simulated value is within a 1% interval
   #' @param sim_data The tibble that is being filled in the simulation function, e.g. \code{SimulateBasicSolowModel()}.
   #' @param parameter_grid The output from \code{create_parameter_grid(...)}.
   #' @param solow_variant String indicating the model, such as "BS" or "ESHC".
@@ -569,7 +570,7 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
       aux_steadystate_variables <- c("gY")
     }else if(solow_variant == "ESEG"){
       if(last_row_parameter[["phi"]] < 0.95){
-      aux_steadystate_variables <- c("KpEW", "gYpW")
+      aux_steadystate_variables <- c("KpEW", "YpEW", "gYpW")
       }else if(last_row_parameter[["phi"]] %>% between(0.95, 1)){
       aux_steadystate_variables <- c("gYpW")
       }
@@ -583,7 +584,7 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
     aux <- aux %>% drop_na()
     aux <- aux %>% mutate_at(vars(steadystate, last_value), round, digits = 2)
     aux <- aux %>% mutate(is_same = case_when(
-      last_value == steadystate ~ "TRUE",
+      last_value - steadystate <= last_value * 0.01 ~ "TRUE",
       TRUE ~ "FALSE"
     ))
     aux <- aux %>% rename("Theoretical Value" = steadystate,
@@ -714,6 +715,8 @@ getRequiredStartingValues <- function(ModelCode){
     out <- c("A", "K", "L", "R")
   } else if (ModelCode == "ESHC") {
     out <- c("A", "K", "L", "H")
+  } else if (ModelCode == "ESEG") {
+    out <- c("K", "L")
   } else {
     (
       out <- NaN
@@ -725,6 +728,7 @@ getRequiredStartingValues <- function(ModelCode){
   return(out)
 }
 
+# 0.11 get the parameters for which starting values need to be filled for a specific Solow variant =================================
 
 getRequiredParams <- function(ModelCode) {
 
@@ -734,7 +738,7 @@ getRequiredParams <- function(ModelCode) {
   #' set. This function yields precisely those parameters
   #' (resp. their abbreviations).
   #' @param ModelCode Model abbreviation, such as "BS", "GS", "ESHC", ESSRO". (See the vignette to this package for an exhaustive listing of possible model codes.)
-  #' @examples getRequiredStartingValues("BS")
+  #' @examples getRequiredParams("BS")
   #' @export
 
   # Function ---------------------------------
@@ -753,6 +757,8 @@ getRequiredParams <- function(ModelCode) {
     out <- c("alpha", "beta", "kappa", "delta", "n", "s", "sE", "g", "X")
   } else if (ModelCode == "ESHC") {
     out <- c("alpha", "phi", "n", "g", "sK", "sH", "delta")
+  } else if (ModelCode == "ESEG") {
+    out <- c("alpha", "phi", "s", "delta", "n")
   } else {
     (
       out <- NaN
@@ -763,6 +769,49 @@ getRequiredParams <- function(ModelCode) {
   }
   return(out)
 }
+
+# 0.12 get the inputs required for the transition equation for a specific Solow variant =================================
+getRequiredInputsToTE<- function(ModelCode) {
+
+  # Roxygen Header ---------------------------------
+  #' @title Get the inputs that are required to draw a models transition diagram (with the transition equation)
+  #' @param ModelCode Model abbreviation, such as "BS", "GS", "ESHC", ESSRO". (See the vignette to this package for an exhaustive listing of possible model codes.)
+  #' @examples getRequiredInputsToTE("BS")
+  #' @export
+
+  # Function ---------------------------------
+
+  out <- if (ModelCode == "BS") {
+    out <- c("B", "alpha", "delta", "n", "s")
+  } else if (ModelCode == "GS_XXXXX") {
+    out <- c("g", "alpha", "delta", "n", "s")
+  } else if (ModelCode == "ESSOE") {
+    out <- c("B", "alpha", "n", "s", "r", "w")
+  } else if (ModelCode == "ESSRL_XXXXX") {
+    out <- c("alpha", "beta", "delta", "n", "s", "g", "X")
+  } else if (ModelCode == "ESSRO_XXXXX") {
+    out <- c("alpha", "beta", "n", "g", "sE", "s", "delta")
+  } else if (ModelCode == "ESSROL_XXXXX") {
+    out <- c("alpha", "beta", "kappa", "delta", "n", "s", "sE", "g", "X")
+  } else if (ModelCode == "ESHC_XXXXX") {
+    out <- c("alpha", "phi", "n", "g", "sK", "sH", "delta")
+  } else {
+    (
+      out <- NaN
+    )
+  }
+  if (is.na(out[[1]])) {
+    warning("The entered shortcode for a model variant does not exist.")
+  }
+  return(out)
+}
+
+
+
+
+
+
+
 
 getVariablesAvailableToBeVisualised <- function(ModelCode1,
                                                 ModelCode2){
@@ -786,6 +835,200 @@ getVariablesAvailableToBeVisualised <- function(ModelCode1,
   return(shared_variables)
 }
 
+draw_transition_diagram <- function(paragrid_special, solow_variant){
+  # Create string with function call to the XX_TE
+  aux_TE_name <- paste0(solow_variant, "_TE")
+  # Catch underspecifications in the parameters
+  if(any(!(names(paragrid_special) %in% getRequiredInputsToTE(solow_variant)))){
+    stop("The parameter paragrid_special does not include all required parameters.
+         Check getRequiredInputsToTE() to see which parameter is missing.")
+  }
+  
+  # Set up the parameter lists for the two lines in the transition diagram
+  aux_parameter_list_template <- list()
+  aux_parameter_list_1 <- aux_parameter_list_template
+  aux_parameter_list_2 <- aux_parameter_list_template
+  
+  # Fill in the parameter lists
+  for (i in names(paragrid_special)){
+    if(length(paragrid_special[[i]]) == 1){
+      aux_parameter_list_1[[i]] <- paragrid_special[[i]]
+      aux_parameter_list_2[[i]] <- paragrid_special[[i]]
+    }else{
+      aux_parameter_list_1[[i]] <- paragrid_special[[i]][1]
+      aux_parameter_list_2[[i]] <- paragrid_special[[i]][2]
+    }
+  }
+  
+  # get variables to be plotted in TE (differing with solow models)
+  TE_var <- getTDAxes(solow_variant)
+  aux_SS_function <- paste0(solow_variant, "_SS_", TE_var)
+  # get steady states under the different sets of parameters to determine the x-axis length
+  aux_SS_paraset1 <- doCall(aux_SS_function, args = aux_parameter_list_1)
+  aux_SS_paraset2 <- doCall(aux_SS_function, args = aux_parameter_list_2)
+  if(aux_SS_paraset1 > aux_SS_paraset2){
+    aux_x_limit <- aux_SS_paraset1
+  }else{
+    aux_x_limit <- aux_SS_paraset2
+  }
+  # initialise output table
+  aux_df <- tibble(x = seq(0.0001,aux_x_limit *1.3, aux_x_limit/5000))
+  
+  aux_parameter_list_1[["x"]] <- aux_df$x
+  aux_parameter_list_2[["x"]] <- aux_df$x
+  # add the lines of the tranistion equation to the output table
+  aux_df["TE1"] <- doCall(aux_TE_name, args = aux_parameter_list_1)
+  aux_df["TE2"] <- doCall(aux_TE_name, args = aux_parameter_list_2)
+  # visualise
+  ggplot(aux_df) +
+    geom_line(aes(x, TE1), size = 0.3) +
+    geom_line(aes(x, TE2), size = 0.3) +
+    geom_abline(intercept = 0, slope = 1, lty = 2, size = 0.3) +
+    labs(title = paste("Transition Diagram of the", solow_variant),
+         x = "KpW_{t}", y = "KpW_{t+1}",
+         caption = "The dashed line represents KpW_{t} = KpW_{t+1}.")
+}
+
+
+
+getTDAxes <- function(ModelCode){
+  out <- if (ModelCode == "BS") {
+    out <- c("KpW")
+  } else if (ModelCode == "GS") {
+    out <- c(NA)
+  } else if (ModelCode == "ESSOE") {
+    out <- c("VpW")
+  } else if (ModelCode == "ESSRL") {
+    out <- c(NA)
+  } else if (ModelCode == "ESSRO") {
+    out <- c(NA)
+  } else if (ModelCode == "ESSROL") {
+    out <- c(NA)
+  } else if (ModelCode == "ESHC") {
+    out <- c(NA)
+  } else {
+    (
+      out <- NaN
+    )
+  }
+  if (is.na(out[[1]])) {
+    warning("The entered shortcode for a model variant does not exist.")
+  }
+  return(out)
+}
+
+
+
+########################## kept but not used ##########################
+#' 
+#' draw_transition_diagram <- function(sim_data, parameter_grid, solow_variant){
+#'   # sim_data <- aux_simulation
+#'   # parameter_grid <- aux_parameter_grid
+#'   # solow_variant <- "BS"
+#'   #' @title
+#'   #' @description
+#'   #' @inheritParams steadystate_checker
+#'   
+#'   
+#'   theme_set(theme_bw())
+#'   ggplot(aux_out) + geom_line(aes(x, y)) + geom_abline(intercept = 0, slope = 1) + labs(y = "KpW_{t + 1}", x = "KpW_{t}")
+#'   if(solow_variant == "BS"){
+#'     i_SS <- dim(sim_data)[1] # usually the last  
+#'     SS_value <- BS_SS_KpW(parameter_grid[["B"]][i_SS], 
+#'                           parameter_grid[["alpha"]][i_SS], 
+#'                           parameter_grid[["s"]][i_SS], 
+#'                           parameter_grid[["n"]][i_SS], 
+#'                           parameter_grid[["delta"]][i_SS])
+#'     aux_out <- 
+#'         tibble(x = seq(0.001, SS_value * 1.3, length.out = i_SS),
+#'                y = ( (1/(1 + parameter_grid[["n"]]) ) * (parameter_grid[["s"]] * parameter_grid[["B"]] * x^parameter_grid[["alpha"]] + (1 - parameter_grid[["delta"]]) * x) ) 
+#'                )
+#'   }else if(solow_variant == "GS"){
+#'     
+#'   }else if(solow_variant == "ESHC"){
+#'     
+#'   }else if(solow_variant == "ESSOE"){
+#'     
+#'   }else if(solow_variant == "ESSRO"){
+#'     
+#'   }else if(solow_variant == "ESSRL"){
+#'     
+#'   }else if(solow_variant == "ESSROL"){
+#'     
+#'   }
+#'   aux_title <- paste("Transition Diagram of the", solow_variant)
+#'   ggplot(aux_out) +
+#'     geom_line(aes(x, y), size = 1.1) +
+#'     geom_abline(intercept = 0, slope = 1, alpha = 0.8) +
+#'     labs(title = aux_title, y = "KpW_{t + 1}", x = "KpW_{t}", caption = "Remark: The dashed line is the steady state.") +
+#'     geom_vline(xintercept = SS_value, lty = 2, alpha = 0.5)
+#' }
+#' 
+#' draw_solow_diagram <- function(sim_data, parameter_grid, solow_variant){
+#'   # sim_data <- aux_simulation
+#'   # parameter_grid <- aux_parameter_grid
+#'   # solow_variant <- "BS"
+#'   #' @title
+#'   #' @description
+#'   #' @inheritParams steadystate_checker
+#'   
+#'   theme_set(theme_bw())
+#'   
+#'   if(solow_variant == "BS"){
+#'     SS_value <- BS_SS_KpW(parameter_grid[["B"]][i_SS], 
+#'                           parameter_grid[["alpha"]][i_SS], 
+#'                           parameter_grid[["s"]][i_SS], 
+#'                           parameter_grid[["n"]][i_SS], 
+#'                           parameter_grid[["delta"]][i_SS])
+#'     i_SS <- (SS_value - sim_data[["KpW"]]) %>% between(0, SS_value * 0.001) %>% which() %>% min() # the period in which the SS is "reached" within in 0.1% 
+#'     np <- dim(sim_data)[1]
+#'     aux_out <- 
+#'         tibble(x = seq(0.001, SS_value * 1.3, length.out = np),
+#'                y1 = (1/(1+parameter_grid[["n"]]))*(parameter_grid[["s"]] * parameter_grid[["B"]] * x^parameter_grid[["alpha"]]),
+#'                y2 = (1/(1+parameter_grid[["n"]]))*((parameter_grid[["n"]] + parameter_grid[["delta"]]) * x)
+#'                )
+#'   }else if(solow_variant == "GS"){
+#'     
+#'   }else if(solow_variant == "ESHC"){
+#'     
+#'   }else if(solow_variant == "ESSOE"){
+#'     
+#'   }else if(solow_variant == "ESSRO"){
+#'     
+#'   }else if(solow_variant == "ESSRL"){
+#'     
+#'   }else if(solow_variant == "ESSROL"){
+#'     
+#'   }
+#'   aux_title <- paste("Transition Diagram of the", solow_variant)
+#'   ggplot(aux_out) +
+#'     geom_line(aes(x, y1)) +
+#'     geom_line(aes(x, y2)) +
+#'     labs(title = aux_title, y = "KpW_{t+1} - KpW_{t}", x = "KpW_{t}", caption = "Remark: The dashed line is the steady state.") +
+#'     geom_vline(xintercept = SS_value, lty = 2, alpha = 0.5)
+#' }
+#' 
+#' vector_shrinker <- function(vector, length_out){
+#'   if(length(unique(vector)) == 1){
+#'     rep(unique(vector), length_out)
+#'   }else{
+#'     unique_values <- unique(vector)
+#'     value_percentages <- rep(NA, length(unique_values))
+#'     for(i in seq_along(unique_values)){
+#'       value_percentages[i] <- sum(vector == i)/length(vector)
+#'     }
+#'   }
+#'   out_vector <- c()
+#'   for(i in seq_along(unique_values)){
+#'     out_vector <- c(out_vector, rep(unique_values[i], length_out * value_percentages[i]))
+#'   }
+#'   if(length(out_vector != length_out)){
+#'     out_vector <- out_vector[1:length_out]
+#'   }
+#'   return(out_vector)
+#' }
+#' 
+########################## end of section kept but not used ##########################
 # 0.99 testing =================================
 # vtstest <- c("testvar", "ja", "nein")
 # create_simulation_table(vtstest, 20)
