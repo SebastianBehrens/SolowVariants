@@ -15,5 +15,5 @@ set. This function yields precisely those parameters
 (resp. their abbreviations).
 }
 \examples{
-getRequiredStartingValues("BS")
+getRequiredParams("BS")
 }
