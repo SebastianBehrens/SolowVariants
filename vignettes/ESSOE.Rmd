@@ -49,7 +49,16 @@ VisualiseSimulation(aux_simulation,
 
 steadystate_checker(aux_simulation, aux_parameter_grid, "ESSOE")
 
+# Draw transition diagram ---------------------------------
+draw_transition_diagram(list(B = 0.01,
+                             alpha = c(1/3,2/3), 
+                             n = 0.05, 
+                             s = c(0.45, 0.05),
+                             r = 0.03,
+                             w = 2), "ESSOE")
+
 ```
+Note: The steady state of the variables FpW and Vpw as tested by `steadystate_checker` is only "reached" after around 4000 thousands periods. Keep that in mind regarding the TRUE or FALSE evaluation in the column "Economy in SS" in the output of `steadystate_checker`.
 
 ## Elaboration
 Parameters defining the ESSOE
