@@ -1,4 +1,4 @@
-### 1.0 Basic Solow Growth Model #############################
+### 9.0 Extended Solow Growth Model (Romer) with Endogenous Growth #############################
 
 SimulateExtendedSolowModelEndogenousGrowthRomer <- function(paragrid, np, startvals){
 
@@ -22,33 +22,52 @@ SimulateExtendedSolowModelEndogenousGrowthRomer <- function(paragrid, np, startv
     aux_index <- which(sim_table$period == 0)
     sim_table[[aux_index, "L"]] <- startvals$L
     sim_table[[aux_index, "K"]] <- startvals$K
-    sim_table[[aux_index, "Y"]] <- ESEGRomer_MF_Y(sim_table[["K"]][[which(sim_table$period == 0)]],
-                                           sim_table[["L"]][[which(sim_table$period == 0)]],
-                                           paragrid[["alpha"]][[which(paragrid$period == 0)]],
-                                           paragrid[["phi"]][[which(paragrid$period == 0)]])
+    sim_table[[aux_index, "TFP"]] <- startvals$A
+    sim_table[[aux_index, "Y"]] <- ESEGRomer_MF_Y(
+        sim_table[["TFP"]][[which(sim_table$period == 0)]],
+        sim_table[["K"]][[which(sim_table$period == 0)]],
+        sim_table[["L"]][[which(sim_table$period == 0)]]* (1-paragrid[["sR"]][[which(paragrid$period == 0)]]),
+        paragrid[["alpha"]][[which(paragrid$period == 0)]]
+    )
     
     # Computing Variables after Period 0 ---------------------------------
     for (i in 1:np){
         # i <- 1
         # print(i)
+
         aux_index <- which(sim_table$period == i)
-        sim_table[[aux_index, "L"]] <- ESEGRomer_MF_LN(paragrid[["n"]][[which(paragrid$period == i-1)]],
-                                                sim_table[["L"]][[which(sim_table$period == i-1)]])
-        sim_table[[aux_index, "K"]] <- ESEGRomer_MF_KN(paragrid[["s"]][[which(paragrid$period == i-1)]],
-                                                sim_table[["Y"]][[which(sim_table$period == i-1)]],
-                                                paragrid[["delta"]][[which(paragrid$period == i-1)]],
-                                                sim_table[["K"]][[which(sim_table$period == i-1)]])
-        sim_table[[aux_index, "Y"]] <- ESEGRomer_MF_Y(sim_table[["K"]][[aux_index]],
-                                                 sim_table[["L"]][[aux_index]],
-                                                 paragrid[["alpha"]][[aux_index]],
-                                                 paragrid[["phi"]][[aux_index]])
+
+        sim_table[[aux_index, "TFP"]] <- ESEGRomer_MF_AN(
+          paragrid[["rho"]][[which(paragrid$period == i-1)]],
+          paragrid[["phi"]][[which(paragrid$period == i-1)]],
+          paragrid[["lambda"]][[which(paragrid$period == i-1)]],
+          sim_table[["TFP"]][[which(sim_table$period == i-1)]],
+          sim_table[["L"]][[which(sim_table$period == i-1)]] * paragrid[["sR"]][[which(paragrid$period == i-1)]]
+          )
+
+        sim_table[[aux_index, "L"]] <- ESEGRomer_MF_LN(
+          paragrid[["n"]][[which(paragrid$period == i-1)]],
+          sim_table[["L"]][[which(sim_table$period == i-1)]])
+        
+        sim_table[[aux_index, "K"]] <- ESEGRomer_MF_KN(
+          paragrid[["s"]][[which(paragrid$period == i-1)]],
+          sim_table[["Y"]][[which(sim_table$period == i-1)]],
+          paragrid[["delta"]][[which(paragrid$period == i-1)]],
+          sim_table[["K"]][[which(sim_table$period == i-1)]])
+        
+        sim_table[[aux_index, "Y"]] <- ESEGRomer_MF_Y(
+            sim_table[["TFP"]][[aux_index]],
+            sim_table[["K"]][[aux_index]],
+            sim_table[["L"]][[aux_index]]* (1-paragrid[["sR"]][[aux_index]]),
+            paragrid[["alpha"]][[aux_index]]
+            )
     }
     
     # Computing Additional Variables ---------------------------------
     
-    remaining_vars_to_compute_bool <- names(sim_table) %in% c("period", "L", "K", "Y")
+    remaining_vars_to_compute_bool <- names(sim_table) %in% c("period", "TFP", "L", "K", "Y")
     
-    sim_table <- add_var_computer(sim_table, remaining_vars_to_compute_bool, paragrid, "special", "ESEGRomer")
+    sim_table <- add_var_computer(sim_table, remaining_vars_to_compute_bool, paragrid, "endo", "ESEGRomer")
     
     return(sim_table)
 }
