@@ -734,6 +734,8 @@ getRequiredStartingValues <- function(ModelCode){
     out <- c("A", "K", "L", "H")
   } else if (ModelCode == "ESEG") {
     out <- c("K", "L")
+  } else if (ModelCode == "ESEGRomer") {
+    out <- c("A", "K", "L")
   } else {
     (
       out <- NaN
@@ -776,6 +778,8 @@ getRequiredParams <- function(ModelCode) {
     out <- c("alpha", "phi", "n", "g", "sK", "sH", "delta")
   } else if (ModelCode == "ESEG") {
     out <- c("alpha", "phi", "s", "delta", "n")
+  } else if (ModelCode == "ESEGRomer") {
+    out <- c("alpha", "phi", "lambda", "s", "sR", "delta", "n")
   } else {
     (
       out <- NaN
