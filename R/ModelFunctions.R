@@ -245,7 +245,7 @@ ESEG_MF_Y <- function(K, L, alpha, phi, A){
 
 ESEG_SS_gYpW <- function(n, phi, s, A, delta){
     #' @export
-    if(phi < 1){
+    if(phi < 0.95){
     (1 + n)^((phi)/(1- phi)) - 1
     }else if(phi >= 0.95 && phi < 1){
             s * A - delta
@@ -275,7 +275,7 @@ ESEGRomer_MF_L_At <- function(sR, L)
 ESEGRomer_MF_AN <- function(rho, phi, lambda, A, L_At){rho * A^phi * L_At^lambda + A}
 # ESEG_MF_RR <- function(K, L, alpha){alpha * B * (K/L)^(alpha - 1)}
 # ESEG_MF_WR <- function(K, L, alpha){(1-alpha) * B * (K/L)^alpha}
-ESEGRomer_MF_Y <- function(K, L, alpha, phi){K^alpha * (K^phi*L)^(1-alpha)}
+ESEGRomer_MF_Y <- function(A, K, L, alpha){K^alpha * (A*L)^(1-alpha)} # remember L here referes to L working in the goods sector (1-s_R) * L_t = L_{Y,t}
 
 # ESEG_SS_gY <- function(endogenous_type, input_list){
 #     if(endogenous_type == "AK")
