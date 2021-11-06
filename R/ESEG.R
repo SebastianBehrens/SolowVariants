@@ -1,4 +1,4 @@
-### 1.0 Extended Solow Growth Model for Endogeneous Growth #############################
+### 8.0 Extended Solow Growth Model for Endogeneous Growth #############################
 
 SimulateExtendedSolowModelEndogenousGrowth <- function(paragrid, np, startvals){
 
