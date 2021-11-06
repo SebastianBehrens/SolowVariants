@@ -39,6 +39,7 @@ knitr::opts_chunk$set(
 ## Illustrative Example
 ```{r, eval = F}
 library(SolowVariants)
+library(tidyverse)
 theme_set(theme_bw())
 
 # Setting up the parameter grid ---------------------------------
