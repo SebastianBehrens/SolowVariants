@@ -73,7 +73,7 @@ Remark: Those parameters can be found via the command: `getRequiredStartingValue
 ## Structural Equations to the Extended Solow Growth Model with the Scarce Resource Land
 $$
 \begin{aligned}
-Y_t &= K_t^\alpha  * (A_t * L_t)^{(1- \beta)} * X_t^\kappa: \alpha + \beta + \kappa = 1 \\
+Y_t &= K_t^\alpha  * (A_t * L_t)^{(1- \beta)} * X_t^\kappa \quad \text{ where } \alpha + \beta + \kappa = 1 \\
 K_{t+1} &= s_KY_t + (1-\delta)K_{t} \\
 L_{t+1}&=(1+n)L_t \\
 A_{t+1}&=(1+g)A_t \\
