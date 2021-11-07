@@ -210,6 +210,7 @@ variable_encoder <- function(variables){
       aux2 == "Consumption per Effective Worker" ~ "CpEW",
 
       aux2 == "Capital to Output Ratio" ~ "CtO"
+      aux2 == "Human Capital to Output Ratio" ~ "HCtO"
 
 
 
@@ -345,7 +346,8 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
     if(i == "CpW"){sim_data[["CpW"]] <- sim_data[["C"]] / sim_data[["L"]]}
     if(i == "CpEW"){sim_data[["CpEW"]] <- sim_data[["C"]] / (technology * sim_data[["L"]])}
 
-    if(i == "CtO"){sim_data[["CtO"]] <- sim_data[["KpW"]]/sim_data[["YpW"]]}
+    if(i == "CtO"){sim_data[["CtO"]] <- sim_data[["K"]]/sim_data[["Y"]]}
+    if(i == "HCtO"){sim_data[["HCtO"]] <- sim_data[["H"]]/sim_data[["Y"]]}
 
 
     # Variables uniquely calculated to different Solow Model Versions (e.g. WR, RR)
