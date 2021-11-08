@@ -43,7 +43,7 @@ VisualiseSimulation(aux_simulation,
                     c("YpW", "KpW", "L"), 
                     "free")
 
-# Verify whether the economy is 'in' steady state in the final period ---------------------------------
+# Economy in SS in the End ---------------------------------
 
 steadystate_checker(aux_simulation, aux_parameter_grid, "ESSRL")
 
