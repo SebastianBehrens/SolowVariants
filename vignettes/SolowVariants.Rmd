@@ -107,7 +107,10 @@ aux2_startvalues <- list(A = 1, K = 1, L = 1)
 aux_simulation_GS <- SimulateGeneralSolowModel(aux2_parameter_grid, aux_np,aux2_startvalues)
 
 # Now onto comparing them.
-compare_simulations(list(aux_simulation_BS, aux_simulation_GS), c("BS", "GS"), c("logY", "gYpW", "YpEW"))
+compare_simulations(
+  list(aux_simulation_BS, aux_simulation_GS), 
+  c("BS", "GS"), c("logY", "gYpW", "YpEW")
+)
 ```
 
 
