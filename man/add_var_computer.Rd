@@ -19,7 +19,7 @@ add_var_computer(
 
 \item{parameter_data}{The output from \code{create_parameter_grid(...)}.}
 
-\item{technology_variant}{A string indicating the exogenous (\code{technology_variant = "exo"}) or endogenous (\code{technology_variant = "endo"}) nature of technology in the respective model. A special case (\code{technology_variant = "special"}) is the technology form of endogenous technology growth (model code "ESEG").}
+\item{technology_variant}{A string indicating the exogenous (\code{technology_variant = "exo"}) or endogenous (\code{technology_variant = "endo"}) nature of technology in the respective model. A special case (\code{technology_variant = "special"}) stands for the technology form(s) of endogenous technology growth models (model code "ESEG").}
 
 \item{solowversion}{The model code for the model, such as "BS" or "ESSOE". (The same variables such as WR or RR are computed differently depending on the model.)}
 }
