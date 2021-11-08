@@ -73,7 +73,7 @@ steadystate_checker(aux_simulation, aux_parameter_grid, "BS")
 
 ```
 ### Comparison of different Solow Variants
-```{r, eval = T, fig.width = 7, fig.height = 4.8, fig.align='center', dpi = 300}
+```{r, eval = T, fig.width = 7, fig.height = 4.8, fig.align='center'}
 suppressPackageStartupMessages(library(SolowVariants))
 aux_np <- 200
 
@@ -111,10 +111,9 @@ aux_simulation_GS <- SimulateGeneralSolowModel(aux2_parameter_grid, aux_np,aux2_
 # Comparing the two economies (solow variants) ---------------------------------
 compare_simulations(
   list(aux_simulation_BS, aux_simulation_GS), 
-  c("BS", "GS"), c("logY", "gYpW", "YpEW")
+  c("BS", "GS"), c("logY", "gYpW", "YpEW", "RR")
 )
 ```
-<!-- Code for picture to be plotted. -->
 
 
 
