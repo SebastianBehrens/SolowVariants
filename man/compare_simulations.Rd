@@ -2,7 +2,7 @@
 % Please edit documentation in R/HelperFunctions.R
 \name{compare_simulations}
 \alias{compare_simulations}
-\title{(Superseeded!) Visualise Common Variables of Different Solow Models}
+\title{Visualise Common Variables of Different Solow Models}
 \usage{
 compare_simulations(simulation_list, sim_identifier_vector, vars_selection)
 }
