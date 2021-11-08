@@ -27,11 +27,19 @@ BS_SS_WR <- function(B, alpha, s, n, delta){
     }
 
 BS_TE <- function(s, n, B, x, alpha, delta){
+    #' @export  
     (1/(1+n)) * (s * B * x^alpha + (1- delta) * x)
 }
-BS_SE_pt1 <- function(s, B, x, alpha){s * B * x^alpha}
-BS_SE_pt2 <- function(n, delta, x){(n + delta) * x}
+BS_SE_pt1 <- function(s, B, x, alpha){
+    #' @export  
+    s * B * x^alpha
+}
+BS_SE_pt2 <- function(n, delta, x){
+    #' @export  
+    (n + delta) * x
+}
 BS_SE <- function(s, B, x, alpha, n, delta){
+    #' @export  
     (1/(1+n)) * (BS_SE_pt1(s, B, x, alpha) - BS_SE_pt2(n, delta, x))
 }
 # Model Functions of General Solow Growth Model ---------------------------------
@@ -75,11 +83,19 @@ GS_SS_YpEW <- function(s, n, g, delta, alpha, A){
     }
 
 GS_TE <- function(s, n, B, x, alpha, delta){
+    #' @export  
     (1/((1+n)* (1 + g))) * (s  * x^alpha + (1- delta) * x)
 }
-GS_SE_pt1 <- function(s, B, x, alpha){s * B * x^alpha}
-GS_SE_pt2 <- function(n, delta, x){(n + delta) * x}
+GS_SE_pt1 <- function(s, B, x, alpha){
+    #' @export  
+    s * B * x^alpha
+}
+GS_SE_pt2 <- function(n, delta, x){
+    #' @export  
+    (n + delta) * x
+}
 GS_SE <- function(s, B, x, alpha, n, delta){
+    #' @export  
     (1/((1+n)* (1 + g))) * (GS_SE_pt1(s, B, x, alpha) - GS_SE_pt2(n, delta, x))
 }
 # Model Functions of Extended Solow Growth Model for the Small and Open Economy ---------------------------------
