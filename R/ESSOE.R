@@ -16,7 +16,7 @@ SimulateExtendedSolowModelSmallOpenEconomy <- function(paragrid, np, startvals){
     # source("ModelFunctions/ESSOEModelFunctions.R")
     
     # Initialize Simulation Table ---------------------------------
-    sim_table <- create_simulation_table(variable_encoder(meta_ESSOE_variables), np)
+    sim_table <- create_simulation_table(variable_encoder(getModelVars("ESSOE")), np)
     # Fill Start Values for Period 0 ---------------------------------
     aux_index <- which(sim_table$period == 0)
     sim_table[[aux_index, "L"]] <- startvals$L

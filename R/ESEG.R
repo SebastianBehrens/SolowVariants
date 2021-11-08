@@ -13,7 +13,7 @@ SimulateExtendedSolowModelEndogenousGrowth <- function(paragrid, np, startvals){
   # Function ---------------------------------
 
     # Initialize Simulation Table ---------------------------------
-    sim_table <- create_simulation_table(variable_encoder(meta_ESEG_variables), np)
+    sim_table <- create_simulation_table(variable_encoder(getModelVars("ESEG")), np)
     
     # Fill Start Values for Period 0 ---------------------------------
     aux_index <- which(sim_table$period == 0)

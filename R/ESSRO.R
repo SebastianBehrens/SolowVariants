@@ -17,7 +17,7 @@ SimulateExtendedSolowModelScarceResourceOil <- function(paragrid, np, startvals)
     # source("ModelFunctions/ESSROModelFunctions.R")
     
     # Initialize Simulation Table ---------------------------------
-    sim_table <- create_simulation_table(variable_encoder(meta_ESSRO_variables), np)
+    sim_table <- create_simulation_table(variable_encoder(getModelVars("ESSRO")), np)
     # Fill Start Values for Period 0 ---------------------------------
     aux_index <- which(sim_table$period == 0)
     sim_table[[aux_index, "TFP"]] <- startvals$A

@@ -17,7 +17,7 @@ SimulateExtendedSolowModelScarceResourceOilAndLand <- function(paragrid, np, sta
     # source("ModelFunctions/ESSROLModelFunctions.R")
     
     # Initialize Simulation Table ---------------------------------
-    sim_table <- create_simulation_table(variable_encoder(meta_ESSROL_variables), np)
+    sim_table <- create_simulation_table(variable_encoder(getModelVars("ESSROL")), np)
     # Fill Start Values for Period 0 ---------------------------------
     aux_index <- which(sim_table$period == 0)
     sim_table[[aux_index, "TFP"]] <- startvals$A
