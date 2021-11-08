@@ -74,6 +74,14 @@ GS_SS_YpEW <- function(s, n, g, delta, alpha, A){
     (s/(n + g + delta + n*g))^(alpha/(1-alpha))
     }
 
+GS_TE <- function(s, n, B, x, alpha, delta){
+    (1/(1+n)) * (s * B * x^alpha + (1- delta) * x)
+}
+GS_SE_pt1 <- function(s, B, x, alpha){s * B * x^alpha}
+GS_SE_pt2 <- function(n, delta, x){(n + delta) * x}
+GS_SE <- function(s, B, x, alpha, n, delta){
+    (1/(1+n)) * (BS_SE_pt1(s, B, x, alpha) - BS_SE_pt2(n, delta, x))
+}
 # Model Functions of Extended Solow Growth Model for the Small and Open Economy ---------------------------------
 ESSOE_MF_LN <- function(n, L){(1+n) * L}
 ESSOE_MF_RR <- function(B, K, L, alpha){alpha * B * (K/(L))^(alpha - 1)}
