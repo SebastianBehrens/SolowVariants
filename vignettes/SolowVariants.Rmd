@@ -73,6 +73,7 @@ steadystate_checker(aux_simulation, aux_parameter_grid, "BS")
 ```
 ### Comparison of different Solow Variants
 ```{r}
+library(SolowVariants)
 aux_np <- 200
 
 aux_parameter_grid <-
