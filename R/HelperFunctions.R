@@ -1,16 +1,5 @@
 # This file sets up several helper functions that will be used throughout the Solow model simulation functions.
 
-############################################################################
-## not working below => fix it  => ultimate goal: automatically load required packages as tidyverse and R.utils
-# workaround_load_packages <- function(){
-#   #' @title This function serves as a workaround to put required pacakges into the imports in the namespace file.
-
-#  #' @imports R.utils
-#  #' @imports tidyverse
-# }
-############################################################################
-
-
 # General Imports of other Packages =================================
 #' @import R.utils
 #' @import tidyverse
@@ -210,6 +199,8 @@ variable_encoder <- function(variables){
       aux2 == "Consumption per Effective Worker" ~ "CpEW",
 
       aux2 == "Capital to Output Ratio" ~ "CtO"
+      aux2 == "Physical Capital to Output Ratio" ~ "CtO"
+      # the two above don't interfere with each other teh Physical Capital is onyl used in ESHC where the usual Capital to Output Ratio is not used.
       aux2 == "Human Capital to Output Ratio" ~ "HCtO"
 
 
