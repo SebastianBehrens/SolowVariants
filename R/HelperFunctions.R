@@ -3,6 +3,7 @@
 # General Imports of other Packages =================================
 #' @import R.utils
 #' @import tidyverse
+#' @import purrr
 
 # 0.1 individual parameter path =================================
 create_path <- function(iv, pfc, nv, np){
@@ -224,6 +225,9 @@ VisualiseSimulation <- function(simulation_data, variables, scale_identifier){
   #' @export
 
   # Function ---------------------------------
+
+  set_default_theme()
+  
   for(i in variables){
     if(i %in% names(simulation_data)){
     }else{
@@ -610,7 +614,7 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
 compare_simulations <- function(simulation_list, sim_identifier_vector, vars_selection){
 
   # Roxygen Header ---------------------------------
-  #' @title (Superseeded!) Visualise Common Variables of Different Solow Models
+  #' @title Visualise Common Variables of Different Solow Models
   #' @description Visualise the evolution of common variables of multiple (2 or more) Solow variants in the same graph.
   #' @param simulation_list List with tibbles. The tibbles need to be the results of the simulationfunctions, e.g. \code{SimulateBasicSolowModel()}.
   #' @param sim_identifier_vector Vector with the model codes. (The first element of \code{sim_identifier_vector} should correspond to the first element of \code{simulation_list}.)
@@ -621,15 +625,13 @@ compare_simulations <- function(simulation_list, sim_identifier_vector, vars_sel
   #' @export
 
   # Function ---------------------------------
-  # simulation_list is list(sim1, sim2, sim3, ...)
-  # sim_identifier_vector is c("oil", "land", "oilland")
-  # vars_selection is a vector of the variables to plot.
+
+  set_default_theme()
 
   # Verifying that inputs are 'correct' and can be worked with
   if(length(simulation_list) != length(sim_identifier_vector)){
     stop("Number of simulation identifier strings and number of simulations don't match.")
   }
-
   for(i in seq_along(simulation_list)){
    simulation_list[[i]] <- simulation_list[[i]] %>% mutate(sim_type = sim_identifier_vector[[i]])
   }
@@ -658,33 +660,9 @@ compare_simulations <- function(simulation_list, sim_identifier_vector, vars_sel
       )
   }
 
-  library(tidyverse)
-
-  theme_set(
-    theme_classic() +
-      theme(
-        axis.ticks.length = unit(-0.25, "cm"),
-        axis.text.x = element_text(margin = unit(c(0.4,0,0,0), "cm")),
-        axis.text.y = element_text(margin = unit(c(0,0.4,0,0), "cm")),
-        axis.line = element_blank(),
-        panel.grid.major.y = element_line(linetype = 2),
-        plot.title = element_text(hjust = 0.5),
-        text = element_text(family = "serif"),
-        legend.justification = c("right", "top"),
-        # legend.position = c(1, 1),
-        legend.position = c(.98, .98),
-        legend.background = element_rect(fill = NA, color = "black"),
-        panel.border = element_rect(fill = NA, size = 1.25),
-        strip.text = element_text(size = 12)
-        # legend.margin = margin(6, 10, 6, 6)
-        # legend.box.background = element_rect(colour = "black")
-      )
-
-  )
-
-
   sims_stacked %>%
     select(all_of(c("period", "sim_type", vars_selection))) %>%
+    relocate(vars_selection) %>% 
     pivot_longer(-c("period", "sim_type"), names_to = "Variable") %>%
     mutate(Variable = as.factor(Variable)) %>%
     ggplot(aes(period, value, col = sim_type, group = sim_type)) +
@@ -957,7 +935,30 @@ getModelVars <- function(ModelCode){
   return(out)
 }
 
+set_default_theme <- function(){
+  #' @export 
+  theme_set(
+    theme_classic() +
+      theme(
+        axis.ticks.length = unit(-0.25, "cm"),
+        axis.text.x = element_text(margin = unit(c(0.4,0,0,0), "cm")),
+        axis.text.y = element_text(margin = unit(c(0,0.4,0,0), "cm")),
+        axis.line = element_blank(),
+        panel.grid.major.y = element_line(linetype = 2),
+        plot.title = element_text(hjust = 0.5),
+        text = element_text(family = "serif"),
+        legend.justification = c("right", "top"),
+        # legend.position = c(1, 1),
+        legend.position = c(.98, .98),
+        legend.background = element_rect(fill = NA, color = "black"),
+        panel.border = element_rect(fill = NA, size = 1.25),
+        strip.text = element_text(size = 12)
+        # legend.margin = margin(6, 10, 6, 6)
+        # legend.box.background = element_rect(colour = "black")
+      )
 
+  )
+}
 
 ########################## kept but not used ##########################
 #' 
