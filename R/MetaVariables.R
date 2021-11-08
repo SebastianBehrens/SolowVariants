@@ -13,6 +13,7 @@ meta_BS_variables <-
 
         "Wage Rate",
         "Rental Rate",
+        "Capital to Output Ratio",
 
         "Log of Capital Stock",
         "Log of Capital Stock per Worker",
@@ -48,6 +49,7 @@ meta_GS_variables <-
         
         "Wage Rate",
         "Rental Rate",
+        "Capital to Output Ratio",
         
         "Log of Output",
         "Log of Output per Worker",
@@ -82,6 +84,7 @@ meta_ESSOE_variables <-
         
         "Wage Rate",
         "Rental Rate",
+        "Capital to Output Ratio",
         
         "National Output",
         "National Wealth",
@@ -112,7 +115,7 @@ meta_ESHC_variables <-
     c(
         "Total Factor Productivity",
         "Human Capital Stock",
-        "Capital Stock",
+        "Physical Capital Stock",
         "Labor Stock",
         "Output",
         
@@ -126,6 +129,8 @@ meta_ESHC_variables <-
         
         "Wage Rate",
         "Rental Rate",
+        "Physical Capital to Output Ratio",
+        "Human Capital to Output Ratio",
         
         "Log of Output",
         "Log of Output per Worker",
@@ -204,6 +209,7 @@ meta_ESSRL_variables <-
         "Wage Rate",
         "Capital Rental Rate",
         "Land Rental Rate",
+        "Capital to Output Ratio",
         
         "Log of Output",
         "Log of Output per Worker",
@@ -219,8 +225,7 @@ meta_ESSRL_variables <-
         
         "Growth Rate of Capital Stock",
         "Growth Rate of Capital Stock per Worker",
-        "Growth Rate of Capital Stock per Effective Worker",
-        "Capital to Output Ratio"
+        "Growth Rate of Capital Stock per Effective Worker"
     )
 meta_ESSROL_variables <-
     c(
@@ -238,6 +243,7 @@ meta_ESSROL_variables <-
         
         "Wage Rate",
         "Rental Rate",
+        "Capital to Output Ratio",
         
         "Log of Output",
         "Log of Output per Worker",
@@ -274,6 +280,7 @@ meta_ESEG_variables <-
         
         "Wage Rate",
         "Rental Rate",
+        "Capital to Output Ratio",
         
         "Log of Capital Stock",
         "Log of Capital Stock per Worker",
@@ -308,6 +315,7 @@ meta_ESEGRomer_variables <-
         
         "Wage Rate",
         "Rental Rate",
+        "Capital to Output Ratio",
         
         "Log of Capital Stock",
         "Log of Capital Stock per Worker",
