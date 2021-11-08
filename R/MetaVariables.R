@@ -1,5 +1,5 @@
 
-load("meta_variables.rda")
+# load("meta_variables.rda")
 
 # Setting up all variables (standardize down below) =================================
 # this messy and redundant way was created first and is standardized down below
