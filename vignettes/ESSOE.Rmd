@@ -23,8 +23,6 @@ theme_set(theme_bw())
 
 # Setting up the parameter grid ---------------------------------
 aux_np <- 200
-getRequiredParams("ESSOE")
-getRequiredStartingValues("ESSOE")
 aux_parameter_grid <-
   create_parameter_grid(
     c("B", "alpha", "n", "s", "r"),
