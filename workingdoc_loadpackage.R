@@ -1,5 +1,6 @@
 # roxygen2::roxygenise()
-# devtools::install()  
+# devtools::install() 
 # devtools::install_github("SebastianBehrens/SolowVariants", build_vignettes = T, force = T)
 # library(SolowVariants)
+# devtools::build(vignettes = TRUE)
 # vignette("ESEG")
