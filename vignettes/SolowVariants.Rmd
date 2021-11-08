@@ -5,8 +5,10 @@ output:
     toc: true
 vignette: >
   %\VignetteIndexEntry{SolowVariants}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -36,10 +38,10 @@ knitr::opts_chunk$set(
     - Example 3: Compare the extended Solow growth models with land, a fixed scarce resource, and the the extended Solow growth models with oil, a not-fixed but depletable scarce resource.
     - and many more.
 
-## Illustrative Example
+## Illustrative Examples
+### Simulation of a Solow Variant
 ```{r, eval = F}
 library(SolowVariants)
-library(tidyverse)
 theme_set(theme_bw())
 
 # Setting up the parameter grid ---------------------------------
@@ -68,6 +70,44 @@ VisualiseSimulation(aux_simulation,
 
 steadystate_checker(aux_simulation, aux_parameter_grid, "BS")
 
+```
+### Comparison of different Solow Variants
+```{r}
+aux_np <- 200
+
+aux_parameter_grid <-
+  create_parameter_grid(
+    c("B", "alpha", "delta", "n", "s"),
+    c(10, 1 / 3, 0.1, 0.005, 0.22),
+    c(NA, NA, 150, NA, NA),
+    c(NA, NA, 0.05, NA, NA),
+    aux_np
+  )
+
+# Setting starting values for K and L ---------------------------------
+aux_startvalues <- list(K = 1, L = 1)
+
+# Simulate the basic Solow growth model ---------------------------------
+aux_simulation_BS <- SimulateBasicSolowModel(aux_parameter_grid, aux_np,aux_startvalues)
+
+
+aux2_parameter_grid <-
+  create_parameter_grid(
+    c("g", "alpha", "delta", "n", "s"),
+    c(0.05, 1 / 3, 0.1, 0.005, 0.22),
+    c(NA, NA, NA, NA, 50),
+    c(NA, NA, NA, NA, 0.05),
+    aux_np
+  )
+
+# Setting starting values for K and L ---------------------------------
+aux2_startvalues <- list(A = 1, K = 1, L = 1)
+
+# Simulate the basic Solow growth model ---------------------------------
+aux_simulation_GS <- SimulateGeneralSolowModel(aux2_parameter_grid, aux_np,aux2_startvalues)
+
+# Now onto comparing them.
+compare_simulations(list(aux_simulation_BS, aux_simulation_GS), c("BS", "GS"), c("logY", "gYpW", "YpEW"))
 ```
 
 
@@ -174,3 +214,16 @@ The following hyperlinks link directly to the vignettes that contain explanation
 [ESEGRomer](ESEGRomer.html)
 
 Remark: You can call any of these directly with, for example, `vignette("BS")`.
+
+
+## Remark to you if you are new to R
+- the example code throughout this package uses input assignment by position. see the example below.
+- when it is unclear how to use a function, make use of the question mark, such as`?compare_simulations`.
+- to get more information on the package and the model use the vignettes, `vignette("SolowVariants"); vignette("ESEG")`
+Example regarding assignment by position 
+```
+f <- function(x, y){x + y}
+f(x = 3, y = 3) # argument assignment by name
+f(3, 3) # argument assignment by position
+```
+This is insofar relevant as the example code will use 
