@@ -198,8 +198,8 @@ variable_encoder <- function(variables){
       aux2 == "Consumption per Worker" ~ "CpW",
       aux2 == "Consumption per Effective Worker" ~ "CpEW",
 
-      aux2 == "Capital to Output Ratio" ~ "CtO",
-      aux2 == "Physical Capital to Output Ratio" ~ "CtO",
+      aux2 == "Capital to Output Ratio" ~ "CtO", 
+      aux2 == "Physical Capital to Output Ratio" ~ "CtO", 
       # the two above don't interfere with each other teh Physical Capital is onyl used in ESHC where the usual Capital to Output Ratio is not used.
       aux2 == "Human Capital to Output Ratio" ~ "HCtO"
 
@@ -850,6 +850,24 @@ getVariablesAvailableToBeVisualised <- function(ModelCode1,
 }
 
 draw_transition_diagram <- function(paragrid_special, solow_variant){
+
+  # Roxygen Header ---------------------------------
+  #' @title Draw the transition diagram for a solow variant
+  #' @param paragrid_special A special parameter grid. See the examples below to see how this input is supposed to look like.
+  #' @param solow_variant A model code such as "BS", "GS", ...
+  #' @examples
+  #' draw_transition_diagram(
+  #' list(B = c(1),
+  #'      alpha = 1/3, 
+  #'      delta = 0.2, 
+  #'      n = 0.005, 
+  #'      s = c(0.25, 0.05)
+  #' ),
+  #' "BS"
+  #' )
+  #' @export
+
+  # Function ---------------------------------  
   # Create string with function call to the XX_TE
   aux_TE_name <- paste0(solow_variant, "_TE")
   # Catch underspecifications in the parameters
