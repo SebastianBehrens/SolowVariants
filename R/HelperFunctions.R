@@ -198,8 +198,8 @@ variable_encoder <- function(variables){
       aux2 == "Consumption per Worker" ~ "CpW",
       aux2 == "Consumption per Effective Worker" ~ "CpEW",
 
-      aux2 == "Capital to Output Ratio" ~ "CtO"
-      aux2 == "Physical Capital to Output Ratio" ~ "CtO"
+      aux2 == "Capital to Output Ratio" ~ "CtO",
+      aux2 == "Physical Capital to Output Ratio" ~ "CtO",
       # the two above don't interfere with each other teh Physical Capital is onyl used in ESHC where the usual Capital to Output Ratio is not used.
       aux2 == "Human Capital to Output Ratio" ~ "HCtO"
 
@@ -928,6 +928,14 @@ getTDAxes <- function(ModelCode){
   if (is.na(out[[1]])) {
     warning("The entered shortcode for a model variant does not exist.")
   }
+  return(out)
+}
+
+eval_string <- function(string){eval(parse(text = string))}
+
+getModelVars <- function(ModelCode){
+  aux_add_vars <- paste0("add_vars_", ModelCode)
+  out <- c(base_variables, eval_string(aux_add_vars))
   return(out)
 }
 
