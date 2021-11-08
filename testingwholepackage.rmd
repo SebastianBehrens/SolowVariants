@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # BS =================================
 ```{r, eval = F}
 library(SolowVariants)
@@ -33,7 +38,7 @@ draw_transition_diagram(list(B = c(1),
                              alpha = 1/3, 
                              delta = 0.2, 
                              n = 0.005, 
-                             s = c(0.25, 0.05)), "BS"
+                             s = c(0.25, 0.05)), "BS")
 ```
 # GS =================================
 ```{r, eval = F}
@@ -73,7 +78,7 @@ library(SolowVariants)
 theme_set(theme_bw())
 
 # Setting up the parameter grid ---------------------------------
-aux_np <- 200
+aux_np <- 500
 aux_parameter_grid <-
   create_parameter_grid(
     c("alpha", "phi", "n", "g", "sK", "sH", "delta"),
@@ -105,7 +110,7 @@ library(SolowVariants)
 theme_set(theme_bw())
 
 # Setting up the parameter grid ---------------------------------
-aux_np <- 200
+aux_np <- 5000
 getRequiredParams("ESSOE")
 getRequiredStartingValues("ESSOE")
 aux_parameter_grid <-
