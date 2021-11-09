@@ -14,7 +14,7 @@ SimulateExtendedSolowModelEndogenousGrowthCozziOne(paragrid, np, startvals)
 \item{startvals}{List with starting values for the variables A, K, L, H, #' R, V. **Remark**: Use \code{getRequiredStartingValues(ModelCode)} to see which variables need to have a starting value in the respective Solow model.}
 }
 \description{
-Simulates all (both primary and secondary) endogenous variables to the extended Solow growth model with endogenous technological growth as in the version put forward by Romer.
+Simulates all (both primary and secondary) endogenous variables to the extended Solow growth model with endogenous technological growth as in the version put forward by Cozzi
 }
 \note{
 The structural equations to this model can be found in the vignette to this package:

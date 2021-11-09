@@ -1,10 +1,10 @@
-### 9.0 Extended Solow Growth Model with Endogenous Growth (Cozzi Extension)#############################
+### 10.0 Extended Solow Growth Model with Endogenous Growth (Cozzi Extension)#############################
 
 SimulateExtendedSolowModelEndogenousGrowthCozziOne <- function(paragrid, np, startvals){
 
   # Roxygen Header ---------------------------------
   #' @title Simulates the ESEGCozziOne Solow variant
-  #' @description Simulates all (both primary and secondary) endogenous variables to the extended Solow growth model with endogenous technological growth as in the version put forward by Romer.
+  #' @description Simulates all (both primary and secondary) endogenous variables to the extended Solow growth model with endogenous technological growth as in the version put forward by Cozzi
   #' @note The structural equations to this model can be found in the vignette to this package:
   #' \code{vignette("SolowVariants")}
   #' @inheritParams SimulateBasicSolowModel

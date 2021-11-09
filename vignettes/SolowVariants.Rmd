@@ -130,8 +130,10 @@ compare_simulations(
 | Extended Solow Growth Model with Scarce Resource Land                     | `SimulateExtendedSolowModelScarceResourceLand()`       |
 | Extended Solow Growth Model with Scarce Resource Oil                      | `SimulateExtendedSolowModelScarceResourceOil()`        |
 | Extended Solow Growth Model with Scarce Resources Oil *and* Land          | `SimulateExtendedSolowModelScarceResourceOilAndLand()` |
+| Extended Solow Growth Model with Endogenous Technological Growth | `SimulateExtendedSolowModelEndogenousGrowth()`         |
 | Extended Solow Growth Model with Endogenous Technological Growth by Romer | `SimulateExtendedSolowModelEndogenousGrowthRomer()`    |
-| Extended Solow Growth Model with Endogenous Technological Growth by Cozzi | `SimulateExtendedSolowModelEndogenousGrowth()`         |
+| Extended Solow Growth Model with Endogenous Technological Growth by Cozzi (Romer Extension) | `SimulateExtendedSolowModelEndogenousGrowthCozziOne()`    |
+| Extended Solow Growth Model with Endogenous Technological Growth by Cozzi (Hybrid Model) | `SimulateExtendedSolowModelEndogenousGrowthCozziTwo()`    |
 
 ## Model Abbreviations
 The table below shows the used abbreviations, so-called model codes, that will be used throughout the package to refer to the respective Solow Growth Model Variants.

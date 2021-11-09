@@ -1,0 +1,91 @@
+---
+title: "Simulate the Extended Solow Model with (semi- and fully) Endogenous Growth (Romer Version)"
+output:
+  html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{ESEGCozziOne}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Working Code Example
+```{r, eval = F}
+library(SolowVariants)
+theme_set(theme_bw())
+
+# Setting up the parameter grid ---------------------------------
+aux_np <- 500
+aux_parameter_grid <- create_parameter_grid(
+  c("alpha", "phi", "lambda", "rho", "s", "sR", "delta", "n"),
+  c(1/3, 1, 0.2, 0.2, 0.2, 0.15, 0.15, 0.005),
+  c(NA, NA, NA, NA, NA, NA, NA, NA),
+  c(NA, NA, NA, NA, NA, NA, NA, NA),
+  aux_np
+)
+
+# Setting starting values for K and L ---------------------------------
+aux_startvalues <- list(A = 1, K = 1, L = 1)
+
+# Simulate the basic Solow growth model ---------------------------------
+aux_simulation <- SimulateExtendedSolowModelEndogenousGrowthCozziOne(aux_parameter_grid, aux_np, aux_startvalues)
+# Visualise some variables ---------------------------------
+VisualiseSimulation(
+  aux_simulation,
+  c("gYpW", "gKpW"),
+  "free"
+)
+
+# Economy in SS in the End ---------------------------------
+
+steadystate_checker(aux_simulation, aux_parameter_grid, "ESEGCozziOne")
+
+# Draw transition diagram ---------------------------------
+#not yet written for ESEG
+# draw_transition_diagram(
+# 	list(B = c(1),
+#     alpha = 1/3, 
+#     delta = 0.2, 
+#     n = 0.005, 
+#     s = c(0.25, 0.05)), 
+# 	"BS"
+# )
+```
+
+## Elaboration
+Parameters defining the ESEGCozziOne
+
+* Alpha ($\alpha$)
+* Phi ($\phi$)
+* Rate of capital depreciation ($\delta$)
+* Population growth rate ($n$)
+* Savings rate ($s$)
+
+Remark: Those parameters can be found via the command: `getRequiredParams("BS")`.
+
+Starting value of endogenous variables defining the BS
+
+* Starting value of physical capital ($K_0$)
+* Starting value of the labor force ($L_0$)
+* Starting value of the total factor productivity ($A_0$)
+
+Remark: Those parameters can be found via the command: `getRequiredStartingValues("BS")`.
+
+## Structural Equations to the Extended Solow Model with Endogenous Growth (Romer Version)
+$$\begin{aligned}
+Y_t &= K_t^\alpha (A_tL_{Y,t})^{1-\alpha} \\
+A_{t+1} &= \rho * A_t^\phi s_R^\lambda + A_t \\
+K_{t+1}&= sY_t + (1-\delta)K_t \\
+L_{t+1}&=(1+n)L_t \\
+L_t &= L_{A,t} + L_{Y,t} \\
+L_{A, t} &= s_R * L_t (\rightarrow L_{Y,t} = (1-s_R * L_t))
+\end{aligned}$$
