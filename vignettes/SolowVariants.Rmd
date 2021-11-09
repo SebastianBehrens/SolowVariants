@@ -74,6 +74,7 @@ steadystate_checker(aux_simulation, aux_parameter_grid, "BS")
 ```
 ### Comparison of different Solow Variants
 ```{r, eval = F, fig.width = 7, fig.height = 4.8, fig.align='center'}
+# Simulating the BS
 library(SolowVariants)
 aux_np <- 200
 
@@ -86,13 +87,11 @@ aux_parameter_grid <-
     aux_np
   )
 
-# Setting starting values for K and L ---------------------------------
 aux_startvalues <- list(K = 1, L = 1)
 
-# Simulate the basic Solow growth model ---------------------------------
 aux_simulation_BS <- SimulateBasicSolowModel(aux_parameter_grid, aux_np, aux_startvalues)
 
-
+# Simulating the GS
 aux2_parameter_grid <-
   create_parameter_grid(
     c("g", "alpha", "delta", "n", "s"),
@@ -102,13 +101,11 @@ aux2_parameter_grid <-
     aux_np
   )
 
-# Setting starting values for K and L ---------------------------------
 aux2_startvalues <- list(A = 1, K = 1, L = 1)
 
-# Simulate the basic Solow growth model ---------------------------------
 aux_simulation_GS <- SimulateGeneralSolowModel(aux2_parameter_grid, aux_np, aux2_startvalues)
 
-# Comparing the two economies (solow variants) ---------------------------------
+# Comparing the two simulations (solow variants) ---------------------------------
 compare_simulations(
   list(aux_simulation_BS, aux_simulation_GS), 
   c("BS", "GS"), c("logY", "gYpW", "YpEW", "RR")
