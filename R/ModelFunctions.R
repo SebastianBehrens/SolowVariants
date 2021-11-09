@@ -324,8 +324,8 @@ ESEGRomer_SS_KpEW <- function(alpha, phi, n, s, delta){
 # Model Functions of Extended Solow Growth Model with Endogeneous Growth as developed by Cozzi's Extension to Romer's ESEG ---------------------------------
 ESEGCozziOne_MF_KN <- function(s, Y, delta, K){s * Y + (1-delta)*K}
 ESEGCozziOne_MF_LN <- function(n, L){(1+n) * L}
-ESEGCozziOne_MF_L_At <- function(sR, L)
 ESEGCozziOne_MF_AN <- function(rho, phi, lambda, A, sR){(rho * A^phi * sR^lambda) + A}
+ESEGCozziOne_MF_L_At <- function(sR, L)
 # ESEG_MF_RR <- function(K, L, alpha){alpha * B * (K/L)^(alpha - 1)}
 # ESEG_MF_WR <- function(K, L, alpha){(1-alpha) * B * (K/L)^alpha}
 ESEGCozziOne_MF_Y <- function(A, K, L, alpha){K^alpha * (A*L)^(1-alpha)} # remember L here referes to L working in the goods sector (1-s_R) * L_t = L_{Y,t}
