@@ -602,6 +602,12 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
       }else if(last_row_parameter[["phi"]] %>% between(0.95, 1)){
       aux_steadystate_variables <- c("gYpW")
       }
+    }else if(solow_variant == "ESEGCozziTwo"){
+      if(last_row_parameter[["phi"]] < 0.95){
+      aux_steadystate_variables <- c("KpEW", "gYpW")
+      }else if(last_row_parameter[["phi"]] %>% between(0.95, 1)){
+      aux_steadystate_variables <- c("gYpW")
+      }
     }
 
     for(i in aux_steadystate_variables){
@@ -765,6 +771,10 @@ getRequiredParams <- function(ModelCode) {
     out <- c("alpha", "phi", "s", "delta", "n")
   } else if (ModelCode == "ESEGRomer") {
     out <- c("alpha", "phi", "lambda", "s", "sR", "delta", "n")
+  } else if (ModelCode == "ESEGCozziOne") {
+    out <- c("alpha", "phi", "lambda", "s", "sR", "delta", "n")
+  } else if (ModelCode == "ESEGCozziTwo") {
+    out <- c("alpha", "phi", "lambda", "s", "sR", "delta", "n", "k")
   } else {
     (
       out <- NaN
@@ -791,6 +801,8 @@ getRequiredInputsToTE<- function(ModelCode) {
     out <- c("B", "alpha", "delta", "n", "s")
   } else if (ModelCode == "GS_XXXXX") {
     out <- c("g", "alpha", "delta", "n", "s")
+  } else if (ModelCode == "ESHC_XXXXX") {
+    out <- c("alpha", "phi", "n", "g", "sK", "sH", "delta")
   } else if (ModelCode == "ESSOE") {
     out <- c("B", "alpha", "n", "s", "r", "w")
   } else if (ModelCode == "ESSRL_XXXXX") {
@@ -799,7 +811,13 @@ getRequiredInputsToTE<- function(ModelCode) {
     out <- c("alpha", "beta", "n", "g", "sE", "s", "delta")
   } else if (ModelCode == "ESSROL_XXXXX") {
     out <- c("alpha", "beta", "kappa", "delta", "n", "s", "sE", "g", "X")
-  } else if (ModelCode == "ESHC_XXXXX") {
+  } else if (ModelCode == "ESEG_XXXXX") {
+    out <- c("alpha", "phi", "n", "g", "sK", "sH", "delta")
+  } else if (ModelCode == "ESEGRomer_XXXXX") {
+    out <- c("alpha", "phi", "n", "g", "sK", "sH", "delta")
+  } else if (ModelCode == "ESEGCozziOne_XXXXX") {
+    out <- c("alpha", "phi", "n", "g", "sK", "sH", "delta")
+  } else if (ModelCode == "ESEGCozziTwo_XXXXX") {
     out <- c("alpha", "phi", "n", "g", "sK", "sH", "delta")
   } else {
     (
