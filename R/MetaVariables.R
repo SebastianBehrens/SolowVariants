@@ -54,7 +54,7 @@ add_vars_ESHC <- c(
   "Log of Human Capital Stock per Effective Worker",
   "Growth Rate of Human Capital Stock",
   "Growth Rate of Human Capital Stock per Worker" ,
-  "Growth Rate of Human Capital Stock per Effective Worker",
+  "Growth Rate of Human Capital Stock per Effective Worker"
 )
 add_vars_ESSRO <- c(
   "Energy Use",
