@@ -24,7 +24,7 @@ SimulateExtendedSolowModelEndogenousGrowthCozziOne <- function(paragrid, np, sta
     # source("ModelFunctions/ESEGCozziOneModelFunctions.R")
     
     # Initialize Simulation Table ---------------------------------
-    sim_table <- create_simulation_table(variable_encoder(getmodelvars("ESEGCozziOne")), np)
+    sim_table <- create_simulation_table(variable_encoder(getModelVars("ESEGCozziOne")), np)
     
     # Fill Start Values for Period 0 ---------------------------------
     aux_index <- which(sim_table$period == 0)
