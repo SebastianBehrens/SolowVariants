@@ -1,5 +1,4 @@
 
-# load("meta_variables.rda")
 
 # Setting up all variables (standardize down below) =================================
 # this messy and redundant way was created first and is standardized down below
@@ -368,6 +367,7 @@
 #     assign(paste0("add_vars_", modelcodes[i]), variables[[i+1]])
 # }
 
+# load("data/meta_variables.rdata")
 # add_vars_BS
 # add_vars_GS
 # add_vars_ESSOE
@@ -377,6 +377,7 @@
 # add_vars_ESSROL
 # add_vars_ESEG
 # add_vars_ESEGRomer
-
-# save(base_variables, add_vars_BS, add_vars_GS, add_vars_ESSOE, add_vars_ESHC, add_vars_ESSRO, add_vars_ESSRL, add_vars_ESSROL, add_vars_ESEG, add_vars_ESEGRomer, file = "meta_variables.Rdata")
+# add_vars_ESEGCozziOne <- add_vars_ESEGRomer
+# add_vars_ESEGCozziTwo <- add_vars_ESEGCozziOne
+# save(base_variables, add_vars_BS, add_vars_GS, add_vars_ESSOE, add_vars_ESHC, add_vars_ESSRO, add_vars_ESSRL, add_vars_ESSROL, add_vars_ESEG, add_vars_ESEGRomer, add_vars_ESEGCozziOne, add_vars_ESEGCozziTwo, file = "data/meta_variables.Rdata")
 
