@@ -1,9 +1,9 @@
-### 9.0 Extended Solow Growth Model (Romer) with Endogenous Growth #############################
+### 9.0 Extended Solow Growth Model with Endogenous Growth (Romer Extension)#############################
 
 SimulateExtendedSolowModelEndogenousGrowthRomer <- function(paragrid, np, startvals){
 
   # Roxygen Header ---------------------------------
-  #' @title Simulates the ESEGR Solow variant
+  #' @title Simulates the ESEGRomer Solow variant
   #' @description Simulates all (both primary and secondary) endogenous variables to the extended Solow growth model with endogenous technological growth as in the version put forward by Romer.
   #' @note The structural equations to this model can be found in the vignette to this package:
   #' \code{vignette("SolowVariants")}
@@ -11,6 +11,14 @@ SimulateExtendedSolowModelEndogenousGrowthRomer <- function(paragrid, np, startv
   #' @export
 
   # Function ---------------------------------
+    
+    # Remark on n = 0 in case of fully endogenous growth (phi -> 1) ---------------------------------
+    if(any(unique(paragrid[["phi"]]) %>% between (0.95, 1))){
+        if(any(unique(paragrid[["n"]])!=0)){
+        warning("Given the entered value for phi is close to 1, which approximates the fully endogenous ESEG, the parameter n should be set at 0.")
+    }
+
+    }
     
     # Load Basic Model Functions ---------------------------------
     # source("ModelFunctions/ESEGRomerModelFunctions.R")
