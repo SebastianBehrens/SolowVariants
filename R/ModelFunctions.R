@@ -320,6 +320,35 @@ ESEGRomer_SS_KpEW <- function(alpha, phi, n, s, delta){
     #' @export
     (s/((1 + n)^(1/(1 - phi)) - (1- delta)))^(1/(1-alpha))
     }
+
+# Model Functions of Extended Solow Growth Model with Endogeneous Growth as developed by Cozzi's Extension to Romer's ESEG ---------------------------------
+ESEGCozziOne_MF_KN <- function(s, Y, delta, K){s * Y + (1-delta)*K}
+ESEGCozziOne_MF_LN <- function(n, L){(1+n) * L}
+ESEGCozziOne_MF_L_At <- function(sR, L)
+ESEGCozziOne_MF_AN <- function(rho, phi, lambda, A, sR){rho * A^phi * sR^lambda + A}
+# ESEG_MF_RR <- function(K, L, alpha){alpha * B * (K/L)^(alpha - 1)}
+# ESEG_MF_WR <- function(K, L, alpha){(1-alpha) * B * (K/L)^alpha}
+ESEGCozziOne_MF_Y <- function(A, K, L, alpha){K^alpha * (A*L)^(1-alpha)} # remember L here referes to L working in the goods sector (1-s_R) * L_t = L_{Y,t}
+
+# ESEG_SS_gY <- function(endogenous_type, input_list){
+#     if(endogenous_type == "AK")
+#     (1 + n)^((phi)/(1- phi)) - 1
+# }
+
+ESEGCozziOne_SS_gYpW <- function(n, phi, s, A, delta){
+    #' @export
+    if(phi < 0.95){
+    (1 + n)^((phi)/(1- phi)) - 1
+    }else if(i %>% between(0.95, 1)){
+            s * A - delta
+    }else if(phi > 1){
+            NaN
+    }
+}
+ESEGCozziOne_SS_KpEW <- function(alpha, phi, n, s, delta){
+    #' @export
+    (s/((1 + n)^(1/(1 - phi)) - (1- delta)))^(1/(1-alpha))
+    }
 # BS_SS_KpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(s/(n+ delta))^(1/(1-alpha))}
 # BS_SS_YpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(s/(n+ delta))^(alpha/(1-alpha))}
 # BS_SS_CpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(1-s)*(s/(n+delta))^(alpha/(1-alpha))}
