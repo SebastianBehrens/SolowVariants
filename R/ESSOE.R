@@ -1,4 +1,4 @@
-### 3.0 Basic Solow Growth Model #############################
+### 3.0 Extended Solow Growth Model for the Small Open Economy #############################
 
 SimulateExtendedSolowModelSmallOpenEconomy <- function(paragrid, np, startvals){
 

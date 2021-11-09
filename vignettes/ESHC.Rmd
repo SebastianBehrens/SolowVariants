@@ -27,8 +27,8 @@ aux_parameter_grid <-
   create_parameter_grid(
     c("alpha", "phi", "n", "g", "sK", "sH", "delta"),
     c(1 / 3, 1 / 3, 0.005, 0.02, 0.15, 0.15, 0.2),
-    c(NA, NA, NA, NA, NA, NA, NA),
-    c(NA, NA, NA, NA, NA, NA, NA),
+    c(NA, NA, NA, NA, 100, 100, NA),
+    c(NA, NA, NA, NA, 0.1, 0.2, NA),
     aux_np
   )
 
@@ -36,7 +36,7 @@ aux_parameter_grid <-
 aux_startvalues <- list(A = 1, K = 1, L = 1, H = 1)
 
 # Simulate the basic Solow growth model ---------------------------------
-aux_simulation <- SimulateExtendedSolowModelHumanCapital(aux_parameter_grid, aux_np,aux_startvalues)
+aux_simulation <- SimulateExtendedSolowModelHumanCapital(aux_parameter_grid, aux_np, aux_startvalues)
 
 # Visualise some variables ---------------------------------
 VisualiseSimulation(aux_simulation,

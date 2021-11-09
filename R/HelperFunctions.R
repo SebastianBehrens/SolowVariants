@@ -145,6 +145,7 @@ variable_encoder <- function(variables){
       aux2 == "Human Capital Stock" ~ "H",
       aux2 == "Log of Human Capital Stock" ~ "logH",
       aux2 == "Capital Stock" ~ "K",
+      aux2 == "Physical Capital Stock" ~ "K", # no interference here "Physical ..." only used in ESHC where the usual Capital STock is ambiguous.
       aux2 == "Log of Capital Stock" ~ "logK",
       aux2 == "Growth Rate of Capital Stock" ~ "gK",
       aux2 == "Growth Rate of Human Capital Stock" ~ "gH",
@@ -244,7 +245,7 @@ VisualiseSimulation <- function(simulation_data, variables, scale_identifier){
     mutate(Variable = as.factor(Variable)) %>%
     ggplot(aes(period, value, col = Variable)) +
     geom_line() +
-    facet_wrap(~Variable, scales = scale_identifier, ncol = 2)+
+    facet_wrap(~factor(Variable, levels = variables), scales = scale_identifier, ncol = 2)+
     labs(x = "Period", y = "Value") +
     theme(legend.position = "none")
 }
@@ -336,8 +337,9 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
     if(i == "VpEW"){sim_data[["VpEW"]] <- sim_data[["V"]] / (sim_data[["L"]]*technology)}
     if(i == "FpW"){sim_data[["FpW"]] <- sim_data[["F"]] / sim_data[["L"]]}
     # Variants of Consumption
-
+    if(solowversion != "ESHC"){
     if(i == "C"){sim_data[["C"]] <- sim_data[["Y"]] * (1- parameter_data[["s"]])}
+      }
     if(i == "CpW"){sim_data[["CpW"]] <- sim_data[["C"]] / sim_data[["L"]]}
     if(i == "CpEW"){sim_data[["CpEW"]] <- sim_data[["C"]] / (technology * sim_data[["L"]])}
 
@@ -421,8 +423,8 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
                                          parameter_data[["alpha"]],
                                          parameter_data[["phi"]])
         }
-
-
+        
+        if(i == "C"){sim_data[["C"]] <- (1- (parameter_data[["sK"]] + parameter_data[["sH"]])) * sim_data[["Y"]]}
 
 
 
