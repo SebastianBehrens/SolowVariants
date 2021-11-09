@@ -40,7 +40,8 @@ add_vars_ESSOE <- c(
   "National Wealth per Effective Worker", 
   "Net Foreign Assets", 
   "Net Foreign Assets per Worker", 
-  "National Savings")
+  "National Savings"
+ )
 add_vars_ESHC <- c(
   "Total Factor Productivity",
   "Human Capital Stock",
