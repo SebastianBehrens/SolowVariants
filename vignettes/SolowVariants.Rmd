@@ -73,7 +73,7 @@ steadystate_checker(aux_simulation, aux_parameter_grid, "BS")
 
 ```
 ### Comparison of different Solow Variants
-```{r, eval = T, fig.width = 7, fig.height = 4.8, fig.align='center'}
+```{r, eval = F, fig.width = 7, fig.height = 4.8, fig.align='center'}
 library(SolowVariants)
 aux_np <- 200
 

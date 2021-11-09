@@ -367,7 +367,7 @@
 #     assign(paste0("add_vars_", modelcodes[i]), variables[[i+1]])
 # }
 
-# load("data/meta_variables.rdata")
+load("data/meta_variables.rdata")
 # add_vars_BS
 # add_vars_GS
 # add_vars_ESSOE
