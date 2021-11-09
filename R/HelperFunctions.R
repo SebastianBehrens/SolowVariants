@@ -592,7 +592,13 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
       }
     }else if(solow_variant == "ESEGRomer"){
       if(last_row_parameter[["phi"]] < 0.95){
-      aux_steadystate_variables <- c("KpEW", "YpEW", "gYpW")
+      aux_steadystate_variables <- c("KpEW", "gYpW")
+      }else if(last_row_parameter[["phi"]] %>% between(0.95, 1)){
+      aux_steadystate_variables <- c("gYpW")
+      }
+    }else if(solow_variant == "ESEGCozziOne"){
+      if(last_row_parameter[["phi"]] < 0.95){
+      aux_steadystate_variables <- c("KpEW", "gYpW")
       }else if(last_row_parameter[["phi"]] %>% between(0.95, 1)){
       aux_steadystate_variables <- c("gYpW")
       }
