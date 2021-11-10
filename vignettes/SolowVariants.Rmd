@@ -222,7 +222,7 @@ Remark: You can call any of these directly with, for example, `vignette("BS")`.
 
 ## Remark to you if you are new to R
 - the example code throughout this package uses input assignment by position. see the example below.
-- when it is unclear how to use a function, make use of the question mark, such as`?compare_simulations`.
+- when it is unclear how to use a function, make use of the question mark, such as `?compare_simulations`.
 - to get more information on the package and the model use the vignettes, `vignette("SolowVariants"); vignette("ESEG")`
 Example regarding assignment by position 
 ```
@@ -230,4 +230,35 @@ f <- function(x, y){x + y}
 f(x = 3, y = 3) # argument assignment by name
 f(3, 3) # argument assignment by position
 ```
-This is insofar relevant as the example code will use 
+
+## How to add further models to this package
+The following steps are self-contained. Thus, each part can live on its own and does not require the other parts to be implemented.
+
+* Create the simulation function
+  1. initialise the variables `add_vars_ModelCode` in `meta_variables.R`.
+  2. expand the function `getRequiredParams`.
+  3. expand the function `getRequiredStartingValues`.
+  4. define the model functions in `ModelFunctions.R`.
+  5. set up the modelling function (similarly to how other simulation functions are set up)
+* Make the newly created simulation function comparable to steady state functions
+  1. define the steady state functions in `ModelFunctions.R`. (Don't forget to export them!)
+  2. expand the function `steadystate_checker` (in `HelperFunctions.R`). 
+* Create the transition diagram for the solow variant
+  1. define the transition equation in `ModelFunctions.R`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
