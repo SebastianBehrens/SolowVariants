@@ -1,6 +1,6 @@
-### 11.0 Extended Solow Growth Model with Endogenous Growth (Cozzi Extension)#############################
+### 11.0 Extended Solow Growth Model with Endogenous Growth (Cozzi's Hybrid Model)#############################
 
-SimulateExtendedSolowModelEndogenousGrowthCozziOne <- function(paragrid, np, startvals){
+SimulateExtendedSolowModelEndogenousGrowthCozziTwo <- function(paragrid, np, startvals){
 
   # Roxygen Header ---------------------------------
   #' @title Simulates the ESEGCozziTwo Solow variant
@@ -46,7 +46,7 @@ SimulateExtendedSolowModelEndogenousGrowthCozziOne <- function(paragrid, np, sta
         aux_index <- which(sim_table$period == i)
 
         sim_table[[aux_index, "TFP"]] <- ESEGCozziTwo_MF_AN(
-          paragrid[["k"]][[which(paragrid$period == i-1)]]
+          paragrid[["k"]][[which(paragrid$period == i-1)]],
           paragrid[["rho"]][[which(paragrid$period == i-1)]],
           paragrid[["phi"]][[which(paragrid$period == i-1)]],
           paragrid[["lambda"]][[which(paragrid$period == i-1)]],
