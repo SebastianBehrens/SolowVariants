@@ -262,6 +262,8 @@ ESEG_MF_Y <- function(K, L, alpha, phi, A){
 
 }
 
+ESEG_MF_WR <- function(A, K, L, alpha, phi){(1-alpha) * ( K/ (A * L) )^alpha * A}
+ESEG_MF_RR <- function(A, K, L, alpha, phi){alpha * (K/(A*L))^(alpha - 1)}
 # ESEG_SS_gY <- function(endogenous_type, input_list){
 #     if(endogenous_type == "AK")
 #     (1 + n)^((phi)/(1- phi)) - 1
