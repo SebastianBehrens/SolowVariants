@@ -9,7 +9,7 @@ draw_transition_diagram(paragrid_special, solow_variant)
 \arguments{
 \item{paragrid_special}{A special parameter grid. See the examples below to see how this input is supposed to look like.}
 
-\item{solow_variant}{A model code such as "BS", "GS", ...}
+\item{solow_variant}{A model code. Currently only "BS", "GS" and "ESSOE" supported.}
 }
 \description{
 Draw the transition diagram for a solow variant
