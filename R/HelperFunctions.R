@@ -967,6 +967,7 @@ getTDAxes <- function(ModelCode){
 eval_string <- function(string){eval(parse(text = string))}
 
 getModelVars <- function(ModelCode){
+  #' @export
   aux_add_vars <- paste0("add_vars_", ModelCode)
   out <- c(base_variables, eval_string(aux_add_vars))
   return(out)
