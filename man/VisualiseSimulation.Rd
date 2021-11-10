@@ -4,7 +4,7 @@
 \alias{VisualiseSimulation}
 \title{Visualise selected variables of a simulation}
 \usage{
-VisualiseSimulation(simulation_data, variables, scale_identifier)
+VisualiseSimulation(simulation_data, variables, scale_identifier = "free")
 }
 \arguments{
 \item{simulation_data}{The output tibble of any simulation function.}
