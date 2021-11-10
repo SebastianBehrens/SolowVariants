@@ -216,7 +216,7 @@ variable_encoder <- function(variables){
 
 
 # 0.6 visualise a simulation =================================
-VisualiseSimulation <- function(simulation_data, variables, scale_identifier){
+VisualiseSimulation <- function(simulation_data, variables, scale_identifier = "free"){
 
   # Roxygen Header ---------------------------------
   #' @title Visualise selected variables of a simulation
@@ -494,22 +494,20 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
         } 
       }
       if (i == "WR") {
-        # sim_data[["WR"]] <- ESEG_MF_WR(technology,
-        #                                sim_data[["H"]],
-        #                                sim_data[["K"]],
-        #                                sim_data[["L"]],
-        #                                parameter_data[["alpha"]],
-        #                                parameter_data[["phi"]])
-        #
+        sim_data[["WR"]] <- ESEG_MF_WR(technology,
+                                       sim_data[["K"]],
+                                       sim_data[["L"]],
+                                       parameter_data[["alpha"]],
+                                       parameter_data[["phi"]])
+        
       }
       # Rental Rate
       if (i == "RR") {
-        # sim_data[["RR"]] <- ESEG_MF_RR(technology,
-        #                                sim_data[["H"]],
-        #                                sim_data[["K"]],
-        #                                sim_data[["L"]],
-        #                                parameter_data[["alpha"]],
-        #                                parameter_data[["phi"]])
+        sim_data[["RR"]] <- ESEG_MF_RR(technology,
+                                       sim_data[["K"]],
+                                       sim_data[["L"]],
+                                       parameter_data[["alpha"]],
+                                       parameter_data[["phi"]])
       }
 
 
@@ -604,9 +602,11 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
       }
     }else if(solow_variant == "ESEGCozziTwo"){
       if(last_row_parameter[["phi"]] < 0.95){
-      aux_steadystate_variables <- c("KpEW", "gYpW")
+      aux_steadystate_variables <- c()
+      # aux_steadystate_variables <- c("KpEW", "gYpW")
       }else if(last_row_parameter[["phi"]] %>% between(0.95, 1)){
-      aux_steadystate_variables <- c("gYpW")
+      aux_steadystate_variables <- c()
+      # aux_steadystate_variables <- c("gYpW")
       }
     }
 
@@ -688,7 +688,8 @@ compare_simulations <- function(simulation_list, sim_identifier_vector, vars_sel
     ggplot(aes(period, value, col = sim_type, group = sim_type)) +
     geom_line(alpha = 0.75) +
     facet_wrap(~Variable, scales = "free", ncol = 2) +
-    labs(x = "Period", y = "Value", col = "Solow Variant")
+    labs(x = "Period", y = "Value", col = "Solow Variant") + 
+    theme(legend.position = "bottom", legend.justification = "center")
 }
 
 # 0.10 get the variables for which starting values need to be filled for a specific Solow variant =================================
@@ -726,6 +727,10 @@ getRequiredStartingValues <- function(ModelCode){
   } else if (ModelCode == "ESEG") {
     out <- c("K", "L")
   } else if (ModelCode == "ESEGRomer") {
+    out <- c("A", "K", "L")
+  } else if (ModelCode == "ESEGCozziOne") {
+    out <- c("A", "K", "L")
+  } else if (ModelCode == "ESEGCozziTwo") {
     out <- c("A", "K", "L")
   } else {
     (
@@ -770,11 +775,11 @@ getRequiredParams <- function(ModelCode) {
   } else if (ModelCode == "ESEG") {
     out <- c("alpha", "phi", "s", "delta", "n")
   } else if (ModelCode == "ESEGRomer") {
-    out <- c("alpha", "phi", "lambda", "s", "sR", "delta", "n")
+    out <- c("alpha", "phi", "lambda", "rho", "s", "sR", "delta", "n")
   } else if (ModelCode == "ESEGCozziOne") {
-    out <- c("alpha", "phi", "lambda", "s", "sR", "delta", "n")
+    out <- c("alpha", "phi", "lambda", "rho", "s", "sR", "delta", "n")
   } else if (ModelCode == "ESEGCozziTwo") {
-    out <- c("alpha", "phi", "lambda", "s", "sR", "delta", "n", "k")
+    out <- c("alpha", "phi", "lambda", "rho", "s", "sR", "delta", "n", "k")
   } else {
     (
       out <- NaN
@@ -864,7 +869,7 @@ draw_transition_diagram <- function(paragrid_special, solow_variant){
   # Roxygen Header ---------------------------------
   #' @title Draw the transition diagram for a solow variant
   #' @param paragrid_special A special parameter grid. See the examples below to see how this input is supposed to look like.
-  #' @param solow_variant A model code such as "BS", "GS", ...
+  #' @param solow_variant A model code. Currently only "BS", "GS" and "ESSOE" supported.
   #' @examples
   #' draw_transition_diagram(
   #' list(B = c(1),
@@ -991,6 +996,141 @@ set_default_theme <- function(){
 
   )
 }
+
+
+getCommonParameters <- function(ModelCode1, ModelCode2){
+
+  # Roxygen Header ---------------------------------
+  #' @title Yields the union of required parameters for two solow variants
+  #' @description
+  #' @param ModelCode1 Model abbreviation for some Solow variant.
+  #' @param ModelCode2 Model abbreviation for some Solow variant.
+  #' @examples
+  #' getUnifiedParameters("BS", "ESSOE")
+  #' @export
+
+  # Function ---------------------------------
+  aux1 <- getRequiredParams(ModelCode1)
+  aux2 <- getRequiredParams(ModelCode2)
+
+  unified <- union(aux1, aux2)
+  return(unified)
+}
+
+getCommonStartingValues <- function(ModelCode1, ModelCode2){
+
+  # Roxygen Header ---------------------------------
+  #' @title Yields the union of required starting values for two solow variants
+  #' @description
+  #' @param ModelCode1 Model abbreviation for some Solow variant.
+  #' @param ModelCode2 Model abbreviation for some Solow variant.
+  #' @examples
+  #' getunifiedstartingvalues("BS", "ESSOE")
+  #' @export
+
+  # Function ---------------------------------
+  aux1 <- getRequiredStartingValues(ModelCode1)
+  aux2 <- getRequiredStartingValues(ModelCode2)
+
+  common_values <- union(aux1, aux2)
+  
+  return(common_values) 
+}
+
+plausible_parameter_entries <- function(parameters, aux_list = NULL){
+
+  # Roxygen Header ---------------------------------
+  #' @export
+
+  # Function ---------------------------------
+  out <- c()
+  specified_parameters <- names(aux_list)
+  for(i in parameters){
+    if(i %in% specified_parameters){
+      aux <- aux_list[[i]]
+    }else{
+      aux <- case_when(
+        i == "B" ~ 1, 
+        i == "alpha" ~ 0.25, 
+        i == "delta" ~ 0.2, 
+        i == "n" ~ 0.005, 
+        i == "s" ~ 0.22, 
+        i == "g" ~ 0.02, 
+        i == "r" ~ 0.03, 
+        i == "phi" ~ 0.25, 
+        i == "sK" ~ 0.2, 
+        i == "sH" ~ 0.2, 
+        i == "beta" ~ 0.25, 
+        i == "sE" ~0.02, 
+        i == "X" ~ 1, 
+        i == "kappa" ~ 0.25, 
+        i == "lambda" ~ 0.2, 
+        i == "rho" ~ 0.1, 
+        i == "sR" ~ 0.2, 
+        i == "k" ~ 0.3
+    )
+    }
+    out <- c(out, aux)
+  }
+  return(out)
+}
+
+plausible_startingvalue_entries <- function(variables, aux_list = NULL){
+  
+  # Roxygen Header ---------------------------------
+  #' @export
+  
+  # Function ---------------------------------
+  out <- list()
+  specified_startingvalue <- names(aux_list)
+  for(i in variables){
+    if(i %in% specified_startingvalue){
+      out[[i]] <- aux_list[[i]]
+    }else{
+      out[[i]] <- case_when(
+        i == "H" ~ 1,
+        i == "K" ~ 1,
+        i == "L" ~ 1,
+        i == "A" ~ 1,
+        i == "V" ~ 1,
+        i == "R" ~ 1
+      )
+    }
+  }
+  return(out)
+}
+
+set_all_na <- function(vector){
+
+  # Roxygen Header ---------------------------------
+  #' @export
+
+  # Function ---------------------------------
+  rep(NA, length(vector))
+}
+
+getSimFunction <- function(ModelCode) {
+  #' @export
+  out <- case_when(
+    ModelCode == "BS" ~ "SimulateBasicSolowModel",
+    ModelCode == "GS" ~ "SimulateGeneralSolowModel",
+    ModelCode == "ESHC" ~ "SimulateExtendedSolowModelHumanCapital",
+    ModelCode == "ESSOE" ~ "SimulateExtendedSolowModelSmallOpenEconomy",
+    ModelCode == "ESSRO" ~ "SimulateExtendedSolowModelScarceResourceOil",
+    ModelCode == "ESSRL" ~ "SimulateExtendedSolowModelScarceResourceLand",
+    ModelCode == "ESSROL" ~ "SimulateExtendedSolowModelScarceResourceOilAndLand",
+    ModelCode == "ESEG" ~ "SimulateExtendedSolowModelEndogenousGrowth",
+    ModelCode == "ESEGRomer" ~ "SimulateExtendedSolowModelEndogenousGrowthRomer",
+    ModelCode == "ESEGCozziOne" ~ "SimulateExtendedSolowModelEndogenousGrowthCozziOne",
+    ModelCode == "ESEGCozziTwo" ~ "SimulateExtendedSolowModelEndogenousGrowthCozziTwo",
+    TRUE ~ "NaN"
+  )
+  if (out == "NaN") {
+    warning("The entered shortcode for a model variant does not exist.")
+  }
+  return(out)
+}
+
 
 ########################## kept but not used ##########################
 #' 
