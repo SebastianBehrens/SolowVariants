@@ -688,7 +688,7 @@ compare_simulations <- function(simulation_list, sim_identifier_vector, vars_sel
     ggplot(aes(period, value, col = sim_type, group = sim_type)) +
     geom_line(alpha = 0.75) +
     facet_wrap(~Variable, scales = "free", ncol = 2) +
-    labs(x = "Period", y = "Value", col = "Solow Variant") + 
+    labs(x = "Period", y = "Value", col = "Solow Variant", title = paste("Comparison between Variants", sim_identifier_vector[[1]], "and", sim_identifier_vector[[2]])) + 
     theme(legend.position = "bottom", legend.justification = "center")
 }
 
