@@ -374,7 +374,7 @@ ESEGCozziOne_SS_KpEW <- function(alpha, rho, phi, lambda, n, s, sR, delta){
     (s/(n + g_e + delta + n * g_e))^(1/(1-alpha)) * (1-sR)
     }
 
-ESEGCozziOne_SS_YpEW <- function(alpha, phi, n, s, delta){
+ESEGCozziOne_SS_YpEW <- function(alpha, rho, phi, lambda, n, s, sR, delta){
     #' @export
     g_e <- rho * sR^lambda
     (s/(n + g_e + delta + n * g_e))^(alpha/(1-alpha)) * (1-sR)
