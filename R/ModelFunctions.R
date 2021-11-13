@@ -117,6 +117,14 @@ ESSOE_SS_YpW <- function(B, alpha, r){
     #' @export
     B^(1/(1-alpha))*(alpha/r)^(alpha/(1-alpha))
     }
+ESSOE_SS_YnpW <- function(alpha, B, r, s, n){
+    #' @export
+    B^(1/(1-alpha))*(alpha/r)^(alpha/(1-alpha)) * (1-alpha) * (1/(1- (s/n)*r))
+    }
+ESSOE_SS_CtO <- function(alpha, r){
+    #' @export
+    alpha/r
+}
 ESSOE_SS_WR <- function(B, alpha, r){
     #' @export
     (1-alpha) * B^(1/(1-alpha))*(alpha/r)^(alpha/(1-alpha))
@@ -198,6 +206,11 @@ ESSRO_SS_YpW <- function(KpW, YpW, A, R, L, alpha, beta){
     epsilon <- 1- alpha - beta
     (KpW/YpW)^(alpha/(beta + epsilon)) * A^(beta/(beta + epsilon)) * (R/L)^(epsilon/(beta + epsilon))
     }
+ESSRO_SS_KpW <- function(n, delta, s, E, L, alpha, beta){
+    #' @export
+    epsilon <- 1- alpha - beta
+    (n+delta)/(s * (E/L)^epsilon * A^beta ) ^(1/(alpha-1) )
+    }
 
 
 # Remark regarding dynamics of E and R
@@ -245,6 +258,11 @@ ESSROL_SS_gY <- function(alpha, beta, kappa, n, g, sE){
         ((1- alpha - beta- kappa)/(beta + kappa  + (1- alpha - beta - kappa))) * sE
 }
 
+ESSROL_SS_YpW <- function(alpha, beta, kappa, A, K, L, X, R, sE){
+    #' @export
+    epsilon <- 1- alpha - beta - kappa
+    (K/L)^(alpha/(beta + kappa + epsilon)) * A^(beta/(beta + kappa + epsilon)) * (X/L)^(kappa/(beta + kappa + epsilon)) * sE^(epsilon/(beta + kappa + epsilon)) * (R/L)^(epsilon/(beta + kappa + epsilon))
+}
 # Remark regarding dynamics of E and R
 # R_0 => E_1 = s_ER_0 => R_1=R_0 - E_1 => E_2=sER_1 => ...
 
@@ -308,25 +326,34 @@ ESEGRomer_MF_Y <- function(A, K, L, alpha){K^alpha * (A*L)^(1-alpha)} # remember
 #     (1 + n)^((phi)/(1- phi)) - 1
 # }
 
-ESEGRomer_SS_gYpW <- function(n, phi, s, A, delta){
+ESEGRomer_SS_gYpW <- function(n, rho, phi, sR, L, lambda){
     #' @export
     if(phi < 0.95){
     (1 + n)^((phi)/(1- phi)) - 1
-    }else if(i %>% between(0.95, 1)){
-            s * A - delta
+    }else if(phi >= 0.95 && phi <= 1){
+            rho * (sR * L)^lambda
     }else if(phi > 1){
-            NaN
+            message("The function ESEGRomer_SS_gYpW is not defined for phi > 1.")
     }
 }
-ESEGRomer_SS_KpEW <- function(alpha, phi, n, s, delta){
+
+ESEGRomer_SS_YpEW <- function(s, n, alpha, rho, phi, sR, L, delta, lambda){
     #' @export
-    (s/((1 + n)^(1/(1 - phi)) - (1- delta)))^(1/(1-alpha))
+    if(phi < 0.95){
+    g_se <- (1 + n)^(lambda/(1-phi)) - 1
+    (s/(n + g_se + delta + n*g_se))^(alpha/(1-alpha)) * (1-sR)
+    }else if(phi >= 0.95 && phi <= 1){
+    g_e <- rho * (sR * L)^lambda
+    (s/(g_e + delta))^(alpha/(1-alpha)) * (1-sR)
+    }else if(phi > 1){
+            message("The function ESEGRomer_SS_gYpW is not defined for phi > 1.")
     }
+}
 
 # Model Functions of Extended Solow Growth Model with Endogeneous Growth as developed by Cozzi's Extension to Romer's ESEG ---------------------------------
 ESEGCozziOne_MF_KN <- function(s, Y, delta, K){s * Y + (1-delta)*K}
 ESEGCozziOne_MF_LN <- function(n, L){(1+n) * L}
-ESEGCozziOne_MF_AN <- function(rho, phi, lambda, A, sR){(rho * A^phi * sR^lambda) + A}
+ESEGCozziOne_MF_AN <- function(rho, phi, lambda, A, sR){(rho * A * sR^lambda) + A}
 ESEGCozziOne_MF_L_At <- function(sR, L){sR * L}
 # ESEG_MF_RR <- function(K, L, alpha){alpha * B * (K/L)^(alpha - 1)}
 # ESEG_MF_WR <- function(K, L, alpha){(1-alpha) * B * (K/L)^alpha}
@@ -337,25 +364,25 @@ ESEGCozziOne_MF_Y <- function(A, K, L, alpha){K^alpha * (A*L)^(1-alpha)} # remem
 #     (1 + n)^((phi)/(1- phi)) - 1
 # }
 
-ESEGCozziOne_SS_gYpW <- function(n, phi, s, A, delta){
+ESEGCozziOne_SS_gYpW <- function(rho, sR, lambda){
     #' @export
-    if(phi < 0.95){
-    (1 + n)^((phi)/(1- phi)) - 1
-    }else if(i %>% between(0.95, 1)){
-            s * A - delta
-    }else if(phi > 1){
-            NaN
-    }
+    rho * sR^lambda
 }
-ESEGCozziOne_SS_KpEW <- function(alpha, phi, n, s, delta){
+ESEGCozziOne_SS_KpEW <- function(alpha, rho, phi, lambda, n, s, sR, delta){
     #' @export
-    (s/((1 + n)^(1/(1 - phi)) - (1- delta)))^(1/(1-alpha))
+    g_e <- rho * sR^lambda
+    (s/(n + g_e + delta + n * g_e))^(1/(1-alpha)) * (1-sR)
     }
 
+ESEGCozziOne_SS_YpEW <- function(alpha, phi, n, s, delta){
+    #' @export
+    g_e <- rho * sR^lambda
+    (s/(n + g_e + delta + n * g_e))^(alpha/(1-alpha)) * (1-sR)
+    }
 # Model Functions of Extended Solow Growth Model with Endogeneous Growth as developed by Cozzi's Extension to Romer's ESEG ---------------------------------
 ESEGCozziTwo_MF_KN <- function(s, Y, delta, K){s * Y + (1-delta)*K}
 ESEGCozziTwo_MF_LN <- function(n, L){(1+n) * L}
-ESEGCozziTwo_MF_AN <- function(k, rho, phi, lambda, A, sR, L_At){k * (rho * A^phi * L_At^lambda + A) + (1-k)*(rho * A^phi * sR^lambda) + A}
+ESEGCozziTwo_MF_AN <- function(k, rho, phi, lambda, A, sR, L_At){k * (rho * A^phi * L_At^lambda) + (1-k)*(A * sR^lambda) + A}
 ESEGCozziTwo_MF_L_At <- function(sR, L){sR * L}
 # ESEG_MF_RR <- function(K, L, alpha){alpha * B * (K/L)^(alpha - 1)}
 # ESEG_MF_WR <- function(K, L, alpha){(1-alpha) * B * (K/L)^alpha}
@@ -366,19 +393,36 @@ ESEGCozziTwo_MF_Y <- function(A, K, L, alpha){K^alpha * (A*L)^(1-alpha)} # remem
 #     (1 + n)^((phi)/(1- phi)) - 1
 # }
 
-ESEGCozziTwo_SS_gYpW <- function(n, phi, s, A, delta){
+ESEGCozziTwo_SS_gTFP <- function(k, rho, sR, lambda, phi, n){
     #' @export
-    if(phi < 0.95){
-    (1 + n)^((phi)/(1- phi)) - 1
-    }else if(i %>% between(0.95, 1)){
-            s * A - delta
-    }else if(phi > 1){
-            NaN
+    conditional_n_bar <- ((1-k) * rho * sR^lambda + 1)^((1-phi)/lambda) - 1 # minimum n for semi edno growth
+    if(n > conditional_n_bar){
+        (1 + n)^(lambda/(1-phi)) - 1
+    }else{
+        (1-k)  *rho * sR^lambda
     }
 }
-ESEGCozziTwo_SS_KpEW <- function(alpha, phi, n, s, delta){
+ESEGCozziTwo_SS_KpEW <- function(k, rho, sR, lambda, phi, n, s, alpha, delta){
     #' @export
-    (s/((1 + n)^(1/(1 - phi)) - (1- delta)))^(1/(1-alpha))
+    conditional_n_bar <- ((1-k) * rho * sR^lambda + 1)^((1-phi)/lambda) - 1 # minimum n for semi edno growth
+    if(n > conditional_n_bar){
+        g_h <- (1 + n)^(lambda/(1-phi)) - 1
+    }else{
+        g_h <- (1-k)  *rho * sR^lambda
+    }
+    out <- (s/(n + g_h + delta + n * g_h))^(1/(1-alpha)) * (1-sR)
+    return(out)
+    }
+ESEGCozziTwo_SS_YpEW <- function(k, rho, sR, lambda, phi, n, s, alpha, delta){
+    #' @export
+    conditional_n_bar <- ((1-k) * rho * sR^lambda + 1)^((1-phi)/lambda) - 1 # minimum n for semi edno growth
+    if(n > conditional_n_bar){
+        g_h <- (1 + n)^(lambda/(1-phi)) - 1
+    }else{
+        g_h <- (1-k)  *rho * sR^lambda
+    }
+    out <- (s/(n + g_h + delta + n * g_h))^(alpha/(1-alpha)) * (1-sR)
+    return(out)
     }
 # BS_SS_KpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(s/(n+ delta))^(1/(1-alpha))}
 # BS_SS_YpW <- function(B, alpha, s, n, delta){B^(1/(1-alpha))*(s/(n+ delta))^(alpha/(1-alpha))}

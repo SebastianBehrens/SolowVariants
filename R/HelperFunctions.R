@@ -141,6 +141,7 @@ variable_encoder <- function(variables){
     aux2 <- variables[[i]]
     aux3 <- case_when(
       aux2 == "Total Factor Productivity" ~ "TFP",
+      aux2 == "Growth Rate of Total Factor Productivity" ~ "gTFP",
 
       aux2 == "Human Capital Stock" ~ "H",
       aux2 == "Log of Human Capital Stock" ~ "logH",
@@ -186,6 +187,7 @@ variable_encoder <- function(variables){
       aux2 == "Growth Rate of Output per Effective Worker" ~ "gYpEW",
 
       aux2 == "National Output" ~ "Yn",
+      aux2 == "National Output per Worker" ~ "YnpW",
       aux2 == "National Wealth" ~ "V",
       aux2 == "National Wealth per Worker"~ "VpW",
       aux2 == "National Wealth per Effective Worker"~ "VpEW",
@@ -302,6 +304,7 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
     # Variants of Output
     if(i == "YpW"){sim_data[["YpW"]] <- sim_data[["Y"]]/sim_data[["L"]]}
     if(i == "YpEW"){sim_data["YpEW"] <- sim_data[["Y"]]/(technology * sim_data[["L"]])}
+    if(i == "YnpW"){sim_data["YnpW"] <- sim_data[["Yn"]]/sim_data[["L"]]}
     # Variants of Output Logarithmised
     if(i == "logY"){sim_data[["logY"]] <- sim_data[["Y"]] %>% log()}
     if(i == "logYpW"){sim_data[["logYpW"]] <- sim_data[["YpW"]] %>% log()}
@@ -321,6 +324,7 @@ add_var_computer <- function(sim_data, add_vars, parameter_data, technology_vari
     if(i == "logHpW"){sim_data[["logHpW"]] <- sim_data[["HpW"]] %>% log()}
     if(i == "logHpEW"){sim_data[["logHpEW"]] <- sim_data[["HpEW"]] %>% log()}
     # Variants of Growth
+    if(i == "gTFP"){sim_data[["gTFP"]] <- log(sim_data[["TFP"]]) - log(lag(sim_data[["TFP"]]))}
     if(i == "gY"){sim_data[["gY"]] <- log(sim_data[["Y"]]) - log(lag(sim_data[["Y"]]))}
     if(i == "gYpW"){sim_data[["gYpW"]] <- log(sim_data[["YpW"]]) - log(lag(sim_data[["YpW"]]))}
     if(i == "gYpEW"){sim_data[["gYpEW"]] <- log(sim_data[["YpEW"]]) - log(lag(sim_data[["YpEW"]]))}
@@ -529,7 +533,7 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
   #' @title Check correctness by comparing simulated (endo.) variables to their steady state values
   #' @description Compare variables in the final period of the simulation to their respective steady state value (given the exo. paramters).
   #' @details This function presumes that the number of periods simulated were such that the final values are near steady state. If the steady state path is disrupted by a parameter change in the second to last period, this function will yield misleading results. 
-  #' @note The column "Economy in SS" is evaluated as TRUE when the simulated value is within a 1% interval
+  #' @note The column "Economy in SS" is evaluated as TRUE when the simulated value is within a .1\% interval around the steady state value for reason of computational inacurracy.
   #' @param sim_data The tibble that is being filled in the simulation function, e.g. \code{SimulateBasicSolowModel()}.
   #' @param parameter_grid The output from \code{create_parameter_grid(...)}.
   #' @param solow_variant String indicating the model, such as "BS" or "ESHC".
@@ -549,13 +553,16 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
         sK = last_row_parameter[["sK"]],
         sH = last_row_parameter[["sH"]],
         sE = last_row_parameter[["sE"]],
+        sR = last_row_parameter[["sR"]],
         n = last_row_parameter[["n"]],
         B = last_row_parameter[["B"]],
         r = last_row_parameter[["r"]],
+        rho = last_row_parameter[["rho"]],
         g = last_row_parameter[["g"]],
         alpha = last_row_parameter[["alpha"]],
         beta = last_row_parameter[["beta"]],
         kappa = last_row_parameter[["kappa"]],
+        lambda = last_row_parameter[["lambda"]],
         phi = last_row_parameter[["phi"]],
         YpW = last_row_simulation[["YpW"]],
         RR = last_row_simulation[["RR"]],
@@ -564,7 +571,10 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
         KpW = last_row_simulation[["KpW"]],
         L = last_row_simulation[["L"]],
         X = last_row_parameter[["X"]],
-        R = last_row_simulation[["R"]]
+        K = last_row_simulation[["K"]],
+        k = last_row_parameter[["k"]],
+        R = last_row_simulation[["R"]],
+        E = last_row_parameter[["sE"]]* last_row_simulation[["R"]]
       )
 
     if(solow_variant == "BS") {
@@ -573,7 +583,7 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
     }else if(solow_variant == "GS"){
       aux_steadystate_variables <- c("KpW", "YpW", "CpW", "WR", "RR", "KpEW", "YpEW")
     }else if(solow_variant == "ESSOE"){
-      aux_steadystate_variables <- c("KpW", "YpW", "WR", "VpW", "FpW")
+      aux_steadystate_variables <- c("KpW", "YpW", "CtO", "YnpW", "WR", "VpW", "FpW")
     }else if(solow_variant == "ESHC"){
       aux_steadystate_variables <- c("KpEW", "HpEW", "YpEW", "YpW", "CpW") # WR and RR missing
     }else if(solow_variant == "ESSRL"){
@@ -581,7 +591,7 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
     }else if(solow_variant == "ESSRO"){
       aux_steadystate_variables <- c("YpW")
     }else if(solow_variant == "ESSROL"){
-      aux_steadystate_variables <- c("gY")
+      aux_steadystate_variables <- c("gY", "YpW")
     }else if(solow_variant == "ESEG"){
       if(last_row_parameter[["phi"]] < 0.95){
       aux_steadystate_variables <- c("KpEW", "YpEW", "gYpW")
@@ -590,24 +600,18 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
       }
     }else if(solow_variant == "ESEGRomer"){
       if(last_row_parameter[["phi"]] < 0.95){
-      aux_steadystate_variables <- c("KpEW", "gYpW")
+      aux_steadystate_variables <- c("YpEW", "gYpW") #...SS_gYpW would exist, but is yielding correct results.
       }else if(last_row_parameter[["phi"]] %>% between(0.95, 1)){
-      aux_steadystate_variables <- c("gYpW")
+      aux_steadystate_variables <- c("YpEW")
       }
     }else if(solow_variant == "ESEGCozziOne"){
       if(last_row_parameter[["phi"]] < 0.95){
-      aux_steadystate_variables <- c("KpEW", "gYpW")
+      aux_steadystate_variables <- c("KpEW", "YpEW", "gYpW")
       }else if(last_row_parameter[["phi"]] %>% between(0.95, 1)){
       aux_steadystate_variables <- c("gYpW")
       }
     }else if(solow_variant == "ESEGCozziTwo"){
-      if(last_row_parameter[["phi"]] < 0.95){
-      aux_steadystate_variables <- c()
-      # aux_steadystate_variables <- c("KpEW", "gYpW")
-      }else if(last_row_parameter[["phi"]] %>% between(0.95, 1)){
-      aux_steadystate_variables <- c()
-      # aux_steadystate_variables <- c("gYpW")
-      }
+      aux_steadystate_variables <- c("gTFP", "KpEW", "YpEW")
     }
 
     for(i in aux_steadystate_variables){
@@ -618,7 +622,7 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
     aux <- aux %>% drop_na()
     aux <- aux %>% mutate_at(vars(steadystate, last_value), round, digits = 2)
     aux <- aux %>% mutate(is_same = case_when(
-      last_value - steadystate <= last_value * 0.01 ~ "TRUE",
+      abs(last_value - steadystate) <= 0.01 ~ "TRUE",
       TRUE ~ "FALSE"
     ))
     aux <- aux %>% rename("Theoretical Value" = steadystate,
@@ -626,6 +630,7 @@ steadystate_checker <- function(sim_data, parameter_grid, solow_variant){
                           "Variable" = variable,
                           "Economy in SS" = is_same)
     return(aux)
+    message("Remark: steadystate_checker considers two values 0.01 away from each other 'equal' because of inaccuracy from floating point point calculations.")
 
 }
 
@@ -1003,7 +1008,6 @@ getCommonParameters <- function(ModelCode1, ModelCode2){
 
   # Roxygen Header ---------------------------------
   #' @title Yields the union of required parameters for two solow variants
-  #' @description
   #' @param ModelCode1 Model abbreviation for some Solow variant.
   #' @param ModelCode2 Model abbreviation for some Solow variant.
   #' @examples
@@ -1022,7 +1026,6 @@ getCommonStartingValues <- function(ModelCode1, ModelCode2){
 
   # Roxygen Header ---------------------------------
   #' @title Yields the union of required starting values for two solow variants
-  #' @description
   #' @param ModelCode1 Model abbreviation for some Solow variant.
   #' @param ModelCode2 Model abbreviation for some Solow variant.
   #' @examples

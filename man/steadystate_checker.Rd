@@ -20,5 +20,5 @@ Compare variables in the final period of the simulation to their respective stea
 This function presumes that the number of periods simulated were such that the final values are near steady state. If the steady state path is disrupted by a parameter change in the second to last period, this function will yield misleading results.
 }
 \note{
-The column "Economy in SS" is evaluated as TRUE when the simulated value is within a 1% interval
+The column "Economy in SS" is evaluated as TRUE when the simulated value is within a .1\% interval around the steady state value for reason of computational inacurracy.
 }

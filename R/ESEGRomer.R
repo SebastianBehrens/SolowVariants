@@ -15,7 +15,7 @@ SimulateExtendedSolowModelEndogenousGrowthRomer <- function(paragrid, np, startv
     # Remark on n = 0 in case of fully endogenous growth (phi -> 1) ---------------------------------
     if(any(unique(paragrid[["phi"]]) %>% between (0.95, 1))){
         if(any(unique(paragrid[["n"]])!=0)){
-        warning("Given the entered value for phi is close to 1, which approximates the fully endogenous ESEG, the parameter n should be set at 0.")
+        message("Given the entered value for phi is close to 1, which approximates the fully endogenous ESEG, the parameter n should be set at 0.")
     }
 
     }

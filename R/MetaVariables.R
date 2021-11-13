@@ -30,9 +30,10 @@ base_variables <- c(
 )
 
 add_vars_BS <- c("Wage Rate", "Rental Rate")
-add_vars_GS <- c("Total Factor Productivity", "Wage Rate", "Rental Rate")
+add_vars_GS <- c("Total Factor Productivity", "Growth Rate of Total Factor Productivity", "Wage Rate", "Rental Rate")
 add_vars_ESSOE <- c(
   "National Output", 
+  "National Output per Worker", 
   "National Wealth", 
   "National Wealth per Worker", 
   "National Wealth per Effective Worker", 
@@ -44,6 +45,7 @@ add_vars_ESSOE <- c(
  )
 add_vars_ESHC <- c(
   "Total Factor Productivity",
+  "Growth Rate of Total Factor Productivity",
   "Human Capital Stock",
   "Physical Capital Stock",
   "Human Capital Stock per Worker",
@@ -62,16 +64,19 @@ add_vars_ESHC <- c(
 add_vars_ESSRO <- c(
   "Energy Use",
   "Resource Stock",
-  "Total Factor Productivity"
+  "Total Factor Productivity",
+  "Growth Rate of Total Factor Productivity",
+  "Capital to Output Ratio"
 )
 add_vars_ESSRL <- c(
   "Total Factor Productivity",
+  "Growth Rate of Total Factor Productivity",
   "Capital Rental Rate",
   "Land Rental Rate"
 )
 add_vars_ESSROL <- add_vars_ESSRO
-add_vars_ESEG <- c("Total Factor Productivity", "Wage Rate", "Rental Rate")
-add_vars_ESEGRomer <- c("Total Factor Productivity")
+add_vars_ESEG <- c("Total Factor Productivity", "Growth Rate of Total Factor Productivity", "Wage Rate", "Rental Rate")
+add_vars_ESEGRomer <- c("Total Factor Productivity", "Growth Rate of Total Factor Productivity")
 add_vars_ESEGCozziOne <- add_vars_ESEGRomer
 add_vars_ESEGCozziTwo <- add_vars_ESEGCozziOne
 

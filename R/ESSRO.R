@@ -16,6 +16,9 @@ SimulateExtendedSolowModelScarceResourceOil <- function(paragrid, np, startvals)
     # Load Basic Model Functions ---------------------------------
     # source("ModelFunctions/ESSROModelFunctions.R")
     
+    # Checking the additivity of the exponents in the production function to one. (see structural equations)
+    # always given, since epsilon is inferred by 1-alpha-beta in various calculations in this variant.
+
     # Initialize Simulation Table ---------------------------------
     sim_table <- create_simulation_table(variable_encoder(getModelVars("ESSRO")), np)
     # Fill Start Values for Period 0 ---------------------------------

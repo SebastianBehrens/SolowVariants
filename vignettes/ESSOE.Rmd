@@ -5,8 +5,10 @@ output:
     toc: true
 vignette: >
   %\VignetteIndexEntry{ESSOE}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -22,7 +24,7 @@ library(SolowVariants)
 theme_set(theme_bw())
 
 # Setting up the parameter grid ---------------------------------
-aux_np <- 10000
+aux_np <- 10000 # set to 10000 because the SS on FpW and VpW is only 'reached' after around 6000 periods. All others are of course reached earlier.
 aux_parameter_grid <-
   create_parameter_grid(
     c("B", "alpha", "n", "s", "r"),
@@ -40,12 +42,16 @@ aux_simulation <- SimulateExtendedSolowModelSmallOpenEconomy(aux_parameter_grid,
 
 # Visualise some variables ---------------------------------
 VisualiseSimulation(aux_simulation,
-                    c("YpW", "gKpW", "VpEW", "VpW"), 
+                    c("Y", "KpW", "VpEW", "VpW"), 
                     "free")
 
 # Verify whether the economy is 'in' steady state in the final period ---------------------------------
 
 steadystate_checker(aux_simulation, aux_parameter_grid, "ESSOE")
+
+sim_data <- aux_simulation
+parameter_grid <- aux_parameter_grid
+solow_variant <- "ESSOE"
 
 # Draw transition diagram ---------------------------------
 draw_transition_diagram(list(B = 0.01,

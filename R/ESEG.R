@@ -58,7 +58,7 @@ SimulateExtendedSolowModelEndogenousGrowth <- function(paragrid, np, startvals){
     # Remark on n = 0 in case of fully endogenous growth (phi -> 1) ---------------------------------
     if(any(unique(paragrid[["phi"]]) %>% between (0.95, 1))){
         if(any(unique(paragrid[["n"]])!=0)){
-        warning("Given the entered value for phi is close to 1, which approximates the fully endogenous ESEG, the parameter n should be set at 0.")
+        message("Given the entered value for phi is close to 1, which approximates the fully endogenous ESEG, the parameter n should be set at 0.")
     }
 
     }
@@ -80,15 +80,15 @@ SimulateExtendedSolowModelEndogenousGrowth <- function(paragrid, np, startvals){
 
     if(phi < 0.95){
             if(((1 + n)^(1/(1-phi))) > (1 - delta)){
-                warning("Stability condition of the semi endogeneous ESEG (((1 + n)^(1/(1-phi))) > (1 - delta)) is fulfilled.")
+                message("Stability condition of the semi endogeneous ESEG (((1 + n)^(1/(1-phi))) > (1 - delta)) is fulfilled.")
             }else{
-              warning("Stability condition of the semi endogeneous ESEG (((1 + n)^(1/(1-phi))) > (1 - delta)) is NOT fulfilled.")
+              message("Stability condition of the semi endogeneous ESEG (((1 + n)^(1/(1-phi))) > (1 - delta)) is NOT fulfilled.")
             }
     }else if(phi >= 0.95 && phi< 1){
             if(s * A - delta > 0){
-                warning("Stability condition of the fully endogeneous ESEG (s*A - delta > 0) is fulfilled.")
+                message("Stability condition of the fully endogeneous ESEG (s*A - delta > 0) is fulfilled.")
             }else{
-              warning("Stability condition of the fully endogeneous ESEG (s*A - delta > 0) is NOT fulfilled.")
+              message("Stability condition of the fully endogeneous ESEG (s*A - delta > 0) is NOT fulfilled.")
             }
     }else if(phi > 1){
             NaN
