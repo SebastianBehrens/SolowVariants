@@ -2,7 +2,9 @@
 
 # General Imports of other Packages =================================
 #' @import R.utils
-#' @import tidyverse
+#' @import ggplot2
+#' @import dplyr
+#' @import tidyr
 #' @import purrr
 
 # 0.1 individual parameter path =================================
