@@ -39,3 +39,4 @@ vignettes/*.pdf
 .Renviron
 /doc/
 /Meta/
+.DS_Store
