@@ -148,53 +148,32 @@ The table below shows the used abbreviations, so-called model codes, that will b
 | Extended Solow Growth Model with Endogenous Technological Growth by Cozzi | ESEG                |
 
 ## Variable Abbreviations
-| Full Variable Name                                        | Variable Abbreviation |
-|:--------------------------------------------------------- |:---------------------:|
-| "Total Factor Productivity"                               |         "TFP"         |
-| "Human Capital Stock"                                     |          "H"          |
-| "Log of Human Capital Stock"                              |        "logH"         |
-| "Capital Stock"                                           |          "K"          |
-| "Log of Capital Stock"                                    |        "logK"         |
-| "Growth Rate of Capital Stock"                            |         "gK"          |
-| "Growth Rate of Human Capital Stock"                      |         "gH"          |
-| "Capital Stock per Worker"                                |         "KpW"         |
-| "Log of Capital Stock per Worker"                         |       "logKpW"        |
-| "Growth Rate of Capital Stock per Worker"                 |        "gKpW"         |
-| "Human Capital Stock per Worker"                          |         "HpW"         |
-| "Log of Human Capital Stock per Worker"                   |       "logHpW"        |
-| "Growth Rate of Human Capital Stock per Worker"           |        "gHpW"         |
-| "Capital Stock per Effective Worker"                      |        "KpEW"         |
-| "Log of Capital Stock per Effective Worker"               |       "logKpEW"       |
-| "Growth Rate of Capital Stock per Effective Worker"       |        "gKpEW"        |
-| "Human Capital Stock per Effective Worker"                |        "HpEW"         |
-| "Log of Human Capital Stock per Effective Worker"         |       "logHpEW"       |
-| "Growth Rate of Human Capital Stock per Effective Worker" |        "gHpEW"        |
-| "Labor Stock"                                             |          "L"          |
-| "Wage Rate"                                               |         "WR"          |
-| "Rental Rate"                                             |         "RR"          |
-| "Capital Rental Rate"                                     |         "RR"          |
-| "Land Rental Rate"                                        |         "LR"          |
-| "Output"                                                  |          "Y"          |
-| "Log of Output"                                           |        "logY"         |
-| "Growth Rate of Output"                                   |         "gY"          |
-| "Output per Worker"                                       |         "YpW"         |
-| "Log of Output per Worker"                                |       "logYpW"        |
-| "Growth Rate of Output per Worker"                        |        "gYpW"         |
-| "Output per Effective Worker"                             |        "YpEW"         |
-| "Log of Output per Effective Worker"                      |       "logYpEW"       |
-| "Growth Rate of Output per Effective Worker"              |        "gYpEW"        |
-| "National Output"                                         |         "Yn"          |
-| "National Wealth"                                         |          "V"          |
-| "National Wealth per Worker"                              |         "VpW"         |
-| "Net Foreign Assets"                                      |          "F"          |
-| "Net Foreign Assets per Worker"                           |         "FpW"         |
-| "National Savings"                                        |         "Sn"          |
-| "Energy Use"                                              |          "E"          |
-| "Resource Stock"                                          |          "R"          |
-| "Consumption"                                             |          "C"          |
-| "Consumption per Worker"                                  |         "CpW"         |
-| "Consumption per Effective Worker"                        |        "CpEW"         |
-| "Capital to Output Ratio"                                 |         "CtO"         |
+| Full Variable Name        | Variable |
+| ------------------------- |:--------:|
+| Total Factor Productivity |   TFP    |
+| Labor Force               |    L     |
+| (Physical) Capital        |    K     |
+| Human Capital             |    H     |
+| Output                    |    Y     |
+| National Output           |    Yn    |
+| National Savings          |    Sn    |
+| Consumption               |    C     |
+| National Wealth           |    V     |
+| Net Foreign Assets        |    F     |
+| Energy                    |    E     |
+| Resource Stock            |    R     |
+| Land                      |    X     |
+| Capital to Output Ratio   |   CtO    |
+| Wage Rate                 |    WR    |
+| (Capital) Rental Rate     |    RR    |
+| Land Rental Rate          |    LR    |
+
+| Prefix/Suffix | Meaning                |
+|:-------------:| ---------------------- |
+|      gX       | Growth Rate of X       |
+|     logX      | Logarithm of X         |
+|      XpW      | X per Worker           |
+|     XpEW      | X per Effective Worker |
 
 ## Vignettes to each Solow Growth Model Variant
 The following hyperlinks link directly to the vignettes that contain explanations on the respective Solow variant.
