@@ -2,11 +2,11 @@
 This repo contains the R package "SolowVariants" with which one can simulate various macroeconomic Solow growth models.
 
 ## How to install and load the package
-1. Install the package withj
+1. First, download and install the package:
 ```
 devtools::install_github("SebastianBehrens/SolowVariants", build_vignettes = T)
 ```
-2. Load the library with (remark: after installing the package!)
+2. Then load the library:
 ```
 library(SolowVariants)
 ```
