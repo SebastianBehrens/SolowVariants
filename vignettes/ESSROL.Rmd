@@ -46,8 +46,8 @@ VisualiseSimulation(aux_simulation,
                     "free")
 
 # Economy in SS in the End ---------------------------------
-
 steadystate_checker(aux_simulation, aux_parameter_grid, "ESSROL")
+
 ```
 
 ## Elaboration
