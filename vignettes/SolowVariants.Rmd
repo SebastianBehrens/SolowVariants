@@ -34,10 +34,10 @@ knitr::opts_chunk$set(
       - versions put forward by Cozzi
 2. function to nicely visualise certain variables of a simulation
 3. function to visualise several simulations to compare them
-    - Example 1: An increase parameter s in period 50 vs. a decrease in capital depreciation rate, $\delta$, in period 50.
-    - Example 2: Compare output in the basic Solow growth model to Output in the general Solow growth model. (both with the same common parameters.)
-    - Example 3: Compare the extended Solow growth models with land, a fixed scarce resource, and the the extended Solow growth models with oil, a not-fixed but depletable scarce resource.
-    - and many more.
+    - Example 1: An increase in the savings rate, $s$, in period 50 vs. a decrease in capital depreciation rate, $\delta$, in period 50 in in the general Solow growth model.
+    - Example 2: Compare the effects on output in the basic Solow growth model to output in the general Solow growth model with the same parameter changes in either economy.
+    - Example 3: Compare the the effects of population growth in the extended Solow growth model with land, a fixed scarce resource, and the effects in the the extended Solow growth models with oil, a not-fixed but depletable scarce resource.
+    - (and many more.)
 
 ## Illustrative Examples
 ### Simulation of a Solow Variant
@@ -118,34 +118,35 @@ compare_simulations(
 
 
 ## Simulation Functions
-| Solow Variant                                                             | Simulation Function                                    |
-|:------------------------------------------------------------------------- |:------------------------------------------------------ |
-| Basic Solow Growth Model                                                  | `SimulateBasicSolowGrowthModel()`                      |
-| General Solow Growth Model                                                | `SimulateGeneralSolowModel()`                          |
-| Extended Solow Growth Model with Human Capital                            | `SimulateExtendedSolowModelHumanCapital()`             |
-| Extended Solow Growth Model for the Small and Open Economy                | `SimulateExtendedSolowModelSmallOpenEconomy()`         |
-| Extended Solow Growth Model with Scarce Resource Land                     | `SimulateExtendedSolowModelScarceResourceLand()`       |
-| Extended Solow Growth Model with Scarce Resource Oil                      | `SimulateExtendedSolowModelScarceResourceOil()`        |
-| Extended Solow Growth Model with Scarce Resources Oil *and* Land          | `SimulateExtendedSolowModelScarceResourceOilAndLand()` |
-| Extended Solow Growth Model with Endogenous Technological Growth | `SimulateExtendedSolowModelEndogenousGrowth()`         |
-| Extended Solow Growth Model with Endogenous Technological Growth by Romer | `SimulateExtendedSolowModelEndogenousGrowthRomer()`    |
-| Extended Solow Growth Model with Endogenous Technological Growth by Cozzi (Romer Extension) | `SimulateExtendedSolowModelEndogenousGrowthCozziOne()`    |
-| Extended Solow Growth Model with Endogenous Technological Growth by Cozzi (Hybrid Model) | `SimulateExtendedSolowModelEndogenousGrowthCozziTwo()`    |
-
+| Solow Variant                                                                           | Simulation Function                                    |
+|:--------------------------------------------------------------------------------------- |:------------------------------------------------------ |
+| Basic Solow Growth Model                                                                | `SimulateBasicSolowGrowthModel()`                      |
+| General Solow Growth Model                                                              | `SimulateGeneralSolowModel()`                          |
+| Extended Solow Growth Model with Human Capital                                          | `SimulateExtendedSolowModelHumanCapital()`             |
+| Extended Solow Growth Model for the Small and Open Economy                              | `SimulateExtendedSolowModelSmallOpenEconomy()`         |
+| Extended Solow Growth Model with Scarce Resource Land                                   | `SimulateExtendedSolowModelScarceResourceLand()`       |
+| Extended Solow Growth Model with Scarce Resource Oil                                    | `SimulateExtendedSolowModelScarceResourceOil()`        |
+| Extended Solow Growth Model with Scarce Resources Oil *and* Land                        | `SimulateExtendedSolowModelScarceResourceOilAndLand()` |
+| Extended Solow Growth Model with Endogenous Technological Growth                        | `SimulateExtendedSolowModelEndogenousGrowth()`         |
+| Extended Solow Growth Model with Endogenous Technological Growth (Romer Extension)      | `SimulateExtendedSolowModelEndogenousGrowthRomer()`    |
+| Extended Solow Growth Model with Endogenous Technological Growth (Cozzi Extension)      | `SimulateExtendedSolowModelEndogenousGrowthCozziOne()` |
+| Extended Solow Growth Model with Endogenous Technological Growth (Cozzi's Hybrid Model) | `SimulateExtendedSolowModelEndogenousGrowthCozziTwo()` |
 ## Model Abbreviations
 The table below shows the used abbreviations, so-called model codes, that will be used throughout the package to refer to the respective Solow Growth Model Variants.
 
-| Solow Variant                                                             | Simulation Function |
-|:------------------------------------------------------------------------- |:------------------- |
-| Basic Solow Growth Model                                                  | BS                  |
-| General Solow Growth Model                                                | GS                  |
-| Extended Solow Growth Model with Human Capital                            | ESHC                |
-| Extended Solow Growth Model for the Small and Open Economy                | ESSOE               |
-| Extended Solow Growth Model with Scarce Resource Land                     | ESSRL               |
-| Extended Solow Growth Model with Scarce Resource Oil                      | ESSRO               |
-| Extended Solow Growth Model with Scarce Resources Oil *and* Land          | ESSROL              |
-| Extended Solow Growth Model with Endogenous Technological Growth by Romer | ESEGRomer           |
-| Extended Solow Growth Model with Endogenous Technological Growth by Cozzi | ESEG                |
+| Solow Variant                                                                           | Simulation Function |
+|:--------------------------------------------------------------------------------------- |:-------------------:|
+| Basic Solow Growth Model                                                                |         BS          |
+| General Solow Growth Model                                                              |         GS          |
+| Extended Solow Growth Model with Human Capital                                          |        ESHC         |
+| Extended Solow Growth Model for the Small and Open Economy                              |        ESSOE        |
+| Extended Solow Growth Model with Scarce Resource Land                                   |        ESSRL        |
+| Extended Solow Growth Model with Scarce Resource Oil                                    |        ESSRO        |
+| Extended Solow Growth Model with Scarce Resources Oil *and* Land                        |       ESSROL        |
+| Extended Solow Growth Model with Endogenous Technological Growth                        |        ESEG         |
+| Extended Solow Growth Model with Endogenous Technological Growth (Romer Extension)      |      ESEGRomer      |
+| Extended Solow Growth Model with Endogenous Technological Growth (Cozzi Extension)      |    ESEGCozziOne     |
+| Extended Solow Growth Model with Endogenous Technological Growth (Cozzi's Hybrid Model) |    ESEGCozziTwo     |
 
 ## Variable Abbreviations
 | Full Variable Name        | Variable |
