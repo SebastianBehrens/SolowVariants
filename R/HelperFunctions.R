@@ -876,7 +876,7 @@ draw_transition_diagram <- function(paragrid_special, solow_variant){
   # Roxygen Header ---------------------------------
   #' @title Draw the transition diagram for a solow variant
   #' @param paragrid_special A special parameter grid. See the examples below to see how this input is supposed to look like.
-  #' @param solow_variant A model code. Currently only "BS", "GS" and "ESSOE" supported.
+  #' @param solow_variant A model code. Currently only "BS" and "GS" supported.
   #' @examples
   #' draw_transition_diagram(
   #' list(B = c(1),
@@ -887,7 +887,7 @@ draw_transition_diagram <- function(paragrid_special, solow_variant){
   #' ),
   #' "BS"
   #' )
-  #' @export
+  # @export (unfinished; needs to be adapted for various versions.)
 
   # Function ---------------------------------  
   # Create string with function call to the XX_TE
@@ -931,8 +931,8 @@ draw_transition_diagram <- function(paragrid_special, solow_variant){
   aux_parameter_list_1[["x"]] <- aux_df$x
   aux_parameter_list_2[["x"]] <- aux_df$x
   # add the lines of the tranistion equation to the output table
-  aux_df["TE1"] <- doCall(aux_TE_name, args = aux_parameter_list_1)
-  aux_df["TE2"] <- doCall(aux_TE_name, args = aux_parameter_list_2)
+  aux_df["TE1"] <- doCall(aux_SS_function, args = aux_parameter_list_1)
+  aux_df["TE2"] <- doCall(aux_SS_function, args = aux_parameter_list_2)
   # visualise
   ggplot(aux_df) +
     geom_line(aes(x, TE1), size = 0.3) +
@@ -966,7 +966,7 @@ getTDAxes <- function(ModelCode){
     )
   }
   if (is.na(out[[1]])) {
-    warning("The entered shortcode for a model variant does not exist.")
+    warning("The entered shortcode for a model variant does not exist yet. Feel free to adapt and augment the function 'draw_transition_diagram' and to submit a pull request.")
   }
   return(out)
 }
