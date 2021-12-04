@@ -1,5 +1,5 @@
 ---
-title: "Simulate the Extended Solow Model with (semi- and fully) Endogenous Growth (Romer Version)"
+title: "Simulate the Extended Solow Model with (semi- and fully) Endogenous Growth (Cozzi Hybrid Model)"
 output:
   html_vignette:
     toc: true

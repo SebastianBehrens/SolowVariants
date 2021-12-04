@@ -31,7 +31,7 @@ knitr::opts_chunk$set(
       - with Oil and Land
     - Extended Solow Growth Model with Endogenous Technological Growth
       - version put forward by Romer
-      - version put forward by Cozzi
+      - versions put forward by Cozzi
 2. function to nicely visualise certain variables of a simulation
 3. function to visualise several simulations to compare them
     - Example 1: An increase parameter s in period 50 vs. a decrease in capital depreciation rate, $\delta$, in period 50.
@@ -195,6 +195,10 @@ The following hyperlinks link directly to the vignettes that contain explanation
 [ESEG](ESEG.html)
 
 [ESEGRomer](ESEGRomer.html)
+
+[ESEGCozziOne](ESEGCozziOne.html)
+
+[ESEGCozziTwo](ESEGCozziTwo.html)
 
 Remark: You can call any of these directly with, for example, `vignette("BS")`.
 
