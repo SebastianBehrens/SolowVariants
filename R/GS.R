@@ -22,10 +22,12 @@ SimulateGeneralSolowModel <- function(paragrid, np, startvals){
     sim_table[[aux_index, "TFP"]] <- startvals$A
     sim_table[[aux_index, "L"]] <- startvals$L
     sim_table[[aux_index, "K"]] <- startvals$K
-    sim_table[[aux_index, "Y"]] <- GS_MF_Y(sim_table[["TFP"]][[which(sim_table$period == 0)]], 
-                                           sim_table[["K"]][[which(sim_table$period == 0)]],
-                                           sim_table[["L"]][[which(sim_table$period == 0)]],
-                                           paragrid[["alpha"]][[which(paragrid$period == 0)]])
+    sim_table[[aux_index, "Y"]] <- 
+        GS_MF_Y(sim_table[["TFP"]][[which(sim_table$period == 0)]],
+               sim_table[["K"]][[which(sim_table$period == 0)]],
+               sim_table[["L"]][[which(sim_table$period == 0)]],
+               paragrid[["alpha"]][[which(paragrid$period == 0)]]
+        )
     # Computing Variables after Period 0 ---------------------------------
     for (i in 1:np){
         # i <- 1

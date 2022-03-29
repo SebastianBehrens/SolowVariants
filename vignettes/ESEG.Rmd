@@ -36,7 +36,11 @@ aux_parameter_grid <-
 aux_startvalues <- list(K = 1, L = 1)
 
 # Simulate the basic Solow growth model ---------------------------------
-aux_simulation <- SimulateExtendedSolowModelEndogenousGrowth(aux_parameter_grid, aux_np, aux_startvalues)
+aux_simulation <-
+    SimulateExtendedSolowModelEndogenousGrowth(aux_parameter_grid,
+                                               aux_np,
+                                               aux_startvalues
+    )
 # Visualise some variables ---------------------------------
 VisualiseSimulation(
   aux_simulation,
