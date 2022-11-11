@@ -1,5 +1,6 @@
 # SolowVariants
 This repo contains the R package "SolowVariants" with which one can simulate various macroeconomic Solow growth models.
+For use without installing the package has been into a web application: [Link](https://sebastianshinyapps.shinyapps.io/SolowVariants/).
 
 ## How to install and load the package
 1. First, download and install the package:
